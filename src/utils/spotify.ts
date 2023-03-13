@@ -29,3 +29,5 @@ export const getAccessToken = async (account: Account) => {
 	const res = (await response.json()) as spotifyRefeshTokenResponse;
 	return res;
 };
+
+export const API_URL = 'https://api.spotify.com/v1';
