@@ -40,7 +40,7 @@ const ListComponent = ({
 				/>
 				<span
 					className={cn(
-						'truncate text-sm font-bold',
+						'truncate text-sm font-semibold',
 						routerPathname === pathname
 							? 'text-white'
 							: 'text-gray-text transition-colors duration-200 group-hover:text-white peer-hover:text-white'

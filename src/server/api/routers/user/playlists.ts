@@ -46,7 +46,14 @@ export const playlistsRouter = createTRPCRouter({
 				});
 			}
 
-			const res = await fetch(`${API_URL}/users/${idToUse}/playlists`, {
+			const url =
+				`${API_URL}/users/${idToUse}/playlists?` +
+				new URLSearchParams({
+					offset: '0',
+					limit: '50',
+				}).toString();
+
+			const res = await fetch(url, {
 				// auth header
 				headers: {
 					Authorization: `Bearer ${access_token}`,

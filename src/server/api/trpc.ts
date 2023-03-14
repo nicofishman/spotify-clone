@@ -137,11 +137,11 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 	const expires = account.expires_at ?? 0;
 
 	if (expires < Date.now()) {
+		console.log('refreshing token');
+
 		const { access_token: newToken, expires_in } = await getAccessToken(
 			account
 		);
-		console.log('newToken', newToken);
-
 		const newExpire = Math.floor(Date.now() / 1000) + expires_in;
 		await ctx.prisma.account.update({
 			where: { id: account.id },

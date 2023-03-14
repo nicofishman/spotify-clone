@@ -6,6 +6,7 @@ import Icon from '@/components/UI/Icon';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { api } from '@/utils/api';
 import { cn } from '@/utils/cn';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ResizableBox } from 'react-resizable';
@@ -34,7 +35,7 @@ export const Sidebar = ({}) => {
 			className='relative h-full resize-x grid-in-nav-bar'
 			axis='x'
 		>
-			<nav className='h-full w-full min-w-[130px] max-w-sm overflow-auto bg-black text-white'>
+			<nav className='h-full w-full min-w-[130px] max-w-sm overflow-y-hidden bg-black text-white'>
 				<div className='flex h-full flex-col pt-6'>
 					<Link
 						className='mb-[18px] h-16 w-full shrink-0 origin-left px-6'
@@ -93,7 +94,7 @@ export const Sidebar = ({}) => {
 						</Link>
 					</div>
 					<hr className='mx-6 mt-2 h-px border-none bg-gray-bg' />
-					<div className='flex h-full w-full flex-col py-2'>
+					<div className='flex h-full w-full flex-col overflow-y-scroll py-2'>
 						<LikedPlaylists
 							playlists={likedPlaylists?.items ?? []}
 						/>
