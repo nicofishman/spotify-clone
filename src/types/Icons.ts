@@ -12,6 +12,12 @@ import collaborative from '@/assets/icons/collaborative.svg';
 import likeDefault from '@/assets/icons/like.svg';
 import likeActive from '@/assets/icons/like-active.svg';
 import pictureInPicture from '@/assets/icons/picture-in-picture.svg';
+import next from '@/assets/icons/next.svg';
+import previous from '@/assets/icons/previous.svg';
+import play from '@/assets/icons/play.svg';
+import pause from '@/assets/icons/pause.svg';
+import shuffle from '@/assets/icons/shuffle.svg';
+import repeat from '@/assets/icons/repeat.svg';
 
 export const Icons = {
 	logo: logo,
@@ -27,4 +33,10 @@ export const Icons = {
 	likeDefault: likeDefault,
 	likeActive: likeActive,
 	pictureInPicture: pictureInPicture,
+	next: next,
+	previous: previous,
+	play: play,
+	pause: pause,
+	shuffle: shuffle,
+	repeat: repeat,
 } as const;

@@ -7,22 +7,26 @@ import {
 } from '@/components/UI/Tooltip';
 import React from 'react';
 
-const PictureInPictureButton = () => {
+interface LikeSongButtonProps {
+	isLiked: boolean;
+}
+
+export const LikeSongButton = ({ isLiked }: LikeSongButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger>
-					<Icon
-						name='pictureInPicture'
-						className='h-4 w-4 fill-gray-text transition-colors hover:fill-white'
-					/>
+					<div className='flex h-8 w-8 items-center justify-center'>
+						<Icon
+							name='likeDefault'
+							className='h-4 w-4 fill-gray-text transition-colors hover:fill-white'
+						/>
+					</div>
 				</TooltipTrigger>
 				<TooltipContent className='mb-4' sideOffset={4}>
-					<p>Picture in picture</p>
+					<p>Save to your Library</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
 	);
 };
-
-export default PictureInPictureButton;
