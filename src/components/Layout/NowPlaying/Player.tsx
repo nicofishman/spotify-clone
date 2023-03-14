@@ -5,9 +5,14 @@ import {
 	NextButton,
 	RepeatButton,
 } from '@/components/Layout/NowPlaying/ButtonsWithTooltip';
+import TimeBar from '@/components/Layout/NowPlaying/TimeBar';
 import React from 'react';
 
-const Player = () => {
+interface PlayerProps {
+	playing: SpotifyApi.CurrentlyPlayingResponse;
+}
+
+const Player = ({ playing }: PlayerProps) => {
 	return (
 		<div className='flex w-2/5 max-w-[722px] flex-col'>
 			<div className='mb-2 flex items-center gap-x-4'>
@@ -21,6 +26,7 @@ const Player = () => {
 					<RepeatButton />
 				</div>
 			</div>
+			<TimeBar playing={playing} />
 		</div>
 	);
 };

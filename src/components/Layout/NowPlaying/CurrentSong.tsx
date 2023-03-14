@@ -1,5 +1,7 @@
-import LikeSongButton from '@/components/Layout/NowPlaying/LikeSong';
-import PictureInPictureButton from '@/components/Layout/NowPlaying/PictureInPictureButton';
+import {
+	PictureInPictureButton,
+	LikeSongButton,
+} from '@/components/Layout/NowPlaying/ButtonsWithTooltip';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';

@@ -6,6 +6,9 @@ const config = {
 			fontFamily: {
 				spotify: ['CircularSp', 'Helvetica', 'sans-serif'],
 			},
+			fontSize: {
+				xxs: '0.6875rem',
+			},
 			backgroundImage: {
 				'liked-songs-bg': 'linear-gradient(135deg,#450af5,#c4efd9)',
 			},
