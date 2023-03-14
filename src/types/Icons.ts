@@ -8,6 +8,10 @@ import collectionDefault from '@/assets/icons/collection.svg';
 import collectionActive from '@/assets/icons/collection-active.svg';
 import plus from '@/assets/icons/plus.svg';
 import heart from '@/assets/icons/heart.svg';
+import collaborative from '@/assets/icons/collaborative.svg';
+import likeDefault from '@/assets/icons/like.svg';
+import likeActive from '@/assets/icons/like-active.svg';
+import pictureInPicture from '@/assets/icons/picture-in-picture.svg';
 
 export const Icons = {
 	logo: logo,
@@ -19,4 +23,8 @@ export const Icons = {
 	collectionDefault: collectionDefault,
 	plus: plus,
 	heart: heart,
+	collaborative: collaborative,
+	likeDefault: likeDefault,
+	likeActive: likeActive,
+	pictureInPicture: pictureInPicture,
 } as const;
