@@ -4,15 +4,7 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				spotify: [
-					'CircularSp',
-					'CircularSp-Arab',
-					'CircularSp-Hebr',
-					'CircularSp-Cyrl',
-					'CircularSp-Grek',
-					'CircularSp-Deva',
-					'sans-serif',
-				],
+				spotify: ['CircularSp', 'Helvetica', 'sans-serif'],
 			},
 			backgroundImage: {
 				'liked-songs-bg': 'linear-gradient(135deg,#450af5,#c4efd9)',
