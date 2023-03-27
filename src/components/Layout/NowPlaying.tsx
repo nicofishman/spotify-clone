@@ -17,7 +17,7 @@ export const NowPlaying = () => {
 				<>
 					<CurrentSong playing={currentPlaying} />
 					<Player playing={currentPlaying} />
-					<Controls />
+					<Controls playing={currentPlaying} />
 				</>
 			) : undefined}
 		</footer>
