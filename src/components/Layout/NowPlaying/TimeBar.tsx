@@ -1,13 +1,24 @@
 import { Slider } from '@/components/UI/Slider';
 import { api } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
+import { useState, useEffect } from 'react';
 
 interface TimeBarProps {
 	playing: SpotifyApi.CurrentlyPlayingResponse;
 }
 
 const TimeBar = ({ playing }: TimeBarProps) => {
-	const seekMutation = api.me.player.seek.useMutation();
+	const [localTime, setLocalTime] = useState(playing.progress_ms);
+
+	useEffect(() => {
+		setLocalTime(playing.progress_ms);
+	}, [playing.progress_ms]);
+
+	const seekMutation = api.me.player.seek.useMutation({
+		onMutate: (newTime) => {
+			setLocalTime(newTime);
+		},
+	});
 
 	if (!playing || !playing.item) return null;
 
@@ -15,7 +26,7 @@ const TimeBar = ({ playing }: TimeBarProps) => {
 		<div className='flex w-full items-center justify-between gap-x-2'>
 			<div className='min-w-[40px] text-right'>
 				<span className='text-xxs text-[#a7a7a7]'>
-					{millisToMinutesAndSeconds(playing.progress_ms ?? 0)}
+					{millisToMinutesAndSeconds(localTime ?? 0)}
 				</span>
 			</div>
 			<div className='h-4 w-full'>
@@ -30,7 +41,7 @@ const TimeBar = ({ playing }: TimeBarProps) => {
 					onChange={(value) => {
 						console.log(value);
 					}}
-					value={[playing.progress_ms ?? 0]}
+					value={[localTime ?? 0]}
 				/>
 			</div>
 			<div className='min-w-[40px] text-left'>

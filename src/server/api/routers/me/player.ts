@@ -14,6 +14,9 @@ export const playerRouter = createTRPCRouter({
 			},
 		});
 
+		const resJson =
+			(await res.json()) as SpotifyApi.CurrentPlaybackResponse;
+
 		if (res.status === 204) {
 			return {
 				is_playing: false,
@@ -22,7 +25,7 @@ export const playerRouter = createTRPCRouter({
 		}
 
 		if (res.status !== 200) {
-			const error = (await res.json()) as {
+			const error = resJson as unknown as {
 				message: string;
 				status: number;
 			};
@@ -33,7 +36,7 @@ export const playerRouter = createTRPCRouter({
 			});
 		}
 
-		return ((await res.json()) ?? {}) as SpotifyApi.CurrentPlaybackResponse;
+		return resJson;
 	}),
 	play: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/play`, {
@@ -42,7 +45,7 @@ export const playerRouter = createTRPCRouter({
 			},
 			method: 'PUT',
 		});
-		await checkRes(res);
+		await checkRes(res, 204);
 	}),
 	pause: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/pause`, {
@@ -52,7 +55,7 @@ export const playerRouter = createTRPCRouter({
 			method: 'PUT',
 		});
 
-		await checkRes(res);
+		await checkRes(res, 204);
 	}),
 	next: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/next`, {
@@ -61,7 +64,7 @@ export const playerRouter = createTRPCRouter({
 			},
 			method: 'POST',
 		});
-		await checkRes(res);
+		await checkRes(res, 204);
 	}),
 	previous: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/previous`, {
@@ -70,7 +73,7 @@ export const playerRouter = createTRPCRouter({
 			},
 			method: 'POST',
 		});
-		await checkRes(res);
+		await checkRes(res, 204);
 	}),
 	seek: protectedProcedureWithAccount
 		.input(z.number())
@@ -84,7 +87,7 @@ export const playerRouter = createTRPCRouter({
 					method: 'PUT',
 				}
 			);
-			await checkRes(res);
+			await checkRes(res, 204);
 		}),
 	shuffle: protectedProcedureWithAccount
 		.input(z.boolean())
@@ -100,7 +103,7 @@ export const playerRouter = createTRPCRouter({
 					method: 'PUT',
 				}
 			);
-			await checkRes(res);
+			await checkRes(res, 204);
 		}),
 	repeat: protectedProcedureWithAccount
 		.input(z.enum(['track', 'off']))
@@ -114,7 +117,7 @@ export const playerRouter = createTRPCRouter({
 					method: 'PUT',
 				}
 			);
-			await checkRes(res);
+			await checkRes(res, 204);
 		}),
 	volume: protectedProcedureWithAccount
 		.input(z.number().min(0).max(100))
@@ -128,12 +131,36 @@ export const playerRouter = createTRPCRouter({
 					method: 'PUT',
 				}
 			);
-			await checkRes(res);
+			await checkRes(res, 204);
 		}),
+	queue: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
+		const res = await fetch(`${API_URL}/me/player/queue`, {
+			headers: {
+				Authorization: `Bearer ${ctx.session.account.access_token}`,
+			},
+			method: 'GET',
+		});
+		await checkRes(res, 200);
+	}),
+	recentlyPlayed: protectedProcedureWithAccount.query(async ({ ctx }) => {
+		// get the 6 most recent playlists heard
+		const res = await fetch(
+			`${API_URL}/me/player/recently-played?limit=50`,
+			{
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+				method: 'GET',
+			}
+		);
+		await checkRes(res, 200);
+		return ((await res.json()) ??
+			{}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
+	}),
 });
 
-const checkRes = async (res: Response) => {
-	if (res.status !== 204) {
+const checkRes = async (res: Response, status: number) => {
+	if (res.status !== status) {
 		const error = (await res.json()) as {
 			message: string;
 			status: number;
@@ -144,3 +171,19 @@ const checkRes = async (res: Response) => {
 		});
 	}
 };
+
+/**
+ * const res = await fetch(
+			`${API_URL}/me/player/recently-played?limit=50`,
+			{
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+				method: 'GET',
+			}
+		);
+		await checkRes(res, 200);
+
+		return ((await res.json()) ??
+			{}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
+ */
