@@ -8,14 +8,19 @@ import {
 import { cn } from '@/utils/cn';
 import React, { useState } from 'react';
 
-export const RepeatButton = () => {
-	const [isRepeating, setIsRepeating] = useState(false);
+interface RepeatButtonProps {
+	isRepeating: boolean;
+}
+
+export const RepeatButton = ({ isRepeating }: RepeatButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger className='flex h-8 w-8 items-center justify-center'>
 					<Icon
-						onClick={() => setIsRepeating(!isRepeating)}
+						onClick={() => {
+							// setIsEnabled(!isEnabled);
+						}}
 						name='repeat'
 						className={cn(
 							'hover:brightness-125',

@@ -17,7 +17,7 @@ export const playerRouter = createTRPCRouter({
 			return {
 				is_playing: false,
 				item: null,
-			} as SpotifyApi.CurrentlyPlayingResponse;
+			} as SpotifyApi.CurrentPlaybackResponse;
 		}
 
 		if (res.status !== 200) {
@@ -32,7 +32,6 @@ export const playerRouter = createTRPCRouter({
 			});
 		}
 
-		return ((await res.json()) ??
-			{}) as SpotifyApi.CurrentlyPlayingResponse;
+		return ((await res.json()) ?? {}) as SpotifyApi.CurrentPlaybackResponse;
 	}),
 });
