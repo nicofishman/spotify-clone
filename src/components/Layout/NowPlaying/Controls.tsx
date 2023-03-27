@@ -15,7 +15,7 @@ interface ControlsProps {
 
 const Controls = ({ playing }: ControlsProps) => {
 	const [localVolume, setLocalVolume] = useState(
-		playing.device.volume_percent
+		playing.device?.volume_percent ?? 5
 	);
 
 	const setVolumeMutation = api.me.player.volume.useMutation({

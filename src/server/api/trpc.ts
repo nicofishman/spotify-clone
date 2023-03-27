@@ -134,7 +134,7 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 		throw new TRPCError({ code: 'UNAUTHORIZED' });
 	}
 
-	const expires = account.expires_at ?? 0;
+	const expires = account.expires_at ?? Date.now();
 
 	if (expires > Date.now()) {
 		console.log('refreshing token');
