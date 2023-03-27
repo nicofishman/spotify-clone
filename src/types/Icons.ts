@@ -18,6 +18,11 @@ import play from '@/assets/icons/play.svg';
 import pause from '@/assets/icons/pause.svg';
 import shuffle from '@/assets/icons/shuffle.svg';
 import repeat from '@/assets/icons/repeat.svg';
+import connect from '@/assets/icons/connect.svg';
+import fullscreen from '@/assets/icons/fullscreen.svg';
+import lyrics from '@/assets/icons/lyrics.svg';
+import queue from '@/assets/icons/queue.svg';
+import volume from '@/assets/icons/volume.svg';
 
 export const Icons = {
 	logo: logo,
@@ -39,4 +44,9 @@ export const Icons = {
 	pause: pause,
 	shuffle: shuffle,
 	repeat: repeat,
+	connect: connect,
+	fullscreen: fullscreen,
+	lyrics: lyrics,
+	queue: queue,
+	volume: volume,
 } as const;
