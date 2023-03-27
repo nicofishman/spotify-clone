@@ -14,19 +14,17 @@ export const ShuffleButton = () => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger>
-					<button className='flex h-8 w-8 items-center justify-center'>
-						<Icon
-							onClick={() => setIsEnabled(!isEnabled)}
-							name='shuffle'
-							className={cn(
-								'hover:brightness-125',
-								isEnabled
-									? 'fill-spotify-green after:bottom-0 after:h-2 after:w-2 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full'
-									: 'fill-white/70'
-							)}
-						/>
-					</button>
+				<TooltipTrigger className='flex h-8 w-8 items-center justify-center'>
+					<Icon
+						onClick={() => setIsEnabled(!isEnabled)}
+						name='shuffle'
+						className={cn(
+							'hover:brightness-125',
+							isEnabled
+								? 'fill-spotify-green after:bottom-0 after:h-2 after:w-2 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full'
+								: 'fill-white/70'
+						)}
+					/>
 				</TooltipTrigger>
 				<TooltipContent>
 					<p>{isEnabled ? 'Disable shuffle' : 'Enable shuffle'}</p>

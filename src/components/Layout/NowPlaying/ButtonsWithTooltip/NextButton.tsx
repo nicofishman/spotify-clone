@@ -11,13 +11,11 @@ export const NextButton = () => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger>
-					<button className='flex h-8 w-8 items-center justify-center'>
-						<Icon
-							name='next'
-							className='fill-white/70 transition-colors hover:fill-white'
-						/>
-					</button>
+				<TooltipTrigger className='flex h-8 w-8 items-center justify-center'>
+					<Icon
+						name='next'
+						className='fill-white/70 transition-colors hover:fill-white'
+					/>
 				</TooltipTrigger>
 				<TooltipContent>
 					<span>Next</span>

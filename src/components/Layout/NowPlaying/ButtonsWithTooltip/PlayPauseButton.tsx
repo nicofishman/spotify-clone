@@ -5,21 +5,22 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/UI/Tooltip';
-import React, { useState } from 'react';
 
-export const PlayPauseButton = () => {
-	const [isPlaying, setIsPlaying] = useState(false);
+interface PlayPauseButtonProps {
+	isPlaying: boolean;
+}
 
+export const PlayPauseButton = ({ isPlaying }: PlayPauseButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger>
-					<button
-						onClick={() => setIsPlaying(!isPlaying)}
-						className='flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform hover:scale-110'
-					>
-						<Icon name={isPlaying ? 'pause' : 'play'} />
-					</button>
+				<TooltipTrigger
+					onClick={() => {
+						console.log();
+					}}
+					className='flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform hover:scale-110'
+				>
+					<Icon name={isPlaying ? 'pause' : 'play'} />
 				</TooltipTrigger>
 				<TooltipContent>
 					<p>{isPlaying ? 'Pause' : 'Play'}</p>
