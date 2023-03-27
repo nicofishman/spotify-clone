@@ -9,6 +9,7 @@ specifiers:
   '@savvywombat/tailwindcss-grid-areas': ^3.0.1
   '@svgr/webpack': ^6.5.1
   '@tanstack/react-query': ^4.20.2
+  '@total-typescript/ts-reset': ^0.4.2
   '@trpc/client': ^10.9.0
   '@trpc/next': ^10.9.0
   '@trpc/react-query': ^10.9.0
@@ -67,6 +68,7 @@ dependencies:
 
 devDependencies:
   '@savvywombat/tailwindcss-grid-areas': 3.0.1_tailwindcss@3.2.7
+  '@total-typescript/ts-reset': 0.4.2
   '@types/eslint': 8.21.1
   '@types/node': 18.15.0
   '@types/prettier': 2.7.2
@@ -2173,6 +2175,10 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
+
+  /@total-typescript/ts-reset/0.4.2:
+    resolution: {integrity: sha512-vqd7ZUDSrXFVT1n8b2kc3LnklncDQFPvR58yUS1kEP23/nHPAO9l1lMjUfnPrXYYk4Hj54rrLKMW5ipwk7k09A==}
+    dev: true
 
   /@trpc/client/10.15.0_@trpc+server@10.15.0:
     resolution: {integrity: sha512-Tmm3N7jibEOZTsvHRU+tWCVvUf8F9/UcKOVTGAWuyasBpnjOZ7ClZ81F9wo4cg9+9tUxUhuJns+E96/HtATpyQ==}
