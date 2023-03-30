@@ -3,10 +3,10 @@ import LikedPlaylists from '@/components/Layout/Sidebar/LikedPlaylists';
 import LikedSongsIcon from '@/components/Layout/Sidebar/LikedSongsIcon';
 import ListComponent from '@/components/Layout/Sidebar/ListComponent';
 import Icon from '@/components/UI/Icon';
+import { triggerResizeSidebar } from '@/hooks/useElementSize';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { api } from '@/utils/api';
 import { cn } from '@/utils/cn';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ResizableBox } from 'react-resizable';
@@ -34,6 +34,9 @@ export const Sidebar = ({}) => {
 			maxConstraints={[384, Infinity]}
 			className='relative h-full resize-x grid-in-nav-bar'
 			axis='x'
+			onResize={() => {
+				triggerResizeSidebar();
+			}}
 		>
 			<nav className='h-full w-full min-w-[130px] max-w-sm overflow-y-hidden bg-black text-white'>
 				<div className='flex h-full flex-col pt-6'>

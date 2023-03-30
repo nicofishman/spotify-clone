@@ -134,9 +134,9 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 		throw new TRPCError({ code: 'UNAUTHORIZED' });
 	}
 
-	const expires = account.expires_at ?? Date.now();
+	const expires = account.expires_at ?? Infinity;
 
-	if (expires > Date.now()) {
+	if (expires < new Date().getTime() / 1000) {
 		console.log('refreshing token');
 
 		const { access_token: newToken, expires_in } = await getAccessToken(

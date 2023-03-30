@@ -1,3 +1,4 @@
+import { checkRes } from '@/server/api/routers/me/player';
 import {
 	createTRPCRouter,
 	protectedProcedureWithAccount,
@@ -72,4 +73,15 @@ export const playlistsRouter = createTRPCRouter({
 
 			return data;
 		}),
+	featured: protectedProcedureWithAccount.query(async ({ ctx }) => {
+		const res = await fetch(`${API_URL}/browse/featured-playlists`, {
+			headers: {
+				Authorization: `Bearer ${ctx.session.account.access_token}`,
+			},
+		});
+		await checkRes(res, 200);
+		const data =
+			(await res.json()) as SpotifyApi.ListOfFeaturedPlaylistsResponse;
+		return data;
+	}),
 });

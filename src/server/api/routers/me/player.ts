@@ -157,9 +157,25 @@ export const playerRouter = createTRPCRouter({
 		return ((await res.json()) ??
 			{}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
 	}),
+	addToQueue: protectedProcedureWithAccount
+		.input(z.array(z.string()))
+		.mutation(async ({ ctx, input }) => {
+			for (const uri of input) {
+				const res = await fetch(
+					`${API_URL}/me/player/queue?uri=${uri}`,
+					{
+						headers: {
+							Authorization: `Bearer ${ctx.session.account.access_token}`,
+						},
+						method: 'POST',
+					}
+				);
+				await checkRes(res, 204);
+			}
+		}),
 });
 
-const checkRes = async (res: Response, status: number) => {
+export const checkRes = async (res: Response, status: number) => {
 	if (res.status !== status) {
 		const error = (await res.json()) as {
 			message: string;
