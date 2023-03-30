@@ -32,4 +32,12 @@
 	body {
 		font-family: CircularSp, sans-serif;
 	}
+
+	.playlistsGrid {
+		grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
+	}
+
+	.featuredPlaylists {
+		grid-template: auto/repeat(auto-fill, minmax(max(186px, 20%), 1fr));
+	}
 }

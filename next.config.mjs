@@ -10,7 +10,12 @@
 const config = {
 	reactStrictMode: true,
 	images: {
-		domains: ['i.scdn.co'],
+		domains: ['', 'blend-playlist-covers.spotifycdn.com'],
+		remotePatterns: [
+			{
+				hostname: '*.scdn.co',
+			},
+		],
 	},
 	webpack: (config) => {
 		config.module.rules.push({
