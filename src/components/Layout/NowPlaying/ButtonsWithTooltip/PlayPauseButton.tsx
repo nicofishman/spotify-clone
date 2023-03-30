@@ -12,8 +12,12 @@ interface PlayPauseButtonProps {
 }
 
 export const PlayPauseButton = ({ isPlaying }: PlayPauseButtonProps) => {
-	const playMutation = api.me.player.play.useMutation();
-	const pauseMutation = api.me.player.pause.useMutation();
+	const utils = api.useContext();
+	const invalidate = {
+		onSuccess: () => utils.me.player.currentlyPlaying.invalidate(),
+	};
+	const playMutation = api.me.player.play.useMutation(invalidate);
+	const pauseMutation = api.me.player.pause.useMutation(invalidate);
 
 	return (
 		<TooltipProvider>
