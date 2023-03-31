@@ -38,9 +38,6 @@ const TimeBar = ({ playing }: TimeBarProps) => {
 					min={0}
 					max={playing.item.duration_ms}
 					className='top-1/2 h-1'
-					onChange={(value) => {
-						console.log(value);
-					}}
 					value={[localTime ?? 0]}
 				/>
 			</div>

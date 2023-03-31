@@ -43,8 +43,6 @@ function useElementSize<T extends HTMLElement = HTMLDivElement>(
 
 			const scrollbar = ref.offsetHeight > window.innerHeight ? 0 : 17;
 
-			console.log(scrollbar);
-
 			const elementWidth =
 				ref?.offsetWidth - paddingX - borderX - scrollbar;
 			const elementHeight = ref?.offsetHeight - paddingY - borderY;

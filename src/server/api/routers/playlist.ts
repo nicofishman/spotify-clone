@@ -7,8 +7,6 @@ export const playlistRouter = createTRPCRouter({
 	getMany: protectedProcedureWithAccount
 		.input(z.array(z.string()))
 		.query(async ({ ctx, input }) => {
-			console.log('input', input);
-
 			const playlists = input.map(async (playlistId) => {
 				const res = await fetch(`${API_URL}/playlists/${playlistId}`, {
 					headers: {
