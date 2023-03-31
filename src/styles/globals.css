@@ -40,4 +40,21 @@
 	.featuredPlaylists {
 		grid-template: auto/repeat(auto-fill, minmax(max(186px, 20%), 1fr));
 	}
+
+	.genresGrid {
+		grid-template: auto/repeat(auto-fill, minmax(max(157px, 20%), 1fr));
+	}
+
+	body::-webkit-scrollbar {
+		display: none;
+	}
+
+	::-webkit-scrollbar {
+		width: 16px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: rgba(255, 255, 255, 0.3);
+		border-radius: 8px;
+	}
 }
