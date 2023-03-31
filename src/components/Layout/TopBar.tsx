@@ -2,12 +2,10 @@ import {
 	GoBackButton,
 	GoForwardButton,
 } from '@/components/Layout/TopBar/ButtonsWithTooltip';
-import UserChip from '@/components/Layout/TopBar/UserChip';
+import UserChipWithDropdown from '@/components/Layout/TopBar/UserChipWithDropdown';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
 
 export const TopBar = () => {
-	const [isOpen, setOpen] = useState(false);
 	const router = useRouter();
 
 	return (
@@ -25,7 +23,7 @@ export const TopBar = () => {
 						}}
 					/>
 				</div>
-				<UserChip isOpen={isOpen} setOpen={setOpen} />
+				<UserChipWithDropdown />
 			</div>
 		</header>
 	);

@@ -12,21 +12,15 @@ import React from 'react';
 
 interface UserChipProps {
 	isOpen: boolean;
-	setOpen: (isOpen: boolean) => void;
 }
 
-const UserChip = ({ isOpen, setOpen }: UserChipProps) => {
+const UserChip = ({ isOpen }: UserChipProps) => {
 	const { data: user } = useSession();
 	return (
 		user && (
 			<TooltipProvider>
 				<Tooltip>
-					<TooltipTrigger
-						onClick={() => {
-							setOpen(!isOpen);
-						}}
-						className='flex h-8 items-center gap-x-2 rounded-full bg-black/70 p-0.5'
-					>
+					<TooltipTrigger className='flex h-8 items-center gap-x-2 rounded-full bg-black/70 p-0.5'>
 						<figure className='h-7 w-7'>
 							<Image
 								className='h-full w-full rounded-full object-cover'
@@ -41,7 +35,7 @@ const UserChip = ({ isOpen, setOpen }: UserChipProps) => {
 						</span>
 						<Icon
 							className={cn(
-								'mr-1.5',
+								'mr-1.5 transition-transform',
 								isOpen
 									? 'rotate-180 transform'
 									: 'rotate-0 transform'

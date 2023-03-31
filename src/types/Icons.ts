@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import arrowDown from '@/assets/icons/arrow-down.svg';
+import check from '@/assets/icons/check.svg';
 import chevronLeft from '@/assets/icons/chevron-left.svg';
 import chevronRight from '@/assets/icons/chevron-right.svg';
+import circle from '@/assets/icons/circle.svg';
 import collaborative from '@/assets/icons/collaborative.svg';
 import collectionActive from '@/assets/icons/collection-active.svg';
 import collectionDefault from '@/assets/icons/collection.svg';
 import connect from '@/assets/icons/connect.svg';
+import externalUrl from '@/assets/icons/external-url.svg';
 import fullscreen from '@/assets/icons/fullscreen.svg';
 import heart from '@/assets/icons/heart.svg';
 import homeActive from '@/assets/icons/home-active.svg';
@@ -29,30 +32,33 @@ import volume from '@/assets/icons/volume.svg';
 
 export const Icons = {
 	arrowDown: arrowDown,
-	logo: logo,
-	homeActive: homeActive,
-	homeDefault: homeDefault,
-	searchActive: searchActive,
-	searchDefault: searchDefault,
+	check: check,
+	chevronLeft: chevronLeft,
+	chevronRight: chevronRight,
+	circle: circle,
+	collaborative: collaborative,
 	collectionActive: collectionActive,
 	collectionDefault: collectionDefault,
-	plus: plus,
-	heart: heart,
-	collaborative: collaborative,
-	likeDefault: likeDefault,
-	likeActive: likeActive,
-	pictureInPicture: pictureInPicture,
-	next: next,
-	previous: previous,
-	play: play,
-	pause: pause,
-	shuffle: shuffle,
-	repeat: repeat,
 	connect: connect,
+	externalUrl: externalUrl,
 	fullscreen: fullscreen,
+	heart: heart,
+	homeActive: homeActive,
+	homeDefault: homeDefault,
+	likeActive: likeActive,
+	likeDefault: likeDefault,
+	logo: logo,
 	lyrics: lyrics,
+	next: next,
+	pause: pause,
+	pictureInPicture: pictureInPicture,
+	play: play,
+	plus: plus,
+	previous: previous,
 	queue: queue,
+	repeat: repeat,
+	searchActive: searchActive,
+	searchDefault: searchDefault,
+	shuffle: shuffle,
 	volume: volume,
-	chevronRight: chevronRight,
-	chevronLeft: chevronLeft,
 } as const;
