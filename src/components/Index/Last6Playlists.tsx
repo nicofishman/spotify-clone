@@ -21,8 +21,6 @@ const Last6Playlists = () => {
 		enabled: uris.length > 0,
 		onSuccess(data) {
 			data.forEach((playlist) => {
-				console.log('playlist', playlist);
-
 				setLast6Playlists((last6Playlists) => {
 					const newLast6Playlists = new Set(last6Playlists);
 					newLast6Playlists.add(playlist);

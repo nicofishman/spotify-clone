@@ -1,11 +1,9 @@
 import PlaylistCardSquare from '@/components/Index/PlaylistCardSquare/PlaylistCardSquare';
 import { mainSizeStore } from '@/stores/mainSizeStore';
 import { api } from '@/utils/api';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
-interface FeaturedPlaylistsProps {}
-
-const FeaturedPlaylists = ({}: FeaturedPlaylistsProps) => {
+const FeaturedPlaylists = () => {
 	const { data: featuredPlaylists, isLoading } =
 		api.user.playlists.featured.useQuery();
 
@@ -30,12 +28,11 @@ const FeaturedPlaylists = ({}: FeaturedPlaylistsProps) => {
 
 	return (
 		<section className='w-full'>
-			<h2 className='text-4xl font-bold text-white'>
+			<h2 className='cursor-pointer text-4xl font-bold text-white hover:underline'>
 				{featuredPlaylists?.message}
 			</h2>
-			{/* <p>{`${width} ${columnCount} ${columnWidth}`}</p> */}
 			<div
-				className='flex w-full min-w-[384px] justify-between gap-6 overflow-x-auto py-2'
+				className='featuredGrid grid w-full min-w-[384px] gap-6 overflow-x-auto py-2'
 				style={{
 					gridTemplateColumns: `repeat(${columnCount}, ${
 						columnWidth - 24
