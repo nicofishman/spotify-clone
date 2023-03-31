@@ -8,6 +8,7 @@ import collaborative from '@/assets/icons/collaborative.svg';
 import collectionActive from '@/assets/icons/collection-active.svg';
 import collectionDefault from '@/assets/icons/collection.svg';
 import connect from '@/assets/icons/connect.svg';
+import cross from '@/assets/icons/cross.svg';
 import externalUrl from '@/assets/icons/external-url.svg';
 import fullscreen from '@/assets/icons/fullscreen.svg';
 import heart from '@/assets/icons/heart.svg';
@@ -40,6 +41,7 @@ export const Icons = {
 	collectionActive: collectionActive,
 	collectionDefault: collectionDefault,
 	connect: connect,
+	cross: cross,
 	externalUrl: externalUrl,
 	fullscreen: fullscreen,
 	heart: heart,

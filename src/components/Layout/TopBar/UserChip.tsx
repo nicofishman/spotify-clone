@@ -3,7 +3,6 @@ import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
-	TooltipTrigger,
 } from '@/components/UI/Tooltip';
 import { cn } from '@/utils/cn';
 import { useSession } from 'next-auth/react';
@@ -20,8 +19,8 @@ const UserChip = ({ isOpen }: UserChipProps) => {
 		user && (
 			<TooltipProvider>
 				<Tooltip>
-					<TooltipTrigger className='flex h-8 items-center gap-x-2 rounded-full bg-black/70 p-0.5'>
-						<figure className='h-7 w-7'>
+					<div className='flex h-8 items-center gap-x-2 rounded-full bg-black/70 p-0.5'>
+						<figure className='h-7 w-7 '>
 							<Image
 								className='h-full w-full rounded-full object-cover'
 								src={user.user.image || ''}
@@ -42,7 +41,7 @@ const UserChip = ({ isOpen }: UserChipProps) => {
 							)}
 							name='arrowDown'
 						/>
-					</TooltipTrigger>
+					</div>
 					<TooltipContent>{user.user.name}</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>
