@@ -12,7 +12,7 @@ const Last6Playlists = () => {
 		api.me.player.currentlyPlaying.useQuery();
 
 	const uris = (recentlyPlayed?.items ?? [])
-		.map((item) => item.context.uri)
+		.map((item) => item.context?.uri ?? '')
 		.filter((uri) => uri.startsWith('spotify:playlist:'))
 		.map((uri) => uri.split(':')[2])
 		.filter(Boolean);

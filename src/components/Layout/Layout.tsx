@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 type LayoutProps = {
 	children: React.ReactElement | React.ReactElement[];
 	className?: string;
+	mainClassName?: string;
 } & (
 	| {
 			includeSearchInput: true;
@@ -24,6 +25,7 @@ type LayoutProps = {
 const Layout = ({
 	children,
 	className,
+	mainClassName,
 	includeSearchInput = false,
 	searchInput,
 	onSearchInputChange,
@@ -63,7 +65,10 @@ const Layout = ({
 				)}
 				<main
 					ref={mainRef}
-					className='flex flex-col gap-y-6 overflow-auto px-8 pt-6 text-white grid-in-main-view'
+					className={cn(
+						'@container/main flex flex-col gap-y-6 overflow-auto px-8 pt-6 text-white grid-in-main-view',
+						mainClassName
+					)}
 				>
 					{children}
 				</main>
