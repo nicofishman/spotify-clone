@@ -130,7 +130,7 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 		},
 	});
 
-	if (!account) {
+	if (!account || !account.access_token) {
 		throw new TRPCError({ code: 'UNAUTHORIZED' });
 	}
 
