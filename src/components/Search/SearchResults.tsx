@@ -1,3 +1,4 @@
+import Songs from '@/components/Search/Songs/Songs';
 import TopResult from '@/components/Search/TopResult';
 import { mainSizeStore } from '@/stores/mainSizeStore';
 import { api } from '@/utils/api';
@@ -37,7 +38,6 @@ function getTopResult(query: string, searchResult: SpotifyApi.SearchResponse) {
 
 		return bSimilarity - aSimilarity;
 	});
-	console.log(sorted[0]);
 
 	return sorted[0];
 }
@@ -134,7 +134,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 					) : undefined}
 
 					<section
-						className='h-full min-h-full w-full bg-blue-500'
+						className='h-full min-h-full w-full'
 						style={{
 							flex: rightCols,
 						}}
@@ -142,6 +142,11 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 						<h2 className='mb-4 truncate text-2xl font-bold'>
 							Songs
 						</h2>
+						<Songs
+							songs={
+								searchResult?.tracks?.items.slice(0, 4) ?? []
+							}
+						/>
 					</section>
 				</div>
 			</div>

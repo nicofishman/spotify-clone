@@ -25,7 +25,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
 	<DropdownMenuPrimitive.SubTrigger
 		ref={ref}
 		className={cn(
-			'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm font-medium outline-none focus:bg-slate-100 data-[state=open]:bg-slate-100 dark:focus:bg-slate-700 dark:data-[state=open]:bg-slate-700',
+			'relative flex cursor-default select-none items-center rounded-sm px-2 py-3 text-sm text-white outline-none focus:bg-white/10 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
 			inset && 'pl-8',
 			className
 		)}
@@ -45,7 +45,7 @@ const DropdownMenuSubContent = React.forwardRef<
 	<DropdownMenuPrimitive.SubContent
 		ref={ref}
 		className={cn(
-			'animate-in slide-in-from-left-1 z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white p-1 text-slate-700 shadow-md dark:border-slate-800 dark:bg-slate-800 dark:text-slate-400',
+			'animate-in slide-in-from-left-1 z-50 max-h-[calc(100vh_-_24px)] min-w-[160px] max-w-[350px] overflow-hidden overflow-y-auto rounded-md border-none bg-gray-border p-1 text-white shadow-md outline-none drop-shadow-lg',
 			className
 		)}
 		{...props}
@@ -81,7 +81,7 @@ const DropdownMenuItem = React.forwardRef<
 	<DropdownMenuPrimitive.Item
 		ref={ref}
 		className={cn(
-			'relative flex cursor-default select-none items-center rounded-sm px-2 py-3 text-sm text-white outline-none focus:bg-white/10 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ',
+			'relative flex cursor-default select-none items-center rounded-sm p-2 text-sm text-white outline-none focus:bg-white/10 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ',
 			inset && 'pl-8',
 			className
 		)}
@@ -160,10 +160,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<DropdownMenuPrimitive.Separator
 		ref={ref}
-		className={cn(
-			'-mx-1 my-1 h-px bg-slate-100 dark:bg-slate-700',
-			className
-		)}
+		className={cn('my-1 h-px bg-gray-text/30', className)}
 		{...props}
 	/>
 ));

@@ -15,7 +15,7 @@ const SearchInput = ({
 }: SearchInputProps) => {
 	return (
 		<div className='flex h-10 w-full max-w-sm items-center rounded-full bg-white px-4'>
-			<Icon name='searchDefault' className='mr-4 text-gray-bg' />
+			<Icon name='searchDefault' className='mr-4 h-6 w-6 text-gray-bg' />
 			<input
 				value={value}
 				onChange={onChange}
@@ -35,7 +35,7 @@ const SearchInput = ({
 						} as React.ChangeEvent<HTMLInputElement>)
 					}
 				>
-					<Icon name='cross' className='ml-2 text-gray-bg' />
+					<Icon name='cross' className='ml-2 h-6 w-6 text-gray-bg' />
 				</button>
 			) : undefined}
 		</div>

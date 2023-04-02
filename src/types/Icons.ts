@@ -29,6 +29,7 @@ import repeat from '@/assets/icons/repeat.svg';
 import searchActive from '@/assets/icons/search-active.svg';
 import searchDefault from '@/assets/icons/search.svg';
 import shuffle from '@/assets/icons/shuffle.svg';
+import threeDots from '@/assets/icons/three-dots.svg';
 import volume from '@/assets/icons/volume.svg';
 
 export const Icons = {
@@ -62,5 +63,6 @@ export const Icons = {
 	searchActive: searchActive,
 	searchDefault: searchDefault,
 	shuffle: shuffle,
+	threeDots: threeDots,
 	volume: volume,
 } as const;
