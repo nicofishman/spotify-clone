@@ -14,6 +14,7 @@ const config = {
 			},
 			colors: {
 				'spotify-green': '#1DB954',
+                'bg-color': '#121212',
 				'gray-bg': '#181818',
 				'gray-border': '#282828',
 				'gray-text': '#b3b3b3',
@@ -27,7 +28,10 @@ const config = {
 			},
 		},
 	},
-	plugins: [require('@savvywombat/tailwindcss-grid-areas')],
+	plugins: [
+		require('@savvywombat/tailwindcss-grid-areas'),
+		require('@tailwindcss/container-queries'),
+	],
 };
 
 module.exports = config;
