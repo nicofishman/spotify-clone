@@ -25,6 +25,7 @@ const Search = () => {
 				searchInput={searchInput}
 				onSearchInputChange={(val) => setSearchInput(val)}
 				includeSearchInput={true}
+				mainClassName='pt-0 bg-bg-color'
 			>
 				{searchInput.length === 0 ? (
 					<CategoriesGrid
@@ -32,7 +33,7 @@ const Search = () => {
 						categories={categories?.categories.items ?? []}
 					/>
 				) : (
-					<SearchResults search={searchInput} />
+					<SearchResults query={searchInput} />
 				)}
 			</Layout>
 		</>
