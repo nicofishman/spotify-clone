@@ -10,7 +10,7 @@
 const config = {
 	reactStrictMode: true,
 	images: {
-		domains: ['', 'blend-playlist-covers.spotifycdn.com'],
+		domains: ['', 'blend-playlist-covers.spotifycdn.com', 'images-ak.spotifycdn.com'],
 		remotePatterns: [
 			{
 				hostname: '*.scdn.co',

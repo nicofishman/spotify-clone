@@ -4,7 +4,7 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				spotify: ['CircularSp', 'Helvetica', 'sans-serif'],
+				spotify: ['Spotify', 'Comic sans ms', 'sans-serif'],
 			},
 			fontSize: {
 				xxs: '0.6875rem',
@@ -20,11 +20,16 @@ const config = {
 				'gray-text': '#b3b3b3',
 			},
 			gridTemplateAreas: {
-				layout: [
+				layoutLarge: [
 					'nav-bar top-bar',
 					'nav-bar main-view',
 					'now-playing-bar now-playing-bar',
 				],
+                layoutSmall: [
+                    'top-bar',
+                    'main-view',
+                    'now-playing-bar',
+                ],
 			},
             keyframes: {
                 "accordion-down": {

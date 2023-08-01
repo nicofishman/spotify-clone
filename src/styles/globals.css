@@ -1,26 +1,26 @@
 @font-face {
-	font-family: 'CircularSp';
-	src: url('/fonts/CircularSpotifyText-Light.woff') format('woff');
+	font-family: Spotify;
+	src: url('/fonts/Circular/CircularStd-Light.otf') format('otf');
 	font-weight: 300;
 }
 @font-face {
-	font-family: 'CircularSp';
-	src: url('/fonts/CircularSp-Book.woff2') format('woff2');
+	font-family: Spotify;
+	src: url('/fonts/Circular/CircularStd-Book.otf') format('otf');
 	font-weight: 400;
 }
 @font-face {
-	font-family: 'CircularSp';
-	src: url('/fonts/CircularSpotifyText-Medium.woff') format('woff');
+	font-family: Spotify;
+	src: url('/fonts/Circular/CircularStd-Medium.otf') format('otf');
 	font-weight: 500;
 }
 @font-face {
-	font-family: 'CircularSp';
-	src: url('/fonts/CircularSpotifyText-Bold.woff') format('woff');
+	font-family: Spotify;
+	src: url('/fonts/Circular/CircularStd-Bold.otf') format('otf');
 	font-weight: 700;
 }
 @font-face {
-	font-family: 'CircularSp';
-	src: url('/fonts/CircularSpotifyText-Black.woff') format('woff');
+	font-family: Spotify;
+	src: url('/fonts/Circular/CircularStd-Black.otf') format('otf');
 	font-weight: 900;
 }
 
@@ -29,8 +29,8 @@
 @tailwind utilities;
 
 @layer base {
-	body {
-		font-family: CircularSp, sans-serif;
+	* {
+		--contentSpacing: clamp(16px, 16px + (1293 - 600)/424 * 8px, 24px);
 	}
 
 	.playlistsGrid {
