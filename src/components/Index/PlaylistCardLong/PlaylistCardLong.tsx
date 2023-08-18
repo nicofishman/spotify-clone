@@ -32,7 +32,7 @@ const PlaylistCardLong = ({
 		tracks: SpotifyApi.PlaylistTrackObject[],
 		shuffle: boolean
 	) {
-		const uris = tracks.map((track) => track.track?.uri).filter(Boolean);
+		const uris = tracks.map(({ track }) => track?.uri).filter(Boolean);
 		if (shuffle) {
 			uris.sort(() => Math.random() - 0.5);
 		}
@@ -83,11 +83,11 @@ const PlaylistCardLong = ({
 									) {
 										playMutation.mutate();
 									} else {
-										//TODO: clear queue and then play the playlist with the given uri (keep in mind shuffling can be enabled)
-										// addPlaylistToQueue(
-										// 	playlist.tracks.items,
-										// 	shuffle
-										// );
+										// TODO: clear queue and then play the playlist with the given uri (keep in mind shuffling can be enabled)
+										addPlaylistToQueue(
+											playlist.tracks.items,
+											shuffle
+										);
 									}
 								}}
 								isPlaying={false}

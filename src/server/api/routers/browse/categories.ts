@@ -34,7 +34,6 @@ export const categoriesRouter = createTRPCRouter({
 					method: 'GET',
 				}
 			);
-			console.log(ctx.session.account.access_token);
 
 			await checkRes(res, 200);
 			return (await res.json()) as SpotifyApi.MultipleCategoriesResponse;

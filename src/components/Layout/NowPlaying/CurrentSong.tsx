@@ -35,7 +35,7 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
 							</p>
 						</Link>
 						<Link href={`/artist/${song.artists[0]?.id ?? ''}`}>
-							<p className='text-xs font-light text-gray-400'>
+							<p className='text-xs font-normal text-gray-400'>
 								{song.artists.map((art, i) => (
 									<Fragment key={art.id}>
 										<span className='inline hover:text-white hover:underline'>
@@ -51,7 +51,10 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
 							</p>
 						</Link>
 					</div>
-					<LikeSongButton isLiked={false} />
+					<LikeSongButton
+						trackId={playing.item?.id ?? ''}
+						isLiked={false}
+					/>
 					<PictureInPictureButton />
 				</div>
 			) : undefined}

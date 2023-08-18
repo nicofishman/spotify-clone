@@ -22,7 +22,7 @@ export const Sidebar = ({}) => {
 	return (
 		<ResizableBox
 			handle={
-				<div className='absolute top-0 right-0 h-full w-2 cursor-e-resize bg-white/10'></div>
+				<div className='absolute right-0 top-0 h-full w-2 cursor-e-resize bg-white/10'></div>
 			}
 			style={{
 				height: '100%',
@@ -32,7 +32,7 @@ export const Sidebar = ({}) => {
 			width={268}
 			minConstraints={[130, 0]}
 			maxConstraints={[384, Infinity]}
-			className='relative h-full resize-x grid-in-nav-bar'
+			className='relative hidden h-full resize-x rounded grid-in-nav-bar md:block'
 			axis='x'
 			onResize={() => {
 				triggerResizeSidebar();

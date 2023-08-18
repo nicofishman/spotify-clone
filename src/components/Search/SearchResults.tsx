@@ -31,10 +31,6 @@ function getTopResult(query: string, searchResult: SpotifyApi.SearchResponse) {
 	const sorted = topItems.sort((a, b) => {
 		const aSimilarity = similarity(a.name, query);
 		const bSimilarity = similarity(b.name, query);
-		// console.log({
-		// 	aSimilarity,
-		// 	bSimilarity,
-		// });
 
 		return bSimilarity - aSimilarity;
 	});

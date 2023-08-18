@@ -8,7 +8,6 @@ import {
 import { cn } from '@/utils/cn';
 import type * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
-//make it extends htmlbutton props
 type GoBackButtonProps = TooltipPrimitive.TooltipTriggerProps;
 
 export const GoBackButton = ({ disabled, ...props }: GoBackButtonProps) => {

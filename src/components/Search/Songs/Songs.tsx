@@ -1,4 +1,5 @@
-import ThreeDotsButtons from '@/components/Search/Songs/ThreeDotsButton.tsx/ThreeDotsButtons';
+import ThreeDotsButtons from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtons';
+import { RouterOutputs, api } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +10,12 @@ interface SongsProps {
 }
 
 const Songs = ({ songs }: SongsProps) => {
+	const {
+		data: playlistListToAddTracksTo = {} as RouterOutputs['me']['playlists']['get'],
+	} = api.me.playlists.get.useQuery();
+
+	console.log(playlistListToAddTracksTo);
+
 	return (
 		<div>
 			{songs.map((song) => (
@@ -56,7 +63,10 @@ const Songs = ({ songs }: SongsProps) => {
 							{millisToMinutesAndSeconds(song.duration_ms)}
 						</p>
 						<div className='opacity-0 group-hover:opacity-100'>
-							<ThreeDotsButtons trackId={song.id} />
+							<ThreeDotsButtons
+								trackId={song.id}
+								playlists={playlistListToAddTracksTo.items}
+							/>
 						</div>
 					</div>
 				</div>

@@ -14,14 +14,25 @@ export const playerRouter = createTRPCRouter({
 			},
 		});
 
+		if (res.status === 204) {
+			return {
+				available: false,
+				item: null,
+			} as SpotifyApi.CurrentPlaybackResponse & {
+				available: false;
+			};
+		}
 		const resJson =
 			(await res.json()) as SpotifyApi.CurrentPlaybackResponse;
 
 		if (res.status === 204) {
 			return {
+				available: true,
 				is_playing: false,
 				item: null,
-			} as SpotifyApi.CurrentPlaybackResponse;
+			} as SpotifyApi.CurrentPlaybackResponse & {
+				available: true;
+			};
 		}
 
 		if (res.status !== 200) {
@@ -35,8 +46,10 @@ export const playerRouter = createTRPCRouter({
 				message: `Status code ${res.status}: ${error.message}`,
 			});
 		}
-
-		return resJson;
+		return {
+			available: true,
+			...resJson,
+		};
 	}),
 	play: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/play`, {
@@ -103,6 +116,7 @@ export const playerRouter = createTRPCRouter({
 					method: 'PUT',
 				}
 			);
+
 			await checkRes(res, 204);
 		}),
 	repeat: protectedProcedureWithAccount
@@ -187,19 +201,3 @@ export const checkRes = async (res: Response, status: number) => {
 		});
 	}
 };
-
-/**
- * const res = await fetch(
-			`${API_URL}/me/player/recently-played?limit=50`,
-			{
-				headers: {
-					Authorization: `Bearer ${ctx.session.account.access_token}`,
-				},
-				method: 'GET',
-			}
-		);
-		await checkRes(res, 200);
-
-		return ((await res.json()) ??
-			{}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
- */

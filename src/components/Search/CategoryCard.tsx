@@ -1,18 +1,10 @@
-import { FastAverageColor } from 'fast-average-color';
+import { getAverageColor } from '@/utils/images';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface CategoryCardProps {
 	category: SpotifyApi.CategoryObject;
-}
-
-async function getAverageColor(url: string) {
-	const fac = new FastAverageColor();
-
-	const color = (await fac.getColorAsync(url)).hex;
-
-	return color;
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => {

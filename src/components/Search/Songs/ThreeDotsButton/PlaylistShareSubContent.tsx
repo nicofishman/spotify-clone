@@ -13,7 +13,7 @@ interface PlaylistShareSubContentProps {
 
 const PlaylistShareSubContent = ({ trackId }: PlaylistShareSubContentProps) => {
 	return (
-		<ul>
+		<ul className='py-2'>
 			<DropdownMenuItem onClick={() => copyLink(trackId)}>
 				Copy Link
 			</DropdownMenuItem>

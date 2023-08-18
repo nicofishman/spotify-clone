@@ -1,41 +1,20 @@
 import PlayPauseButton from '@/components/Index/PlaylistCardLong/PlayPauseButton';
 import { InnerCard } from '@/components/Search/TopResultCard/InnerCard';
-import Link from 'next/link';
-
-function getArtist(item: TopResultProps['topResult']) {
-	return 'artists' in item
-		? item.artists
-		: 'owner' in item
-		? ([
-				{ name: item.owner.display_name ?? 'Unknown' },
-		  ] as SpotifyApi.ArtistObjectSimplified[])
-		: 'publisher' in item
-		? ([{ name: item.publisher }] as SpotifyApi.ArtistObjectSimplified[])
-		: ([
-				{
-					name: 'Unknown',
-				},
-		  ] as SpotifyApi.ArtistObjectSimplified[]);
-}
-
-interface TopResultProps {
-	topResult:
-		| SpotifyApi.PlaylistObjectSimplified
-		| SpotifyApi.TrackObjectFull
-		| SpotifyApi.AlbumObjectSimplified
-		| SpotifyApi.ArtistObjectFull
-		| SpotifyApi.ShowObjectSimplified
-		| SpotifyApi.EpisodeObjectSimplified;
-}
+import { type TopResultProps, getArtist } from '@/utils/spotifyClient';
+import { useRouter } from 'next/router';
 
 const TopResult = ({ topResult }: TopResultProps) => {
 	const images =
 		'images' in topResult ? topResult.images : topResult.album.images;
 
 	const artists = getArtist(topResult);
+	const router = useRouter();
 
 	return (
-		<Link href={`/${topResult.type}/${topResult.id}`}>
+		<div
+			className='cursor-pointer'
+			onClick={() => router.push(`/${topResult.type}/${topResult.id}`)}
+		>
 			<div className='group relative h-[90%] w-full rounded-sm bg-gray-bg p-5 shadow-lg shadow-black/50 transition-colors hover:bg-gray-border'>
 				<InnerCard
 					image={
@@ -54,7 +33,7 @@ const TopResult = ({ topResult }: TopResultProps) => {
 					className='absolute bottom-0 right-5 opacity-0 transition-all duration-300 hover:scale-105 group-hover:bottom-5 group-hover:flex group-hover:opacity-100'
 				/>
 			</div>
-		</Link>
+		</div>
 	);
 };
 

@@ -7,13 +7,13 @@ export const NowPlaying = () => {
 	const { data: currentPlaying } = api.me.player.currentlyPlaying.useQuery(
 		undefined,
 		{
-			refetchInterval: 500,
+			refetchInterval: 1000,
 		}
 	);
 
 	return (
 		<footer className='flex h-24 items-center justify-between border-t border-gray-border bg-gray-bg px-4 grid-in-now-playing-bar'>
-			{currentPlaying ? (
+			{currentPlaying?.available ? (
 				<>
 					<CurrentSong playing={currentPlaying} />
 					<Player playing={currentPlaying} />

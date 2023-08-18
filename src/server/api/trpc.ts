@@ -137,8 +137,6 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 	const expires = account.expires_at ?? Infinity;
 
 	if (expires < new Date().getTime() / 1000) {
-		console.log('refreshing token');
-
 		const { access_token: newToken, expires_in } = await getAccessToken(
 			account
 		);

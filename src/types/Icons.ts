@@ -31,8 +31,10 @@ import searchDefault from '@/assets/icons/search.svg';
 import shuffle from '@/assets/icons/shuffle.svg';
 import threeDots from '@/assets/icons/three-dots.svg';
 import volume from '@/assets/icons/volume.svg';
+import clock from '@/assets/icons/clock.svg';
 
 export const Icons = {
+	clock: clock,
 	arrowDown: arrowDown,
 	check: check,
 	chevronLeft: chevronLeft,
