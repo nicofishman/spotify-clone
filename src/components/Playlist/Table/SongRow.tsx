@@ -2,7 +2,7 @@ import { LikeSongButton } from '@/components/Layout/NowPlaying/ButtonsWithToolti
 import ThreeDotsButton from '@/components/Playlist/Table/ThreeDotsSongRow';
 import Icon from '@/components/UI/Icon';
 import { TableCell, TableRow } from '@/components/UI/Table';
-import { RouterOutputs } from '@/utils/api';
+import { type RouterOutputs } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ const SongRow = ({
 }: SongRowProps) => {
 	return (
 		<TableRow className='group h-14 rounded-2xl border-b-0 hover:bg-white/10'>
-			<TableCell className='w-5 text-center'>
+			<TableCell className='w-5 truncate text-center'>
 				<Icon
 					name='play'
 					className='mx-auto hidden fill-white group-hover:block'
@@ -34,7 +34,7 @@ const SongRow = ({
 					{index + 1}
 				</span>
 			</TableCell>
-			<TableCell className='mr-2 grid grid-cols-[40px_1fr] gap-x-4 overflow-hidden'>
+			<TableCell className='mr-2 grid grid-cols-[40px_1fr] gap-x-4 truncate'>
 				<Image
 					loading='lazy'
 					src={track?.album?.images[0]?.url ?? ''}
@@ -70,7 +70,7 @@ const SongRow = ({
 					</p>
 				</div>
 			</TableCell>
-			<TableCell className='overflow-hidden'>
+			<TableCell className='truncate'>
 				<Link href={`/album/${track?.album?.id ?? ''}`}>
 					<span className='truncate text-stone-400 hover:underline group-hover:text-white'>
 						{track?.album?.name ?? ''}
@@ -95,7 +95,7 @@ const SongRow = ({
 					</picture>
 				</div>
 			</TableCell>
-			<TableCell className='h-0'>
+			<TableCell className='h-0 truncate'>
 				<div className='flex h-full items-center justify-between'>
 					<span className='ml-4 text-stone-400 group-hover:text-stone-300'>
 						{millisToMinutesAndSeconds(track?.duration_ms ?? 0)}

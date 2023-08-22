@@ -1,5 +1,5 @@
 import ThreeDotsButtons from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtons';
-import { RouterOutputs, api } from '@/utils/api';
+import { type RouterOutputs, api } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,8 +13,6 @@ const Songs = ({ songs }: SongsProps) => {
 	const {
 		data: playlistListToAddTracksTo = {} as RouterOutputs['me']['playlists']['get'],
 	} = api.me.playlists.get.useQuery();
-
-	console.log(playlistListToAddTracksTo);
 
 	return (
 		<div>

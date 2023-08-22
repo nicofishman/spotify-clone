@@ -11,7 +11,6 @@ import {
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
 
 interface PlaylistTableProps {
 	playlistId: string;

@@ -82,6 +82,7 @@ export const createGlobalStore = <State extends object>(
 		/** Deletes a `key` from state, causing a re-render for anything listening. */
 		delete<K extends keyof State>(key: K) {
 			store.setState((prevState) => {
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				const { [key]: _, ...rest } = prevState;
 				return rest as Partial<State>;
 			}, true);

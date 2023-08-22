@@ -1,5 +1,4 @@
 import AddToPlaylistSubMenu from '@/components/Playlist/Table/ThreeDots/AddToPlaylistSubMenu';
-import PlaylistSearchSubContent from '@/components/Search/Songs/ThreeDotsButton/PlaylistSearchSubContent';
 import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/PlaylistShareSubContent';
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import { type DropdownItem } from '@/types/UI';
@@ -39,7 +38,6 @@ const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
 		{
 			sub: true,
 			name: 'Add to playlist',
-			// content: <PlaylistSearchSubContent trackId={trackId} />,
 			content: (
 				<AddToPlaylistSubMenu trackId={trackId} playlists={playlists} />
 			),

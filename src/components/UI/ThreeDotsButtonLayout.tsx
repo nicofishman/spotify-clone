@@ -11,8 +11,6 @@ import {
 import Icon from '@/components/UI/Icon';
 import type { DropdownItem } from '@/types/UI';
 import { cn } from '@/utils/cn';
-import DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import React from 'react';
 
 interface ThreeDotsButtonProps {
 	iconClassName?: string;

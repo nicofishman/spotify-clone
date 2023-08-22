@@ -3,9 +3,8 @@ import GoToArtistSubMenu from '@/components/Playlist/Table/ThreeDots/GoToArtistS
 import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/PlaylistShareSubContent';
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import tracksStore from '@/stores/tracksStore';
-import useTracksStore from '@/stores/tracksStore';
 import { type DropdownItem } from '@/types/UI';
-import { RouterOutputs, api } from '@/utils/api';
+import { type RouterOutputs, api } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 import { type useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';

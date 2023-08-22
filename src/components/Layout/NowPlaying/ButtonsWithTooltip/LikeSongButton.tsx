@@ -28,7 +28,7 @@ export const LikeSongButton = ({
 	}, [liked]);
 
 	const { mutate: like } = api.me.tracks.saved.add.useMutation({
-		onMutate: async () => {
+		onMutate: () => {
 			tracksStore.set('likedTracks', [
 				...tracksStore.get('likedTracks'),
 				trackId,
@@ -36,7 +36,7 @@ export const LikeSongButton = ({
 		},
 	});
 	const { mutate: unlike } = api.me.tracks.saved.remove.useMutation({
-		onMutate: async () => {
+		onMutate: () => {
 			tracksStore.set(
 				'likedTracks',
 				tracksStore.get('likedTracks').filter((id) => id !== trackId)
