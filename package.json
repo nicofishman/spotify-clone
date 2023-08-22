@@ -33,6 +33,7 @@
         "@trpc/server": "^10.9.0",
         "@types/react-resizable": "^3.0.3",
         "clsx": "^1.2.1",
+        "date-fns": "^2.30.0",
         "fast-average-color": "^9.3.0",
         "next": "^13.2.1",
         "next-auth": "^4.19.0",
