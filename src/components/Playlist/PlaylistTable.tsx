@@ -63,10 +63,10 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 						<TableHead className='flex-1'>Title</TableHead>
 						<TableHead className='flex-1'>Album</TableHead>
 						<TableHead className='w-1/6'>Date added</TableHead>
-						<TableHead className='w-32'>
+						<TableHead className='mr-4 w-32'>
 							<Icon
 								name='clock'
-								className='ml-4 translate-x-1/2'
+								className='mx-auto -translate-x-1/2'
 							/>
 						</TableHead>
 					</TableRow>

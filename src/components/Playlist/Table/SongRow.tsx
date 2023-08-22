@@ -77,7 +77,7 @@ const SongRow = ({
 					</span>
 				</Link>
 			</TableCell>
-			<TableCell className='h-0 '>
+			<TableCell className='h-0'>
 				<div className='flex h-full items-center justify-between'>
 					<span className='flex flex-1 text-stone-400 group-hover:text-stone-300'>
 						{new Date(added_at).toLocaleDateString('en-US', {
@@ -86,18 +86,18 @@ const SongRow = ({
 							day: 'numeric',
 						})}
 					</span>
-					<picture className='hidden group-hover:block'>
+				</div>
+			</TableCell>
+			<TableCell className='relative h-0 truncate'>
+				<div className='grid h-full w-full grid-cols-[1fr] group-hover:grid-cols-[16px_1fr_32px]'>
+					<picture className='hidden items-center group-hover:flex'>
 						<LikeSongButton
 							tooltip={false}
 							isLiked={isLiked}
 							trackId={track?.id ?? ''}
 						/>
 					</picture>
-				</div>
-			</TableCell>
-			<TableCell className='h-0 truncate'>
-				<div className='flex h-full items-center justify-between'>
-					<span className='ml-4 text-stone-400 group-hover:text-stone-300'>
+					<span className='mr-4 flex items-center justify-center text-stone-400 group-hover:mr-0 group-hover:text-stone-300'>
 						{millisToMinutesAndSeconds(track?.duration_ms ?? 0)}
 					</span>
 					<picture className='my-auto hidden group-hover:block'>
