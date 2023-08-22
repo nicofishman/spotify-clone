@@ -4,6 +4,7 @@ import Spinner from '@/components/UI/Spinner';
 import {
 	Table,
 	TableBody,
+	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
@@ -55,7 +56,7 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 	const [tracks] = tracksStore.use('tracks');
 	const [likedTracks] = tracksStore.use('likedTracks');
 
-	return !isFetching ? (
+	return (
 		<div className='flex-1 overflow-scroll pl-[--contentSpacing] pr-3 text-gray-300'>
 			<Table className='table-fixed'>
 				<TableHeader>
@@ -72,29 +73,32 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 						</TableHead>
 					</TableRow>
 				</TableHeader>
-				{tracks.length > 0 ? (
+				{!isFetching ? (
 					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
 						{tracks.map((song, index) => (
-							<Fragment key={index}>
-								<SongRow
-									playlistsToAdd={playlistsToAdd}
-									router={router}
-									index={index}
-									song={song}
-									isLiked={likedTracks.includes(
-										song.track?.id ?? ''
-									)}
-								/>
-							</Fragment>
+							<SongRow
+								key={`${song.track?.id ?? ''}__${index}`}
+								playlistsToAdd={playlistsToAdd}
+								router={router}
+								index={index}
+								song={song}
+								isLiked={likedTracks.includes(
+									song.track?.id ?? ''
+								)}
+							/>
 						))}
 					</TableBody>
-				) : undefined}
+				) : (
+					<TableBody>
+						<TableCell colSpan={5}>
+							<div className='mt-2 flex w-full justify-center'>
+								<Spinner />
+							</div>
+						</TableCell>
+					</TableBody>
+				)}
 			</Table>
 		</div>
-	) : (
-		<>
-			<Spinner className='mt-2 flex w-full justify-center' />
-		</>
 	);
 };
 

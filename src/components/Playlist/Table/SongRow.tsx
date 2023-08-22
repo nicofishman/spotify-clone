@@ -8,6 +8,7 @@ import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type useRouter } from 'next/router';
+import { Fragment } from 'react';
 
 interface SongRowProps {
 	song: SpotifyApi.PlaylistTrackObject;
@@ -53,11 +54,8 @@ const SongRow = ({
 					</span>
 					<p>
 						{track?.artists?.map((artist) => (
-							<>
-								<Link
-									href={`/artist/${artist.id}`}
-									key={artist.id}
-								>
+							<Fragment key={artist.id}>
+								<Link href={`/artist/${artist.id}`}>
 									<span className='truncate font-light text-stone-400 hover:underline group-hover:text-white'>
 										{artist.name}
 									</span>
@@ -69,7 +67,7 @@ const SongRow = ({
 								) : (
 									''
 								)}
-							</>
+							</Fragment>
 						))}
 					</p>
 				</div>

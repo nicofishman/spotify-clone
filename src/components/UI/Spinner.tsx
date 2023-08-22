@@ -7,10 +7,13 @@ interface SpinnerProps {
 
 const Spinner = ({ className }: SpinnerProps) => {
 	return (
-		<div className={cn(className)}>
+		<>
 			<svg
 				aria-hidden='true'
-				className='mr-2 h-8 w-8 animate-spin fill-spotify-green text-gray-200 dark:text-gray-600'
+				className={cn(
+					'mr-2 h-8 w-8 animate-spin fill-spotify-green text-gray-200 dark:text-gray-600',
+					className
+				)}
 				viewBox='0 0 100 101'
 				fill='none'
 				xmlns='http://www.w3.org/2000/svg'
@@ -25,7 +28,7 @@ const Spinner = ({ className }: SpinnerProps) => {
 				/>
 			</svg>
 			<span className='sr-only'>Loading...</span>
-		</div>
+		</>
 	);
 };
 
