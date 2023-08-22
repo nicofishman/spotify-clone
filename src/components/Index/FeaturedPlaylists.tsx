@@ -1,4 +1,5 @@
 import PlaylistCardSquare from '@/components/Index/PlaylistCardSquare/PlaylistCardSquare';
+import { Skeleton } from '@/components/UI/Skeleton';
 import { mainSizeStore } from '@/stores/mainSizeStore';
 import { api } from '@/utils/api';
 import { useMemo } from 'react';
@@ -24,13 +25,16 @@ const FeaturedPlaylists = () => {
 		return [count, width / count];
 	}, [width]);
 
-	if (isLoading) return null;
-
 	return (
 		<section className='w-full'>
-			<h2 className='cursor-pointer text-4xl font-bold text-white hover:underline'>
-				{featuredPlaylists?.message}
-			</h2>
+			{isLoading ? (
+				<Skeleton className='mb-4 h-7 w-3/4' />
+			) : (
+				<h2 className='cursor-pointer text-4xl font-bold text-white hover:underline'>
+					{featuredPlaylists?.message}
+				</h2>
+			)}
+
 			<div
 				className='featuredGrid grid w-full min-w-[384px] gap-6 overflow-x-auto py-2'
 				style={{
@@ -40,19 +44,38 @@ const FeaturedPlaylists = () => {
 					width: width,
 				}}
 			>
-				{featuredPlaylists?.playlists.items
-					.slice(0, columnCount)
-					.map((playlist) => {
-						return (
-							<PlaylistCardSquare
-								key={playlist.id}
-								playlist={playlist}
-							/>
-						);
-					})}
+				{isLoading ? (
+					<FeaturedPlaylistsLoading columnCount={columnCount} />
+				) : (
+					featuredPlaylists?.playlists.items
+						.slice(0, columnCount)
+						.map((playlist) => {
+							return (
+								<PlaylistCardSquare
+									key={playlist.id}
+									playlist={playlist}
+								/>
+							);
+						})
+				)}
 			</div>
 		</section>
 	);
 };
 
 export default FeaturedPlaylists;
+
+const FeaturedPlaylistsLoading = ({ columnCount }: { columnCount: number }) => {
+	return (
+		<>
+			{Array.from({ length: columnCount }).map((_, i) => {
+				return (
+					<Skeleton
+						key={i}
+						className='aspect-[23/32] h-full w-full min-w-[158px] max-w-[230px]'
+					/>
+				);
+			})}
+		</>
+	);
+};

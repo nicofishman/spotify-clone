@@ -15,9 +15,10 @@ export const Sidebar = ({}) => {
 	const { height } = useWindowSize();
 	const router = useRouter();
 
-	const { data: likedPlaylists } = api.user.playlists.list.useQuery({
-		me: true,
-	});
+	const { data: likedPlaylists, isLoading } =
+		api.user.playlists.list.useQuery({
+			me: true,
+		});
 
 	return (
 		<ResizableBox
@@ -99,6 +100,7 @@ export const Sidebar = ({}) => {
 					<hr className='mx-6 mt-2 h-px border-none bg-gray-bg' />
 					<div className='flex h-full w-full flex-col overflow-y-scroll py-2'>
 						<LikedPlaylists
+							isLoading={isLoading}
 							playlists={likedPlaylists?.items ?? []}
 						/>
 					</div>
