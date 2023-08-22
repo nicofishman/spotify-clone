@@ -2,6 +2,7 @@ import { LikeSongButton } from '@/components/Layout/NowPlaying/ButtonsWithToolti
 import ThreeDotsButton from '@/components/Playlist/Table/ThreeDotsSongRow';
 import Icon from '@/components/UI/Icon';
 import { TableCell, TableRow } from '@/components/UI/Table';
+import { DEFAULT_PLAYLISTORALBUM_IMAGE } from '@/consts';
 import { type RouterOutputs } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
@@ -37,7 +38,10 @@ const SongRow = ({
 			<TableCell className='mr-2 grid grid-cols-[40px_1fr] gap-x-4 truncate'>
 				<Image
 					loading='lazy'
-					src={track?.album?.images[0]?.url ?? ''}
+					src={
+						track?.album?.images[0]?.url ??
+						DEFAULT_PLAYLISTORALBUM_IMAGE
+					}
 					width={40}
 					height={40}
 					alt={`Cover art for ${track?.name ?? ''}`}
