@@ -55,7 +55,7 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 	const [likedTracks] = tracksStore.use('likedTracks');
 
 	return !isFetching ? (
-		<div className='flex-1 overflow-scroll pl-[--contentSpacing] pr-3 pt-[--contentSpacing] text-gray-300'>
+		<div className='flex-1 overflow-scroll pl-[--contentSpacing] pr-3 text-gray-300'>
 			<Table className='table-fixed'>
 				<TableHeader>
 					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>
