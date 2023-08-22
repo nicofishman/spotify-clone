@@ -9,7 +9,7 @@ interface ThreeDotsButtonProps {
 	iconClassName?: string;
 }
 
-const ThreeDotsButton = ({
+const ThreeDotsButtonPlaylistTitle = ({
 	playlistId,
 	iconClassName,
 }: ThreeDotsButtonProps) => {
@@ -68,4 +68,4 @@ const ThreeDotsButton = ({
 	);
 };
 
-export default ThreeDotsButton;
+export default ThreeDotsButtonPlaylistTitle;

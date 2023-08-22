@@ -71,7 +71,9 @@ export const LikeSongButton = ({
 					</div>
 				</TooltipTrigger>
 				<TooltipContent className='mb-4' side='top' sideOffset={4}>
-					<p>Save to your Library</p>
+					{isLiked
+						? 'Remove from your library'
+						: 'Add to your library'}
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>

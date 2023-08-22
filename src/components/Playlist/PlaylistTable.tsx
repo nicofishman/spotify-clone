@@ -11,6 +11,7 @@ import {
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
+import { Fragment } from 'react';
 
 interface PlaylistTableProps {
 	playlistId: string;
@@ -74,18 +75,17 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 				{tracks.length > 0 ? (
 					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
 						{tracks.map((song, index) => (
-							<SongRow
-								playlistsToAdd={playlistsToAdd}
-								router={router}
-								key={`${song.track?.id ?? index}--${new Date(
-									song.added_at
-								).getTime()}`}
-								index={index}
-								song={song}
-								isLiked={likedTracks.includes(
-									song.track?.id ?? ''
-								)}
-							/>
+							<Fragment key={index}>
+								<SongRow
+									playlistsToAdd={playlistsToAdd}
+									router={router}
+									index={index}
+									song={song}
+									isLiked={likedTracks.includes(
+										song.track?.id ?? ''
+									)}
+								/>
+							</Fragment>
 						))}
 					</TableBody>
 				) : undefined}

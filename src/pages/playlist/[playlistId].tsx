@@ -1,8 +1,8 @@
 import PlayPauseButton from '@/components/Index/PlaylistCardLong/PlayPauseButton';
 import Layout from '@/components/Layout/Layout';
 import PlaylistTable from '@/components/Playlist/PlaylistTable';
-import { PlaylistTitle } from '@/components/Playlist/PlaylistTitle';
-import ThreeDotsButton from '@/components/Playlist/ThreeDotsButton';
+import PlaylistTitle from '@/components/Playlist/PlaylistTitle';
+import ThreeDotsButtonPlaylistTitle from '@/components/Playlist/ThreeDotsButtonPlaylistTitle';
 import { api } from '@/utils/api';
 import { FastAverageColor } from 'fast-average-color';
 import Head from 'next/head';
@@ -57,7 +57,7 @@ const PlaylistPage = () => {
 										isPlaying={false}
 										className='scale-110 hover:scale-125 '
 									/>
-									<ThreeDotsButton
+									<ThreeDotsButtonPlaylistTitle
 										iconClassName='scale-150'
 										playlistId={playlist.id}
 									/>
