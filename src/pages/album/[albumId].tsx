@@ -10,6 +10,7 @@ import ThreeDotsButtonAlbumTitle from '@/components/Album/ThreeDotsButtonAlbumTi
 import PlayPauseButton from '@/components/Index/PlaylistCardLong/PlayPauseButton';
 import { albumLiked } from '@/stores/albumLiked';
 import LikeAlbumButton from '@/components/Album/LikeAlbumButton';
+import AlbumTable from '@/components/Album/AlbumTable';
 
 const PlaylistPage = () => {
 	const albumId = useRouter().query.albumId as string;
@@ -66,7 +67,10 @@ const PlaylistPage = () => {
 										album={album}
 									/>
 								</div>
-								{/* <PlaylistTable playlistId={playlist.id} /> */}
+								<AlbumTable
+									albumImage={album.images[0]?.url}
+									albumId={album.id}
+								/>
 							</div>
 						</>
 					) : undefined}
