@@ -3,13 +3,19 @@ import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/P
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import { type DropdownItem } from '@/types/UI';
 import { openSpotify } from '@/utils/spotifyClient';
+import { type useRouter } from 'next/router';
 
 interface ThreeDotsButtonsProps {
-	trackId: string;
+	track: SpotifyApi.TrackObjectSimplified;
+	router: ReturnType<typeof useRouter>;
 	playlists: SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'];
 }
 
-const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
+const ThreeDotsButtonsSearchSong = ({
+	playlists,
+	router,
+	track,
+}: ThreeDotsButtonsProps) => {
 	const items: DropdownItem[] = [
 		{
 			name: 'Add to queue',
@@ -19,9 +25,16 @@ const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
 		},
 		{
 			name: 'Go to song radio',
+			disabled: true,
 		},
 		{
 			name: 'Go to artist',
+			onClick: () =>
+				router.push(
+					track?.artists[0]?.id
+						? `/artist/${track?.artists[0]?.id}`
+						: '/'
+				),
 		},
 		{
 			name: 'Go to album',
@@ -40,7 +53,7 @@ const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
 			name: 'Add to playlist',
 			content: (
 				<AddToPlaylistSubMenu
-					tracksId={trackId}
+					tracksId={track.id}
 					playlists={playlists}
 				/>
 			),
@@ -51,17 +64,19 @@ const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
 		{
 			sub: true,
 			name: 'Share',
-			content: <PlaylistShareSubContent trackId={trackId} />,
+			content: (
+				<PlaylistShareSubContent type={track.type} trackId={track.id} />
+			),
 		},
 		{
 			separator: true,
 		},
 		{
 			name: 'Open in desktop app',
-			onClick: () => openSpotify(trackId),
+			onClick: () => openSpotify(`spotify:track:${track.id}`),
 		},
 	];
 	return <ThreeDotsButtonLayout items={items} />;
 };
 
-export default ThreeDotsButtons;
+export default ThreeDotsButtonsSearchSong;

@@ -4,6 +4,7 @@ import { mainSizeStore } from '@/stores/mainSizeStore';
 import { api } from '@/utils/api';
 import { cn } from '@/utils/cn';
 import { similarity } from '@/utils/string';
+import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 interface SearchResultsProps {
@@ -53,6 +54,7 @@ function intercalateSearchResults(searchResult: SpotifyApi.SearchResponse) {
 
 const SearchResults = ({ query }: SearchResultsProps) => {
 	const [width] = mainSizeStore.use('width');
+	const router = useRouter();
 
 	const [leftCols, rightCols] = useMemo(() => {
 		return width > 1600
@@ -139,6 +141,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 							Songs
 						</h2>
 						<Songs
+							router={router}
 							songs={
 								searchResult?.tracks?.items.slice(0, 4) ?? []
 							}

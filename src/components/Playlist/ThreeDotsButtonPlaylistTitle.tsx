@@ -46,7 +46,12 @@ const ThreeDotsButtonPlaylistTitle = ({
 		{
 			sub: true,
 			name: 'Share',
-			content: <PlaylistShareSubContent trackId={playlistId} />,
+			content: (
+				<PlaylistShareSubContent
+					type={'playlist'}
+					trackId={playlistId}
+				/>
+			),
 		},
 		{
 			separator: true,

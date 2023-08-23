@@ -1,15 +1,17 @@
-import ThreeDotsButtons from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtons';
+import ThreeDotsButtonsSearchSong from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtonsSearchSong';
 import { type RouterOutputs, api } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
+import { type useRouter } from 'next/router';
 import React from 'react';
 
 interface SongsProps {
 	songs: SpotifyApi.TrackObjectFull[];
+	router: ReturnType<typeof useRouter>;
 }
 
-const Songs = ({ songs }: SongsProps) => {
+const Songs = ({ songs, router }: SongsProps) => {
 	const {
 		data: playlistListToAddTracksTo = {} as RouterOutputs['me']['playlists']['get'],
 	} = api.me.playlists.get.useQuery();
@@ -61,8 +63,9 @@ const Songs = ({ songs }: SongsProps) => {
 							{millisToMinutesAndSeconds(song.duration_ms)}
 						</p>
 						<div className='opacity-0 group-hover:opacity-100'>
-							<ThreeDotsButtons
-								trackId={song.id}
+							<ThreeDotsButtonsSearchSong
+								router={router}
+								track={song}
 								playlists={playlistListToAddTracksTo.items}
 							/>
 						</div>
