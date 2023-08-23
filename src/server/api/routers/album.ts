@@ -72,4 +72,22 @@ export const albumRouter = createTRPCRouter({
 				isLiked: resAlbumLikedJson[0],
 			};
 		}),
+	getTracks: protectedProcedureWithAccount
+		.input(z.string())
+		.query(async ({ ctx, input }) => {
+			const res = await fetch(
+				`${API_URL}/albums/${input}/tracks?limit=50`,
+				{
+					headers: {
+						Authorization: `Bearer ${ctx.session.account.access_token}`,
+					},
+					method: 'GET',
+				}
+			);
+
+			const resJson =
+				(await res.json()) as SpotifyApi.AlbumTracksResponse;
+
+			return resJson;
+		}),
 });
