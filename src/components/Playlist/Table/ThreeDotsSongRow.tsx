@@ -4,31 +4,31 @@ import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/P
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import tracksStore from '@/stores/tracksStore';
 import { type DropdownItem } from '@/types/UI';
-import { type RouterOutputs, api } from '@/utils/api';
+import { api, type RouterOutputs } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 import { type useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 interface ThreeDotsSongRowProps {
 	router: ReturnType<typeof useRouter>;
 	track: SpotifyApi.PlaylistTrackObject['track'];
 	isLiked: boolean;
 	playlistsToAdd: RouterOutputs['me']['playlists']['get'];
+	isOwner: boolean;
 }
 
 const ThreeDotsSongRow = ({
+	isOwner,
 	track,
 	router,
-	isLiked: liked,
 	playlistsToAdd,
 }: ThreeDotsSongRowProps) => {
 	const utils = api.useContext();
+	const [likedSongs] = tracksStore.use('likedTracks');
 
-	const [isLiked, setIsLiked] = useState(liked);
-
-	useEffect(() => {
-		setIsLiked(liked);
-	}, [liked]);
+	const isLiked = useMemo(() => {
+		return likedSongs.some((likedTrack) => likedTrack === track?.id);
+	}, [likedSongs, track?.id]);
 
 	const removeTrackFromPlaylist = api.playlist.removeTrack.useMutation({
 		onMutate: ({ trackId }) => {
@@ -39,14 +39,23 @@ const ThreeDotsSongRow = ({
 	});
 	const likeSong = api.me.tracks.saved.add.useMutation({
 		onSuccess: async () => {
-			setIsLiked(true);
 			await utils.me.tracks.saved.get.invalidate();
+		},
+		onMutate: () => {
+			tracksStore.set('likedTracks', (prev) => [
+				...prev,
+				track?.id ?? '',
+			]);
 		},
 	});
 	const dislikeSong = api.me.tracks.saved.remove.useMutation({
 		onSuccess: async () => {
-			setIsLiked(false);
 			await utils.me.tracks.saved.get.invalidate();
+		},
+		onMutate: () => {
+			tracksStore.set('likedTracks', (prev) =>
+				prev.filter((likedTrack) => likedTrack !== track?.id)
+			);
 		},
 	});
 
@@ -83,10 +92,12 @@ const ThreeDotsSongRow = ({
 				/>
 			),
 		},
-		{
-			name: 'Remove from this playlist',
-			onClick: () => handleRemove(),
-		},
+		isOwner
+			? {
+					name: 'Remove from this playlist',
+					onClick: () => handleRemove(),
+			  }
+			: undefined,
 		itemLiked,
 		{
 			name: 'Add to queue',
@@ -112,7 +123,12 @@ const ThreeDotsSongRow = ({
 		{
 			name: 'Share',
 			sub: true,
-			content: <PlaylistShareSubContent trackId={track?.id ?? ''} />,
+			content: (
+				<PlaylistShareSubContent
+					type={track?.type ?? 'track'}
+					trackId={track?.id ?? ''}
+				/>
+			),
 		},
 		{
 			separator: true,
@@ -121,7 +137,7 @@ const ThreeDotsSongRow = ({
 			name: 'Open in desktop app',
 			onClick: () => openSpotify(`spotify:track:${track?.id ?? ''}`),
 		},
-	];
+	].filter(Boolean) as DropdownItem[];
 
 	return <ThreeDotsButtonLayout items={items} />;
 };
@@ -148,8 +164,9 @@ function getItemArtists(
 			),
 		});
 	} else {
+		const artId = artists[0]?.id;
 		Object.assign(itemArtists, {
-			onClick: () => router.push(`/artist/${artists[0]?.id ?? ''}`),
+			onClick: () => router.push(artId ? `/artist/${artId}` : `/`),
 		});
 	}
 

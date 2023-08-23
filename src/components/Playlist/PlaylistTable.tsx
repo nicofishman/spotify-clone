@@ -15,9 +15,10 @@ import { useRouter } from 'next/router';
 
 interface PlaylistTableProps {
 	playlistId: string;
+	isOwner: boolean;
 }
 
-const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
+const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 	const { data: likedSongs, refetch: refetchSaved } =
 		api.me.tracks.saved.get.useQuery(undefined, {
 			onSettled: () => {
@@ -30,6 +31,7 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 				);
 			},
 		});
+
 	const {
 		data: playlistsToAdd = {
 			items: [] as SpotifyApi.PlaylistObjectSimplified[],
@@ -56,7 +58,7 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 	const [likedTracks] = tracksStore.use('likedTracks');
 
 	return (
-		<div className='flex-1 overflow-scroll pl-[--contentSpacing] pr-3 text-gray-300'>
+		<div className='pl-[--contentSpacing] pr-3 text-gray-300'>
 			<Table className='table-fixed'>
 				<TableHeader>
 					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>
@@ -76,6 +78,7 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
 						{tracks.map((song, index) => (
 							<SongRow
+								isOwner={isOwner}
 								key={`${song.track?.id ?? ''}__${index}`}
 								playlistsToAdd={playlistsToAdd}
 								router={router}

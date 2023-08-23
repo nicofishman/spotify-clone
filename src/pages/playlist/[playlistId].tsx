@@ -16,6 +16,8 @@ const PlaylistPage = () => {
 		value: [88, 232, 128],
 	});
 
+	const { data: user } = api.me.info.get.useQuery();
+
 	const { data: playlist } = api.playlist.get.useQuery(playlistId, {
 		enabled: !!playlistId,
 		onSuccess: async (playlist) => {
@@ -27,6 +29,12 @@ const PlaylistPage = () => {
 		},
 	});
 
+	const isOwner = useMemo(
+		() =>
+			playlist?.collaborative ||
+			playlist?.owner?.display_name === user?.name,
+		[playlist?.collaborative, playlist?.owner?.display_name, user?.name]
+	);
 	return (
 		<>
 			<Head>
@@ -62,7 +70,10 @@ const PlaylistPage = () => {
 										playlistId={playlist.id}
 									/>
 								</div>
-								<PlaylistTable playlistId={playlist.id} />
+								<PlaylistTable
+									isOwner={isOwner}
+									playlistId={playlist.id}
+								/>
 							</div>
 						</>
 					) : undefined}
