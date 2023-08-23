@@ -67,7 +67,7 @@ export const PlaylistOrAlbumTitle = ({
 					<span className='text-sm font-normal before:mx-1 before:text-xxs before:content-["•"] after:mx-1 after:text-xxs after:content-["•"]'>
 						{secondText}
 					</span>
-					<span>{total_tracks} songs, </span>
+					<span>{total_tracks} song{total_tracks > 1 ? 's' : ''}, </span>
 					<span className='text-gray-200/80'>
 						&nbsp;
 						{formatDistance(new Date(0), new Date(totalDuration))}
