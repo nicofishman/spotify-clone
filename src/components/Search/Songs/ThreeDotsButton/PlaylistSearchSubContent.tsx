@@ -72,7 +72,7 @@ const PlaylistSearchSubContent = ({
 					onClick={() =>
 						addToPlaylistMutation.mutate({
 							playlistId: playlist.id,
-							trackId: trackId,
+							tracksId: [trackId],
 						})
 					}
 					key={playlist.id}

@@ -12,7 +12,6 @@ import {
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
 
 interface PlaylistTableProps {
 	playlistId: string;
@@ -90,11 +89,13 @@ const PlaylistTable = ({ playlistId }: PlaylistTableProps) => {
 					</TableBody>
 				) : (
 					<TableBody>
-						<TableCell colSpan={5}>
-							<div className='mt-2 flex w-full justify-center'>
-								<Spinner />
-							</div>
-						</TableCell>
+						<TableRow>
+							<TableCell colSpan={5}>
+								<div className='mt-2 flex w-full justify-center'>
+									<Spinner />
+								</div>
+							</TableCell>
+						</TableRow>
 					</TableBody>
 				)}
 			</Table>

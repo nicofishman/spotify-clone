@@ -75,7 +75,7 @@ const ThreeDotsSongRow = ({
 			sub: true,
 			content: (
 				<AddToPlaylistSubMenu
-					trackId={track?.id ?? ''}
+					tracksId={track?.id ?? ''}
 					playlists={
 						playlistsToAdd?.items ??
 						([] as SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'])

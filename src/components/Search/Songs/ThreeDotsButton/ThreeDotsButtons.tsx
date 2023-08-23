@@ -39,7 +39,10 @@ const ThreeDotsButtons = ({ trackId, playlists }: ThreeDotsButtonsProps) => {
 			sub: true,
 			name: 'Add to playlist',
 			content: (
-				<AddToPlaylistSubMenu trackId={trackId} playlists={playlists} />
+				<AddToPlaylistSubMenu
+					tracksId={trackId}
+					playlists={playlists}
+				/>
 			),
 		},
 		{

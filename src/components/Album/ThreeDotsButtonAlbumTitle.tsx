@@ -1,3 +1,4 @@
+import AddToPlaylistSubMenu from '@/components/Playlist/Table/ThreeDots/AddToPlaylistSubMenu';
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import { albumLiked } from '@/stores/albumLiked';
 import { type DropdownItem } from '@/types/UI';
@@ -12,6 +13,12 @@ const ThreeDotsButtonAlbumTitle = ({
 	album,
 	iconClassName,
 }: ThreeDotsButtonAlbumTitleProps) => {
+	const {
+		data: playlistsToAdd = {
+			items: [] as SpotifyApi.PlaylistObjectSimplified[],
+		} as SpotifyApi.ListOfUsersPlaylistsResponse,
+	} = api.me.playlists.get.useQuery();
+
 	const [isLiked] = albumLiked.use('albumLiked');
 
 	const { mutate: add } = api.me.album.add.useMutation({
@@ -36,6 +43,28 @@ const ThreeDotsButtonAlbumTitle = ({
 					remove([album.id]);
 				}
 			},
+		},
+		{
+			name: 'Add to your queue',
+		},
+		{
+			name: 'Go to artist radio',
+		},
+		{
+			separator: true,
+		},
+		{
+			name: 'Add to playlist',
+			sub: true,
+			content: (
+				<AddToPlaylistSubMenu
+					tracksId={album.tracks.items.map((item) => item.id)}
+					playlists={
+						playlistsToAdd?.items ??
+						([] as SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'])
+					}
+				/>
+			),
 		},
 	];
 

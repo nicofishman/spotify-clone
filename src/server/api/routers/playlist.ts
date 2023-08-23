@@ -67,17 +67,22 @@ export const playlistRouter = createTRPCRouter({
 		.input(
 			z.object({
 				playlistId: z.string(),
-				trackId: z.string(),
+				tracksId: z.array(z.string()),
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
 			const res = await fetch(
-				`${API_URL}/playlists/${input.playlistId}/tracks?uris=spotify:track:${input.trackId}`,
+				`${API_URL}/playlists/${input.playlistId}/tracks`,
 				{
 					headers: {
 						Authorization: `Bearer ${ctx.session.account.access_token}`,
 					},
 					method: 'POST',
+					body: JSON.stringify({
+						uris: input.tracksId.map(
+							(trackId) => `spotify:track:${trackId}`
+						),
+					}),
 				}
 			);
 			await checkRes(res, 201);

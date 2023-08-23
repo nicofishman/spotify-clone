@@ -8,16 +8,19 @@ import React, { useState } from 'react';
 
 interface PlaylistSearchProps {
 	playlists: SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'];
-	trackId: string;
+	tracksId: string | string[];
 }
 
-const AddToPlaylistSubMenu = ({ playlists, trackId }: PlaylistSearchProps) => {
+const AddToPlaylistSubMenu = ({ playlists, tracksId }: PlaylistSearchProps) => {
 	const [searchInput, setSearchInput] = useState('');
 
 	const addToPlaylist = api.playlist.addTrack.useMutation();
 
 	function handleAddToPlaylist(playlistId: string) {
-		addToPlaylist.mutate({ playlistId, trackId });
+		addToPlaylist.mutate({
+			playlistId,
+			tracksId: Array.isArray(tracksId) ? tracksId : [tracksId],
+		});
 	}
 
 	return (

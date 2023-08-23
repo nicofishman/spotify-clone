@@ -13,7 +13,7 @@ interface PlaylistTitleProps {
 	secondText: string;
 	total_tracks: number;
 	totalDuration: number;
-	playlistOrAlbumImage: string;
+	playlistOrAlbumImage: string | undefined;
 }
 
 export const PlaylistOrAlbumTitle = ({
