@@ -14,7 +14,7 @@ interface PlayerProps {
 
 const Player = ({ playing }: PlayerProps) => {
 	return (
-		<div className='flex w-2/5 max-w-[722px] flex-col'>
+		<div className='flex flex-1 flex-col sm:w-2/5 sm:max-w-[722px] sm:flex-none'>
 			<div className='mb-2 flex items-center gap-x-4'>
 				<div className='flex flex-1 items-center justify-end gap-x-2'>
 					<ShuffleButton shuffle={playing.shuffle_state} />

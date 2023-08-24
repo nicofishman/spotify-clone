@@ -51,11 +51,13 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
 							</p>
 						</Link>
 					</div>
-					<LikeSongButton
-						trackId={playing.item?.id ?? ''}
-						isLiked={false}
-					/>
-					<PictureInPictureButton />
+					<div className='hidden sm:flex'>
+						<LikeSongButton
+							trackId={playing.item?.id ?? ''}
+							isLiked={false}
+						/>
+						<PictureInPictureButton />
+					</div>
 				</div>
 			) : undefined}
 		</div>

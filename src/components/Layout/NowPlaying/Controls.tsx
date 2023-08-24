@@ -25,7 +25,7 @@ const Controls = ({ playing }: ControlsProps) => {
 	});
 
 	return (
-		<div className='flex w-1/3 min-w-[180px] justify-end'>
+		<div className='hidden w-1/3 min-w-[180px] justify-end sm:flex'>
 			<LyricsButton />
 			<QueueButton />
 			<ConnectButton />
