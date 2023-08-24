@@ -74,11 +74,25 @@ export const playlistsRouter = createTRPCRouter({
 			return data;
 		}),
 	featured: protectedProcedureWithAccount.query(async ({ ctx }) => {
-		const res = await fetch(`${API_URL}/browse/featured-playlists`, {
-			headers: {
-				Authorization: `Bearer ${ctx.session.account.access_token}`,
-			},
-		});
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const now = new Date().toISOString().split('.')[0]!;
+		console.log(now);
+
+		const settings = {
+			locale: 'es_AR',
+			country: 'AR',
+			timestamp: now,
+		};
+		const res = await fetch(
+			`${API_URL}/browse/featured-playlists?` +
+				new URLSearchParams(settings).toString(),
+			{
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+			}
+		);
+
 		await checkRes(res, 200);
 		const data =
 			(await res.json()) as SpotifyApi.ListOfFeaturedPlaylistsResponse;

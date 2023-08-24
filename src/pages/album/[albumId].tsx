@@ -37,7 +37,9 @@ const PlaylistPage = () => {
 				<title>
 					{album
 						? `${album?.name} - album by ${
-								album.artists.join(', ') ?? ''
+								album.artists
+									.map((art) => art.name)
+									.join(', ') ?? ''
 						  }`
 						: 'Loading...'}
 				</title>
