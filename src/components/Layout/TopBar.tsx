@@ -44,7 +44,12 @@ export const TopBar = ({
 					<div className='flex-1'>
 						<SearchInput
 							value={searchInput}
-							onChange={(e) => setSearchInput(e.target.value)}
+							onChange={async (e) => {
+								setSearchInput(e.target.value);
+								await router.push(
+									`/search?q=${e.target.value}`
+								);
+							}}
 						/>
 					</div>
 				)}
