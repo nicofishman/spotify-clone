@@ -2,6 +2,7 @@ import { LikeSongButton } from '@/components/Layout/NowPlaying/ButtonsWithToolti
 import Icon from '@/components/UI/Icon';
 import { TableCell, TableRow } from '@/components/UI/Table';
 import { DEFAULT_PLAYLISTORALBUM_IMAGE } from '@/consts';
+import { cn } from '@/utils/cn';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,7 +46,7 @@ const TableRowLayout = ({
 					className='aspect-square object-cover'
 				/>
 				<div className='flex flex-col truncate'>
-					<span className='truncate font-bold text-stone-300'>
+					<span className='truncate font-bold text-white'>
 						{track?.name ?? ''}
 					</span>
 					<p>
@@ -70,15 +71,25 @@ const TableRowLayout = ({
 			</TableCell>
 			{children}
 			<TableCell className='relative h-0 truncate'>
-				<div className='grid h-full w-full grid-cols-[1fr] group-hover:grid-cols-[16px_1fr_32px]'>
-					<picture className='hidden items-center group-hover:flex'>
+				<div
+					className={cn(
+						'grid h-full w-full grid-cols-[16px_1fr_32px]'
+					)}
+				>
+					<picture
+						className={cn(
+							isLiked
+								? 'flex items-center'
+								: 'hidden items-center group-hover:flex'
+						)}
+					>
 						<LikeSongButton
 							tooltip={false}
 							isLiked={isLiked}
 							trackId={track?.id ?? ''}
 						/>
 					</picture>
-					<span className='mr-4 flex items-center justify-center text-stone-400 group-hover:mr-0 group-hover:text-stone-300'>
+					<span className='col-start-2 flex items-center justify-center text-stone-400 group-hover:mr-0 group-hover:text-stone-300'>
 						{millisToMinutesAndSeconds(track?.duration_ms ?? 0)}
 					</span>
 					<picture className='my-auto hidden group-hover:block'>

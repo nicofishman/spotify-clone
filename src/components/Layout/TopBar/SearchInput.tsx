@@ -21,7 +21,7 @@ const SearchInput = ({
 				onChange={onChange}
 				type='text'
 				className={cn(
-					'h-fit flex-1 py-1.5 text-sm outline-none placeholder:text-gray-text',
+					'h-fit flex-1 py-1.5 text-sm text-black outline-none placeholder:text-gray-text',
 					className
 				)}
 				placeholder='What do you want to listen to?'
