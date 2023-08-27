@@ -82,7 +82,7 @@ const Layout = ({
 							)}
 							<div
 								className={cn(
-									'-mt-[88px] flex h-full flex-col gap-y-4 pt-16',
+									'-mt-[88px] flex h-full flex-1 flex-col gap-y-4 pt-16',
 									divClassName
 								)}
 							>

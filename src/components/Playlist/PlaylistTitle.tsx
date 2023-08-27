@@ -27,6 +27,7 @@ const PlaylistTitle = ({ playlist }: PlaylistTitleProps) => {
 			type={playlist.type}
 			total_tracks={playlist.tracks.total}
 			playlistOrAlbumImage={playlist?.images?.[0]?.url}
+			description={playlist?.description}
 		/>
 	);
 };

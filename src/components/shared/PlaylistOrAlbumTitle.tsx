@@ -14,6 +14,7 @@ interface PlaylistTitleProps {
 	total_tracks: number;
 	totalDuration: number;
 	playlistOrAlbumImage: string | undefined;
+	description?: string | null;
 }
 
 export const PlaylistOrAlbumTitle = ({
@@ -27,6 +28,7 @@ export const PlaylistOrAlbumTitle = ({
 	totalDuration,
 	total_tracks,
 	type,
+	description,
 }: PlaylistTitleProps) => {
 	return (
 		<div className='mt-[calc(var(--contentSpacing)*2)] flex h-[30vh] px-[--contentSpacing] pb-[--contentSpacing]'>
@@ -40,11 +42,16 @@ export const PlaylistOrAlbumTitle = ({
 					loading='eager'
 				/>
 			</div>
-			<div className='flex w-fit flex-1 flex-col justify-end'>
+			<div className='flex w-fit flex-1 flex-col justify-end space-y-2'>
 				<span className='font-bold capitalize'>{type}</span>
-				<span className='mb-4 mt-2 overflow-hidden break-words font-black sm:text-4xl md:text-5xl lg:text-7xl'>
+				<span className='overflow-hidden break-words font-black sm:text-4xl md:text-5xl lg:text-7xl'>
 					{name ?? ''}
 				</span>
+				{description && (
+					<p className='line-clamp-3 max-h-[74px] w-full truncate text-sm text-white/70'>
+						{description}
+					</p>
+				)}
 				<div className='flex items-center'>
 					<div className='flex'>
 						<Image
