@@ -4,17 +4,13 @@ import PlaylistTable from '@/components/Playlist/PlaylistTable';
 import PlaylistTitle from '@/components/Playlist/PlaylistTitle';
 import ThreeDotsButtonPlaylistTitle from '@/components/Playlist/ThreeDotsButtonPlaylistTitle';
 import { api } from '@/utils/api';
-import { FastAverageColor } from 'fast-average-color';
+import { getGcAndSetVariable } from '@/utils/images';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 const PlaylistPage = () => {
 	const playlistId = useRouter().query.playlistId as string;
-	const fac = useMemo(() => new FastAverageColor(), []);
-	const [gradientColor, setGradientColor] = useState({
-		value: [88, 232, 128],
-	});
 
 	const { data: user } = api.me.info.get.useQuery();
 
@@ -22,15 +18,7 @@ const PlaylistPage = () => {
 		enabled: !!playlistId,
 		onSuccess: async (playlist) => {
 			if (!playlist.images[0]?.url) return;
-			const gC = await fac.getColorAsync(playlist.images[0].url);
-			setGradientColor({
-				value: gC.value.splice(0, 3),
-			});
-
-			document.body.style.setProperty(
-				'--top-bar-color',
-				`${gC.rgb.replace('rgb(', '').replace(')', '')}`
-			);
+			await getGcAndSetVariable(playlist.images[0].url, '--top-bar-color');
 		},
 	});
 
@@ -56,9 +44,7 @@ const PlaylistPage = () => {
 			<Layout
 				mainClassName='px-0 gap-y-0'
 				style={{
-					backgroundImage: `linear-gradient(180deg, rgba(${gradientColor.value.join(
-						','
-					)}, 0.8) 0%, #121212 100%)`,
+					backgroundImage: `linear-gradient(180deg, rgba(var(--top-bar-color), 0.8) 0%, #121212 100%)`,
 				}}
 			>
 				<>

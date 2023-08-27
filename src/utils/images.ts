@@ -7,3 +7,17 @@ export async function getAverageColor(url: string) {
 
 	return color;
 }
+
+export const getGcAndSetVariable = async (
+	imageUrl: string,
+	variable: string
+) => {
+	const fac = new FastAverageColor();
+
+	const gC = await fac.getColorAsync(imageUrl);
+
+	document.body.style.setProperty(
+		variable,
+		`${gC.rgb.replace('rgb(', '').replace(')', '')}`
+	);
+};
