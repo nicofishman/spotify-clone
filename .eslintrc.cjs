@@ -1,6 +1,6 @@
 /** @type {import("eslint").Linter.Config} */
 const config = {
-    ignorePatterns: ['node_modules', 'dist', 'coverage', 'tailwind.config.cjs'],
+	ignorePatterns: ['node_modules', 'dist', 'coverage', 'tailwind.config.cjs'],
 	overrides: [
 		{
 			extends: [
@@ -36,6 +36,7 @@ const config = {
 			'warn',
 			{ argsIgnorePattern: '^_' },
 		],
+		'@typescript-eslint/ban-ts-comment': 'off',
 	},
 };
 

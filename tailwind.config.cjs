@@ -21,12 +21,10 @@ const config = {
 			},
 			gridTemplateAreas: {
 				layoutLarge: [
-					'nav-bar top-bar',
 					'nav-bar main-view',
 					'now-playing-bar now-playing-bar',
 				],
                 layoutSmall: [
-                    'top-bar',
                     'main-view',
                     'now-playing-bar',
                 ],
