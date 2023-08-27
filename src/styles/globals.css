@@ -31,6 +31,7 @@
 @layer base {
 	* {
 		--contentSpacing: clamp(16px, 16px + (1293 - 600)/424 * 8px, 24px);
+		--top-bar-color: 18, 18, 18;
 	}
 
 	.playlistsGrid {

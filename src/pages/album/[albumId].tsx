@@ -28,6 +28,13 @@ const PlaylistPage = () => {
 				value: gC.value.splice(0, 3),
 			});
 			albumLiked.set('albumLiked', album.isLiked);
+
+			console.log(gC.rgb.replace('rgb(', '').replace(')', ''));
+
+			document.body.style.setProperty(
+				'--top-bar-color',
+				`${gC.rgb.replace('rgb(', '').replace(')', '')}`
+			);
 		},
 	});
 

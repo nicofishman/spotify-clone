@@ -10,6 +10,7 @@ type LayoutProps = {
 	children: React.ReactElement | React.ReactElement[];
 	className?: string;
 	mainClassName?: string;
+	divClassName?: string;
 	style?: React.CSSProperties;
 } & (
 	| {
@@ -29,6 +30,7 @@ const Layout = ({
 	className,
 	style,
 	mainClassName,
+	divClassName,
 	includeSearchInput = false,
 	searchInput,
 	onSearchInputChange,
@@ -59,25 +61,33 @@ const Layout = ({
 				{session ? (
 					<>
 						<Sidebar />
-						{includeSearchInput &&
-						searchInput !== undefined &&
-						onSearchInputChange ? (
-							<TopBar
-								includeSearchInput={true}
-								searchInput={searchInput}
-								setSearchInput={onSearchInputChange}
-							/>
-						) : (
-							<TopBar includeSearchInput={false} />
-						)}
+
 						<main
 							ref={mainRef}
 							className={cn(
-								'flex flex-col gap-y-6 overflow-auto px-8 pt-6 text-white grid-in-main-view @container/main',
+								'flex flex-col gap-y-6 overflow-auto px-8 text-white grid-in-main-view @container/main',
 								mainClassName
 							)}
 						>
-							{children}
+							{includeSearchInput &&
+							searchInput !== undefined &&
+							onSearchInputChange ? (
+								<TopBar
+									includeSearchInput={true}
+									searchInput={searchInput}
+									setSearchInput={onSearchInputChange}
+								/>
+							) : (
+								<TopBar includeSearchInput={false} />
+							)}
+							<div
+								className={cn(
+									'-mt-[88px] flex h-full flex-col gap-y-4 pt-16',
+									divClassName
+								)}
+							>
+								{children}
+							</div>
 						</main>
 						<NowPlaying />
 					</>

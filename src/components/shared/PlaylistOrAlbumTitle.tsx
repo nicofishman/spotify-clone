@@ -29,7 +29,7 @@ export const PlaylistOrAlbumTitle = ({
 	type,
 }: PlaylistTitleProps) => {
 	return (
-		<div className='flex h-[clamp(275px,30vh,400px)] px-[--contentSpacing] pb-[--contentSpacing]'>
+		<div className='mt-[calc(var(--contentSpacing)*2)] flex h-[30vh] px-[--contentSpacing] pb-[--contentSpacing]'>
 			<div className='relative mr-[--contentSpacing] aspect-square w-full min-w-[150px] max-w-[232px]'>
 				<Image
 					width={232}
@@ -67,7 +67,9 @@ export const PlaylistOrAlbumTitle = ({
 					<span className='text-sm font-normal before:mx-1 before:text-xxs before:content-["•"] after:mx-1 after:text-xxs after:content-["•"]'>
 						{secondText}
 					</span>
-					<span>{total_tracks} song{total_tracks > 1 ? 's' : ''}, </span>
+					<span>
+						{total_tracks} song{total_tracks > 1 ? 's' : ''},{' '}
+					</span>
 					<span className='text-gray-200/80'>
 						&nbsp;
 						{formatDistance(new Date(0), new Date(totalDuration))}

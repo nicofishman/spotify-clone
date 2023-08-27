@@ -26,6 +26,11 @@ const PlaylistPage = () => {
 			setGradientColor({
 				value: gC.value.splice(0, 3),
 			});
+
+			document.body.style.setProperty(
+				'--top-bar-color',
+				`${gC.rgb.replace('rgb(', '').replace(')', '')}`
+			);
 		},
 	});
 
@@ -35,6 +40,7 @@ const PlaylistPage = () => {
 			playlist?.owner?.display_name === user?.name,
 		[playlist?.collaborative, playlist?.owner?.display_name, user?.name]
 	);
+
 	return (
 		<>
 			<Head>
