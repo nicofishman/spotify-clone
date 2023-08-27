@@ -1,4 +1,5 @@
 import { meAlbumRouter } from '@/server/api/routers/me/meAlbumRouter';
+import { meFollowingRouter } from '@/server/api/routers/me/meFollowing';
 import { meInfoRouter } from '@/server/api/routers/me/meInfoRouter';
 import { mePlaylistsRouter } from '@/server/api/routers/me/mePlaylistsRouter';
 import { meTracksRouter } from '@/server/api/routers/me/meTracksRouter';
@@ -11,4 +12,5 @@ export const meRouter = createTRPCRouter({
 	playlists: mePlaylistsRouter,
 	album: meAlbumRouter,
 	info: meInfoRouter,
+	following: meFollowingRouter,
 });

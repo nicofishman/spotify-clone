@@ -1,6 +1,7 @@
 import Controls from '@/components/Layout/NowPlaying/Controls';
 import CurrentSong from '@/components/Layout/NowPlaying/CurrentSong';
 import Player from '@/components/Layout/NowPlaying/Player';
+import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 
 export const NowPlaying = () => {
@@ -8,6 +9,17 @@ export const NowPlaying = () => {
 		undefined,
 		{
 			refetchInterval: 1000,
+			onSuccess: (data) => {
+				const { available, ...rest } = data;
+				if (available) {
+					tracksStore.set('nowPlayingArtist', {
+						is_playing: rest.is_playing,
+						artists: rest.item?.artists.map((art) => art.id) ?? [],
+					});
+				} else {
+					tracksStore.set('nowPlayingArtist', null);
+				}
+			},
 		}
 	);
 
