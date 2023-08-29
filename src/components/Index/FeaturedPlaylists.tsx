@@ -45,7 +45,7 @@ const FeaturedPlaylists = () => {
 				}}
 			>
 				{isLoading ? (
-					<FeaturedPlaylistsLoading columnCount={columnCount} />
+					<SquaredPlaylistsLoading columnCount={columnCount} />
 				) : (
 					featuredPlaylists?.playlists.items
 						.slice(0, columnCount)
@@ -65,7 +65,11 @@ const FeaturedPlaylists = () => {
 
 export default FeaturedPlaylists;
 
-const FeaturedPlaylistsLoading = ({ columnCount }: { columnCount: number }) => {
+export const SquaredPlaylistsLoading = ({
+	columnCount,
+}: {
+	columnCount: number;
+}) => {
 	return (
 		<>
 			{Array.from({ length: columnCount }).map((_, i) => {

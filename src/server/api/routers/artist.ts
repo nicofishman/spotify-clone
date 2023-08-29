@@ -23,4 +23,64 @@ export const artistRouter = createTRPCRouter({
 
 			return resJson;
 		}),
+	getTopTracks: protectedProcedureWithAccount
+		.input(z.string())
+		.query(async ({ input, ctx }) => {
+			const res = await fetch(
+				`${API_URL}/artists/${input}/top-tracks?market=ES`,
+				{
+					headers: {
+						Authorization: `Bearer ${ctx.session.account.access_token}`,
+					},
+					method: 'GET',
+				}
+			);
+
+			await checkRes(res, 200);
+
+			const resJson =
+				(await res.json()) as SpotifyApi.ArtistsTopTracksResponse;
+
+			return resJson;
+		}),
+	getAlbums: protectedProcedureWithAccount
+		.input(z.string())
+		.query(async ({ input, ctx }) => {
+			const res = await fetch(
+				`${API_URL}/artists/${input}/albums?market=ES`,
+				{
+					headers: {
+						Authorization: `Bearer ${ctx.session.account.access_token}`,
+					},
+					method: 'GET',
+				}
+			);
+
+			await checkRes(res, 200);
+
+			const resJson =
+				(await res.json()) as SpotifyApi.ArtistsAlbumsResponse;
+
+			return resJson;
+		}),
+	getRelatedArtists: protectedProcedureWithAccount
+		.input(z.string())
+		.query(async ({ input, ctx }) => {
+			const res = await fetch(
+				`${API_URL}/artists/${input}/related-artists`,
+				{
+					headers: {
+						Authorization: `Bearer ${ctx.session.account.access_token}`,
+					},
+					method: 'GET',
+				}
+			);
+
+			await checkRes(res, 200);
+
+			const resJson =
+				(await res.json()) as SpotifyApi.ArtistsRelatedArtistsResponse;
+
+			return resJson;
+		}),
 });

@@ -48,9 +48,12 @@ export const PlaylistOrAlbumTitle = ({
 					{name ?? ''}
 				</span>
 				{description && (
-					<p className='line-clamp-3 max-h-[74px] w-full truncate text-sm text-white/70'>
-						{description}
-					</p>
+					<p
+						className='line-clamp-3 max-h-[74px] w-full truncate text-sm text-white/70 [&>a]:underline'
+						dangerouslySetInnerHTML={{
+							__html: description,
+						}}
+					></p>
 				)}
 				<div className='flex items-center'>
 					<div className='flex'>
