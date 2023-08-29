@@ -15,6 +15,12 @@ interface TableRowLayoutProps {
 	children?: React.ReactNode;
 	image: string | undefined;
 	threeDotsButton: React.ReactNode;
+	showArtists?: boolean;
+	styles?: {
+		firstColumn?: string;
+		secondColumn?: string;
+		lastColumn?: string;
+	};
 }
 
 const TableRowLayout = ({
@@ -24,10 +30,14 @@ const TableRowLayout = ({
 	threeDotsButton,
 	image,
 	children,
+	styles = {},
+	showArtists = true,
 }: TableRowLayoutProps) => {
 	return (
 		<TableRow className='group h-14 rounded-2xl border-b-0 hover:bg-white/10'>
-			<TableCell className='w-5 truncate text-center'>
+			<TableCell
+				className={cn('w-5 truncate text-center', styles.firstColumn)}
+			>
 				<Icon
 					name='play'
 					className='mx-auto hidden fill-white group-hover:block'
@@ -36,7 +46,12 @@ const TableRowLayout = ({
 					{index + 1}
 				</span>
 			</TableCell>
-			<TableCell className='mr-2 grid grid-cols-[40px_1fr] gap-x-4 truncate'>
+			<TableCell
+				className={cn(
+					'mr-2 grid grid-cols-[40px_1fr] gap-x-4 truncate',
+					styles.secondColumn
+				)}
+			>
 				<Image
 					loading='lazy'
 					src={image ?? DEFAULT_PLAYLISTORALBUM_IMAGE}
@@ -45,37 +60,50 @@ const TableRowLayout = ({
 					alt={`Cover art for ${track?.name ?? ''}`}
 					className='aspect-square object-cover'
 				/>
-				<div className='flex flex-col truncate'>
-					<span className='truncate font-bold text-white'>
+				<div
+					className={cn(
+						'flex flex-col truncate',
+						!showArtists && 'justify-center'
+					)}
+				>
+					<span className='truncate font-normal text-white'>
 						{track?.name ?? ''}
 					</span>
 					<p>
-						{track?.artists?.map((artist) => (
-							<Fragment key={artist.id}>
-								<Link href={`/artist/${artist.id}`}>
-									<span className='truncate font-light text-stone-400 hover:underline group-hover:text-white'>
-										{artist.name}
-									</span>
-								</Link>
-								{artist !== track?.artists?.slice(-1)[0] ? (
-									<span className='truncate font-light text-stone-400 group-hover:text-white'>
-										,{' '}
-									</span>
-								) : (
-									''
-								)}
-							</Fragment>
-						))}
+						{!showArtists && track.artists.length > 1 && (
+							<span className='truncate font-light text-stone-400 group-hover:text-white'>
+								Ft.{' '}
+							</span>
+						)}
+						{track?.artists
+							.slice(showArtists ? 0 : 1)
+							.map((artist) => (
+								<Fragment key={artist.id}>
+									<Link href={`/artist/${artist.id}`}>
+										<span className='truncate font-light text-stone-400 hover:underline group-hover:text-white'>
+											{artist.name}
+										</span>
+									</Link>
+									{artist !== track?.artists?.slice(-1)[0] ? (
+										<span className='truncate font-light text-stone-400 group-hover:text-white'>
+											,{' '}
+										</span>
+									) : (
+										''
+									)}
+								</Fragment>
+							))}
 					</p>
 				</div>
 			</TableCell>
 			{children}
-			<TableCell className='relative h-0 truncate'>
-				<div
-					className={cn(
-						'grid h-full w-full grid-cols-[16px_1fr_32px]'
-					)}
-				>
+			<TableCell
+				className={cn(
+					'relative hidden h-0 truncate sm:table-cell',
+					styles.lastColumn
+				)}
+			>
+				<div className='grid h-full w-full grid-cols-[16px_1fr_32px]'>
 					<picture
 						className={cn(
 							isLiked

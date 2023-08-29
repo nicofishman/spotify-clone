@@ -65,7 +65,7 @@ const Layout = ({
 						<main
 							ref={mainRef}
 							className={cn(
-								'flex flex-col gap-y-6 overflow-auto px-8 text-white grid-in-main-view @container/main',
+								'flex flex-col gap-y-6 overflow-x-hidden px-8 text-white grid-in-main-view @container/main',
 								mainClassName
 							)}
 						>
@@ -95,7 +95,7 @@ const Layout = ({
 					<main
 						ref={mainRef}
 						className={cn(
-							'flex flex-col items-center justify-center gap-y-6 overflow-auto px-8 pt-6 text-white grid-in-main-view @container/main',
+							'flex flex-col items-center justify-center gap-y-6 overflow-x-hidden px-8 pt-6 text-white grid-in-main-view @container/main',
 							mainClassName
 						)}
 					>
