@@ -49,6 +49,7 @@ const PopularTracks = ({ artistId }: PopularTracksProps) => {
 										secondColumn: 'max-w-fit',
 										lastColumn: 'w-[128px]',
 									}}
+									artistId={artistId}
 									threeDotsButton={
 										<ThreeDotsSongRow
 											isLiked={

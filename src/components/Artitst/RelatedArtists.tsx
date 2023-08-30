@@ -11,11 +11,18 @@ const RelatedArtists = ({ artistId }: RelatedArtistsProps) => {
 	const { data: relatedArtists, isLoading } =
 		api.artist.getRelatedArtists.useQuery(artistId);
 
-	return (
+	return relatedArtists?.artists && relatedArtists?.artists.length > 0 ? (
 		<section>
 			<h2 className='flex justify-between'>
-				<span className='text-2xl font-bold'>Fans also like</span>
 				<Link href={`/artist/${artistId}/related`}>
+					<span className='text-2xl font-bold hover:underline'>
+						Fans also like
+					</span>
+				</Link>
+				<Link
+					className='hidden sm:block'
+					href={`/artist/${artistId}/related`}
+				>
 					<span className='text-sm font-bold text-zinc-400 hover:underline'>
 						Show all
 					</span>
@@ -37,6 +44,8 @@ const RelatedArtists = ({ artistId }: RelatedArtistsProps) => {
 				}
 			</CardSquareGrid>
 		</section>
+	) : (
+		<></>
 	);
 };
 

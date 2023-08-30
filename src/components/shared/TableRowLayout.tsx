@@ -21,6 +21,7 @@ interface TableRowLayoutProps {
 		secondColumn?: string;
 		lastColumn?: string;
 	};
+	artistId?: string;
 }
 
 const TableRowLayout = ({
@@ -32,7 +33,12 @@ const TableRowLayout = ({
 	children,
 	styles = {},
 	showArtists = true,
+	artistId = '',
 }: TableRowLayoutProps) => {
+	const otherArtists = track?.artists.filter(
+		(artist) => artist.id !== artistId
+	);
+
 	return (
 		<TableRow className='group h-14 rounded-2xl border-b-0 hover:bg-white/10'>
 			<TableCell
@@ -60,39 +66,33 @@ const TableRowLayout = ({
 					alt={`Cover art for ${track?.name ?? ''}`}
 					className='aspect-square object-cover'
 				/>
-				<div
-					className={cn(
-						'flex flex-col truncate',
-						!showArtists && 'justify-center'
-					)}
-				>
+				<div className={cn('flex flex-col justify-center truncate')}>
 					<span className='truncate font-normal text-white'>
 						{track?.name ?? ''}
 					</span>
-					<p>
+					<p className='truncate text-stone-400 group-hover:text-white'>
 						{!showArtists && track.artists.length > 1 && (
-							<span className='truncate font-light text-stone-400 group-hover:text-white'>
-								Ft.{' '}
-							</span>
+							<span className='font-light'>Ft. </span>
 						)}
-						{track?.artists
-							.slice(showArtists ? 0 : 1)
-							.map((artist) => (
-								<Fragment key={artist.id}>
-									<Link href={`/artist/${artist.id}`}>
-										<span className='truncate font-light text-stone-400 hover:underline group-hover:text-white'>
-											{artist.name}
-										</span>
-									</Link>
-									{artist !== track?.artists?.slice(-1)[0] ? (
-										<span className='truncate font-light text-stone-400 group-hover:text-white'>
-											,{' '}
-										</span>
-									) : (
-										''
-									)}
-								</Fragment>
-							))}
+
+						{(showArtists
+							? track?.artists.slice(showArtists ? 0 : 1)
+							: otherArtists
+						).map((artist) => (
+							<Fragment key={artist.id}>
+								<Link href={`/artist/${artist.id}`}>
+									<span className='truncate font-light text-stone-400 hover:underline group-hover:text-white'>
+										{artist.name}
+									</span>
+								</Link>
+								{artist !==
+									otherArtists[otherArtists.length - 1] && (
+									<span className='font-light text-stone-400'>
+										,{' '}
+									</span>
+								)}
+							</Fragment>
+						))}
 					</p>
 				</div>
 			</TableCell>

@@ -9,7 +9,7 @@ interface PlaylistOrAlbumCardSquareProps {
 	imageUrl: string;
 	name: string;
 	type: 'playlist' | 'album' | 'artist';
-	description: string;
+	description: string | JSX.Element;
 }
 
 const PlaylistOrAlbumCardSquare = ({
@@ -41,7 +41,9 @@ const PlaylistOrAlbumCardSquare = ({
 				/>
 			</div>
 			<h2 className='truncate pb-0.5 font-bold text-white'>{name}</h2>
-			<p className='line-clamp-2 text-sm text-gray-text'>{description}</p>
+			<p className='line-clamp-2 text-sm capitalize text-gray-text'>
+				{description}
+			</p>
 		</Link>
 	);
 };

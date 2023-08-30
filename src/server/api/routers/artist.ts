@@ -44,10 +44,22 @@ export const artistRouter = createTRPCRouter({
 			return resJson;
 		}),
 	getAlbums: protectedProcedureWithAccount
-		.input(z.string())
+		.input(
+			z.object({
+				artistId: z.string(),
+				include_groups: z
+					.array(
+						z.enum(['album', 'single', 'appears_on', 'compilation'])
+					)
+					.optional(),
+			})
+		)
 		.query(async ({ input, ctx }) => {
 			const res = await fetch(
-				`${API_URL}/artists/${input}/albums?market=ES`,
+				`${API_URL}/artists/${input.artistId}/albums?limit=50&market=ES` +
+					(input.include_groups
+						? `&include_groups=${input.include_groups?.join(',')}`
+						: ''),
 				{
 					headers: {
 						Authorization: `Bearer ${ctx.session.account.access_token}`,

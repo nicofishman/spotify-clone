@@ -12,9 +12,20 @@ const AlbumCardSquare = ({ album }: AlbumCardSquareProps) => {
 			type='album'
 			name={album.name}
 			id={album.id}
-			description={`${new Date(
-				album.release_date
-			).getFullYear()} • Album`}
+			description={
+				<>
+					<time
+						dateTime={new Date(album.release_date)
+							.getFullYear()
+							.toString()}
+					>
+						{new Date(album.release_date).getFullYear()}
+					</time>
+					<span className='before:mx-1.5 before:align-middle before:text-[0.5rem] before:content-["•"]'>
+						{album.album_type}
+					</span>
+				</>
+			}
 		/>
 	);
 };
