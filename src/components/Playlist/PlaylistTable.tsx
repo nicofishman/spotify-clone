@@ -1,6 +1,6 @@
 import SongRow from '@/components/Playlist/Table/SongRow';
 import Icon from '@/components/UI/Icon';
-import Spinner from '@/components/UI/Spinner';
+import { Skeleton } from '@/components/UI/Skeleton';
 import {
 	Table,
 	TableBody,
@@ -12,6 +12,8 @@ import {
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
+import { useEffect, useMemo, useRef } from 'react';
+import { useIntersectionObserver } from 'usehooks-ts';
 
 interface PlaylistTableProps {
 	playlistId: string;
@@ -39,24 +41,43 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 	} = api.me.playlists.get.useQuery();
 
 	const {
-		data: songs,
+		data: res,
 		refetch: refetchGetTracks,
 		isFetching,
-	} = api.playlist.getTracks.useQuery(playlistId, {
-		onSettled: () => {
-			if (!songs) {
-				void refetchGetTracks();
-			}
-
-			tracksStore.set('tracks', songs?.tracks.items ?? []);
-		},
-		enabled: !!playlistId,
-	});
+		isFetchingNextPage,
+		fetchNextPage,
+		hasNextPage,
+	} = api.playlist.getTracks.useInfiniteQuery(
+		{ playlistId },
+		{
+			onSettled: () => {
+				if (!res) {
+					void refetchGetTracks();
+				}
+			},
+			getNextPageParam: (lastPage) => lastPage.next ?? null,
+			enabled: !!playlistId,
+		}
+	);
 
 	const router = useRouter();
-	const [tracks] = tracksStore.use('tracks');
 	const [likedTracks] = tracksStore.use('likedTracks');
 
+	const lastRowRef = useRef<HTMLTableRowElement | null>(null);
+	const entry = useIntersectionObserver(lastRowRef, {
+		threshold: 0.5,
+		rootMargin: '0px',
+	});
+
+	useEffect(() => {
+		if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+			void fetchNextPage();
+		}
+	}, [entry, fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+	const _tracks = useMemo(() => {
+		return res?.pages.flatMap((page) => page.items) ?? [];
+	}, [res?.pages]);
 	return (
 		<div className='pl-[--contentSpacing] pr-3 text-gray-300'>
 			<Table className='table-fixed'>
@@ -74,31 +95,54 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 						</TableHead>
 					</TableRow>
 				</TableHeader>
-				{!isFetching ? (
+				{isFetching && !isFetchingNextPage ? (
 					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
-						{tracks.map((song, index) => (
-							<SongRow
-								isOwner={isOwner}
-								key={`${song.track?.id ?? ''}__${index}`}
-								playlistsToAdd={playlistsToAdd}
-								router={router}
-								index={index}
-								song={song}
-								isLiked={likedTracks.includes(
-									song.track?.id ?? ''
-								)}
-							/>
+						{Array.from({ length: 5 }).map((_, index) => (
+							<LoadingRow key={index} />
 						))}
 					</TableBody>
 				) : (
-					<TableBody>
-						<TableRow>
-							<TableCell colSpan={5}>
-								<div className='mt-2 flex w-full justify-center'>
-									<Spinner />
-								</div>
-							</TableCell>
-						</TableRow>
+					<TableBody
+						id='playlistBody'
+						className='before:block before:leading-4 before:content-["\200C"]'
+					>
+						{_tracks.map((song, index) => {
+							if (index === _tracks.length - 2) {
+								return (
+									<SongRow
+										isOwner={isOwner}
+										key={`${
+											song.track?.id ?? ''
+										}__${index}`}
+										playlistsToAdd={playlistsToAdd}
+										router={router}
+										index={index}
+										song={song}
+										isLiked={likedTracks.includes(
+											song.track?.id ?? ''
+										)}
+										ref={lastRowRef}
+									/>
+								);
+							}
+							return (
+								<SongRow
+									isOwner={isOwner}
+									key={`${song.track?.id ?? ''}__${index}`}
+									playlistsToAdd={playlistsToAdd}
+									router={router}
+									index={index}
+									song={song}
+									isLiked={likedTracks.includes(
+										song.track?.id ?? ''
+									)}
+								/>
+							);
+						})}
+						{isFetchingNextPage &&
+							Array.from({ length: 5 }).map((_, index) => (
+								<LoadingRow key={index} />
+							))}
 					</TableBody>
 				)}
 			</Table>
@@ -107,3 +151,23 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 };
 
 export default PlaylistTable;
+
+const LoadingRow = () => (
+	<TableRow className='h-14 border-b-0  [&>td>div]:w-full [&>td>div]:rounded-md [&>td]:h-[inherit] [&>td]:animate-pulse [&>td]:items-center [&>td]:px-1 [&>td]:py-2'>
+		<TableCell>
+			<Skeleton />
+		</TableCell>
+		<TableCell>
+			<Skeleton />
+		</TableCell>
+		<TableCell>
+			<Skeleton />
+		</TableCell>
+		<TableCell>
+			<Skeleton />
+		</TableCell>
+		<TableCell>
+			<Skeleton />
+		</TableCell>
+	</TableRow>
+);

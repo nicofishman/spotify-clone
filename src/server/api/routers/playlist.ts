@@ -19,32 +19,32 @@ export const playlistRouter = createTRPCRouter({
 			return resJson;
 		}),
 	getTracks: protectedProcedureWithAccount
-		.input(z.string())
+		.input(
+			z.object({
+				playlistId: z.string(),
+				cursor: z.string().optional(),
+			})
+		)
 		.query(async ({ ctx, input }) => {
-			const res = await fetch(`${API_URL}/playlists/${input}`, {
+			let url: string;
+			if (!input.cursor) {
+				url = `${API_URL}/playlists/${input.playlistId}/tracks?limit=20`;
+			} else {
+				url = input.cursor;
+			}
+			const res = await fetch(url, {
 				headers: {
 					Authorization: `Bearer ${ctx.session.account.access_token}`,
 				},
 				method: 'GET',
 			});
 
-			const resJson = (await res.json()) as SpotifyApi.PlaylistObjectFull;
-
-			while (resJson.tracks.next) {
-				const nextRes = await fetch(resJson.tracks.next, {
-					headers: {
-						Authorization: `Bearer ${ctx.session.account.access_token}`,
-					},
-					method: 'GET',
-				});
-				const nextJson =
-					(await nextRes.json()) as SpotifyApi.PlaylistTrackResponse;
-				resJson.tracks.items.push(...nextJson.items);
-				resJson.tracks.next = nextJson.next;
-			}
+			const resJson =
+				(await res.json()) as SpotifyApi.PlaylistTrackResponse;
 
 			return resJson;
 		}),
+
 	getMany: protectedProcedureWithAccount
 		.input(z.array(z.string()))
 		.query(async ({ ctx, input }) => {
