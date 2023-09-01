@@ -1,7 +1,7 @@
 import AlbumCardSquare from '@/components/Artitst/AlbumCardSquare';
 import CardSquareGrid from '@/components/Artitst/CardSquareGrid';
+import Chip from '@/components/UI/Chip';
 import { api } from '@/utils/api';
-import { cn } from '@/utils/cn';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
@@ -19,18 +19,28 @@ const Discography = ({ artistId }: DiscographyProps) => {
 		{
 			name: 'Popular Releases',
 			value: 'all',
+			visible: true,
 		},
 		{
 			name: 'Albums',
 			value: 'album',
+			visible: discography?.items.some(
+				(album) => album.album_type === 'album'
+			),
 		},
 		{
 			name: 'Singles & EPs',
 			value: 'single',
+			visible: discography?.items.some(
+				(album) => album.album_type === 'single'
+			),
 		},
 		{
 			name: 'Compilations',
 			value: 'compilation',
+			visible: discography?.items.some(
+				(album) => album.album_type === 'compilation'
+			),
 		},
 	] as const;
 
@@ -78,19 +88,16 @@ const Discography = ({ artistId }: DiscographyProps) => {
 			<ul className='my-4 flex gap-x-2'>
 				{selectTypes.map((type) => {
 					return (
-						<li key={type.value}>
-							<button
-								className={cn(
-									'rounded-full px-3 py-1 text-[0.8125rem] font-light transition-all sm:text-sm',
-									selection === type.value
-										? 'bg-white text-black'
-										: 'bg-[hsla(0,0%,100%,.07)] text-white'
-								)}
-								onClick={() => setSelection(type.value)}
-							>
-								{type.name}
-							</button>
-						</li>
+						type.visible && (
+							<li key={type.value}>
+								<Chip
+									onClick={() => setSelection(type.value)}
+									active={selection === type.value}
+								>
+									{type.name}
+								</Chip>
+							</li>
+						)
 					);
 				})}
 			</ul>

@@ -1,8 +1,8 @@
 import Songs from '@/components/Search/Songs/Songs';
 import TopResult from '@/components/Search/TopResult';
+import Chip from '@/components/UI/Chip';
 import { mainSizeStore } from '@/stores/mainSizeStore';
 import { api } from '@/utils/api';
-import { cn } from '@/utils/cn';
 import { similarity } from '@/utils/string';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
@@ -97,22 +97,17 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 
 	return (
 		<div>
-			<div className='sticky flex h-12 w-full gap-x-4 bg-gray-bg pt-[7px]'>
+			<div className='sticky flex h-12 w-full gap-x-4 pt-[7px]'>
 				{Object.entries(searchFilters).map(([key, value]) => (
-					<button
+					<Chip
 						key={key}
-						className={cn(
-							`flex h-fit min-h-[32px] items-center justify-center rounded-full px-3 py-1 text-sm font-normal`,
-							activeFilter === key
-								? 'bg-white text-black'
-								: 'bg-gray-bg text-white'
-						)}
+						active={activeFilter === key}
 						onClick={() =>
 							setActiveFilter(key as keyof typeof searchFilters)
 						}
 					>
 						{value}
-					</button>
+					</Chip>
 				))}
 			</div>
 			<div className='mt-4 min-h-[300px] w-full'>
