@@ -18,6 +18,10 @@ const Search = () => {
 	const [searchInput, setSearchInput] = useState('');
 
 	useEffect(() => {
+		document.body.style.setProperty('--top-bar-color', 'rgb(18, 18, 18)');
+	}, []);
+
+	useEffect(() => {
 		setSearchInput(query ?? '');
 	}, [query]);
 
