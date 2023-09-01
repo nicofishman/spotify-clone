@@ -131,9 +131,9 @@ const CopyrightSection = ({
 				)}
 			</p>
 			{copyrights.map((copy, index) => (
-				<o key={index} className='text-xxs text-[inherit]'>
+				<p key={index} className='text-xxs text-[inherit]'>
 					{copy.text}
-				</o>
+				</p>
 			))}
 		</div>
 	);
