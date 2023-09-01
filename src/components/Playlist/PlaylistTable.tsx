@@ -97,8 +97,13 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 				</TableHeader>
 				{isFetching && !isFetchingNextPage ? (
 					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
-						{Array.from({ length: 5 }).map((_, index) => (
-							<LoadingRow key={index} />
+						{Array.from({
+							length:
+								res?.pages[0]?.total && res?.pages[0]?.total < 5
+									? res?.pages[0]?.total
+									: 5,
+						}).map((_, index) => (
+							<LoadingRow cellCount={5} key={index} />
 						))}
 					</TableBody>
 				) : (
@@ -141,7 +146,7 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 						})}
 						{isFetchingNextPage &&
 							Array.from({ length: 5 }).map((_, index) => (
-								<LoadingRow key={index} />
+								<LoadingRow cellCount={5} key={index} />
 							))}
 					</TableBody>
 				)}
@@ -152,22 +157,12 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 
 export default PlaylistTable;
 
-const LoadingRow = () => (
-	<TableRow className='h-14 border-b-0  [&>td>div]:w-full [&>td>div]:rounded-md [&>td]:h-[inherit] [&>td]:animate-pulse [&>td]:items-center [&>td]:px-1 [&>td]:py-2'>
-		<TableCell>
-			<Skeleton />
-		</TableCell>
-		<TableCell>
-			<Skeleton />
-		</TableCell>
-		<TableCell>
-			<Skeleton />
-		</TableCell>
-		<TableCell>
-			<Skeleton />
-		</TableCell>
-		<TableCell>
-			<Skeleton />
-		</TableCell>
+export const LoadingRow = ({ cellCount }: { cellCount: number }) => (
+	<TableRow className='h-14 border-b-0  [&>td>div]:w-4/5 [&>td>div]:rounded-md [&>td]:h-[inherit] [&>td]:animate-pulse [&>td]:items-center [&>td]:px-1 [&>td]:py-2'>
+		{Array.from({ length: cellCount }).map((_, i) => (
+			<TableCell key={i}>
+				<Skeleton />
+			</TableCell>
+		))}
 	</TableRow>
 );

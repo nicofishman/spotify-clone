@@ -1,10 +1,9 @@
 import AlbumRow from '@/components/Album/AlbumRow';
+import { LoadingRow } from '@/components/Playlist/PlaylistTable';
 import Icon from '@/components/UI/Icon';
-import Spinner from '@/components/UI/Spinner';
 import {
 	Table,
 	TableBody,
-	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
@@ -12,7 +11,6 @@ import {
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 interface AlbumTableProps {
 	albumId: string;
@@ -87,13 +85,14 @@ const AlbumTable = ({ albumId, albumImage }: AlbumTableProps) => {
 					</TableBody>
 				) : (
 					<TableBody>
-						<TableRow>
-							<TableCell colSpan={3}>
-								<div className='mt-2 flex w-full justify-center'>
-									<Spinner />
-								</div>
-							</TableCell>
-						</TableRow>
+						{Array.from({
+							length:
+								albumTracks?.total && albumTracks?.total >= 5
+									? 5
+									: albumTracks?.total ?? 1,
+						}).map((_, index) => (
+							<LoadingRow cellCount={3} key={index} />
+						))}
 					</TableBody>
 				)}
 			</Table>
