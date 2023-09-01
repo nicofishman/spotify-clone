@@ -27,7 +27,7 @@ const PlaylistOrAlbumCardSquare = ({
 			<div className='relative mb-4 aspect-square w-full'>
 				<Image
 					className={cn(
-						'w-full shadow-xl shadow-black/40',
+						'aspect-square w-full object-cover shadow-xl shadow-black/40',
 						type === 'artist' ? 'rounded-full' : 'rounded-md'
 					)}
 					src={imageUrl}

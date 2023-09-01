@@ -4,7 +4,6 @@ import {
 } from '@/components/Layout/NowPlaying/ButtonsWithTooltip';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 interface CurrentSongProps {
 	playing: SpotifyApi.CurrentlyPlayingResponse | null;
@@ -34,22 +33,21 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
 								{song.name}
 							</p>
 						</Link>
-						<Link href={`/artist/${song.artists[0]?.id ?? ''}`}>
-							<p className='text-xs font-normal text-gray-400'>
-								{song.artists.map((art, i) => (
-									<Fragment key={art.id}>
-										<span className='inline hover:text-white hover:underline'>
-											{art.name}
-										</span>
-										{i !== song.artists.length - 1 ? (
-											<span className='inline'>
-												{', '}
-											</span>
-										) : undefined}
-									</Fragment>
-								))}
-							</p>
-						</Link>
+						<p className='text-xs font-normal text-gray-400'>
+							{song.artists.map((art, i) => (
+								<Link
+									key={art.id}
+									href={`/artist/${art.id ?? ''}`}
+								>
+									<span className='inline hover:text-white hover:underline'>
+										{art.name}
+									</span>
+									{i !== song.artists.length - 1 ? (
+										<span className='inline'>{', '}</span>
+									) : undefined}
+								</Link>
+							))}
+						</p>
 					</div>
 					<div className='hidden sm:flex'>
 						<LikeSongButton

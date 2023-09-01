@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import formatDistance from 'date-fns/formatDistance';
 import { DEFAULT_PLAYLISTORALBUM_IMAGE, DEFAULT_USER_IMAGE } from '@/consts';
+import { cn } from '@/utils/cn';
 
 interface PlaylistTitleProps {
 	type: 'playlist' | 'album';
@@ -44,7 +45,14 @@ export const PlaylistOrAlbumTitle = ({
 			</div>
 			<div className='flex w-fit flex-1 flex-col justify-end space-y-2'>
 				<span className='font-bold capitalize'>{type}</span>
-				<span className='overflow-hidden break-words font-black sm:text-4xl md:text-5xl lg:text-7xl'>
+				<span
+					className={cn(
+						'overflow-hidden break-words font-black',
+						name.length < 20
+							? 'sm:text-4xl md:text-5xl lg:text-7xl'
+							: 'sm:text-2xl md:text-3xl lg:text-5xl'
+					)}
+				>
 					{name ?? ''}
 				</span>
 				{description && (
