@@ -9,8 +9,11 @@ import { api } from '@/utils/api';
 import { getGcAndSetVariable } from '@/utils/images';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import TopBarContent from '@/components/Layout/TopBar/TopBarContent';
+import tracksStore from '@/stores/tracksStore';
 
 const ArtistPage = () => {
+	const [currentPlaying] = tracksStore.use('currentlyPlaying');
 	const artistId = useRouter().query.artistId as string;
 
 	const { data: artist } = api.artist.get.useQuery(artistId, {
@@ -31,7 +34,19 @@ const ArtistPage = () => {
 				<title>{`${artist?.name ?? ''} | Spotify`}</title>
 				<link rel='icon' href='/favicon.png' />
 			</Head>
-			<Layout divClassName='pt-0 gap-y-0' mainClassName='px-0'>
+			<Layout
+				divClassName='pt-0 gap-y-0'
+				mainClassName='px-0'
+				topBarContent={
+					<TopBarContent
+						isPlaying={
+							currentPlaying?.context?.uri ===
+							`spotify:artist:${artistId}`
+						}
+						name={artist?.name ?? ''}
+					/>
+				}
+			>
 				<>
 					<div className='relative flex bg-cover bg-center [background-image:--bg-image]'>
 						<div className='absolute inset-0 bg-black/40 backdrop-blur-3xl'></div>

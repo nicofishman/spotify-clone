@@ -9,14 +9,17 @@ interface PlayAndFollowSectionProps {
 }
 
 const PlayAndFollowSection = ({ artistId }: PlayAndFollowSectionProps) => {
-	const [currentPlaying] = tracksStore.use('nowPlayingArtist');
+	const [currentPlaying] = tracksStore.use('currentlyPlaying');
 	return (
 		<section className='flex w-full items-center gap-x-[calc(var(--contentSpacing)+8px)] py-[--contentSpacing]'>
 			<PlayPauseButton
 				className='scale-[1.20]'
 				isPlaying={
 					(currentPlaying?.is_playing ?? false) &&
-					(currentPlaying?.artists.includes(artistId) ?? false)
+					(currentPlaying?.item?.artists
+						.map((art) => art.id)
+						.includes(artistId) ??
+						false)
 				}
 			/>
 			<FollowButton artistId={artistId} />

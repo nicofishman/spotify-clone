@@ -12,6 +12,7 @@ type LayoutProps = {
 	mainClassName?: string;
 	divClassName?: string;
 	style?: React.CSSProperties;
+	topBarContent?: React.ReactNode;
 } & (
 	| {
 			includeSearchInput: true;
@@ -34,6 +35,7 @@ const Layout = ({
 	includeSearchInput = false,
 	searchInput,
 	onSearchInputChange,
+	topBarContent,
 }: LayoutProps) => {
 	const { data: session } = useSession();
 
@@ -76,9 +78,13 @@ const Layout = ({
 									includeSearchInput={true}
 									searchInput={searchInput}
 									setSearchInput={onSearchInputChange}
+									content={topBarContent}
 								/>
 							) : (
-								<TopBar includeSearchInput={false} />
+								<TopBar
+									includeSearchInput={false}
+									content={topBarContent}
+								/>
 							)}
 							<div
 								className={cn(

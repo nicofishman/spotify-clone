@@ -1,15 +1,16 @@
+import { type RouterOutputs } from '@/utils/api';
 import { createGlobalStore } from '@/utils/createGlobalStore';
 
 const tracksStore = createGlobalStore<{
 	tracks: SpotifyApi.PlaylistTrackObject[];
 	likedTracks: string[];
-	nowPlayingArtist: { is_playing: boolean; artists: string[] } | null;
 	followingArtists: string[];
+	currentlyPlaying: RouterOutputs['me']['player']['currentlyPlaying'] | null;
 }>({
 	tracks: [],
 	likedTracks: [],
-	nowPlayingArtist: null,
 	followingArtists: [],
+	currentlyPlaying: null,
 });
 
 export default tracksStore;

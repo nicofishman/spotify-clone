@@ -10,14 +10,15 @@ export const NowPlaying = () => {
 		{
 			refetchInterval: 1000,
 			onSuccess: (data) => {
-				const { available, ...rest } = data;
+				const { available } = data;
+
 				if (available) {
-					tracksStore.set('nowPlayingArtist', {
-						is_playing: rest.is_playing,
-						artists: rest.item?.artists.map((art) => art.id) ?? [],
-					});
+					tracksStore.set('currentlyPlaying', data);
 				} else {
-					tracksStore.set('nowPlayingArtist', null);
+					tracksStore.set(
+						'currentlyPlaying',
+						tracksStore.get('currentlyPlaying')
+					);
 				}
 			},
 		}
