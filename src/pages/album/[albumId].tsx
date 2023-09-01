@@ -8,13 +8,13 @@ import AlbumTable from '@/components/Album/AlbumTable';
 import LikeAlbumButton from '@/components/Album/LikeAlbumButton';
 import ThreeDotsButtonAlbumTitle from '@/components/Album/ThreeDotsButtonAlbumTitle';
 import PlayPauseButton from '@/components/Index/PlaylistCardLong/PlayPauseButton';
-import { getGcAndSetVariable } from '@/utils/images';
-import { useEffect, useMemo } from 'react';
 import tracksStore from '@/stores/tracksStore';
+import { getGcAndSetVariable } from '@/utils/images';
+import { useMemo } from 'react';
 
-import { format, addDays } from 'date-fns';
 import MoreBy from '@/components/Album/MoreBy';
 import TopBarContent from '@/components/Layout/TopBar/TopBarContent';
+import { addDays, format } from 'date-fns';
 
 const PlaylistPage = () => {
 	const albumId = useRouter().query.albumId as string;
@@ -26,11 +26,6 @@ const PlaylistPage = () => {
 			await getGcAndSetVariable(album.images[0].url, '--top-bar-color');
 		},
 	});
-
-	useEffect(() => {
-		document.body.style.setProperty('--top-bar-opacity', '0');
-		document.body.style.setProperty('--top-bar-content-opacity', '0');
-	}, []);
 
 	const [currentPlaying] = tracksStore.use('currentlyPlaying');
 

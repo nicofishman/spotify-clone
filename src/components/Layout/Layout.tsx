@@ -42,6 +42,11 @@ const Layout = ({
 	const [mainRef, mainSize] = useElementSize(mainSizeStore);
 
 	useEffect(() => {
+		document.body.style.setProperty('--top-bar-opacity', '0');
+		document.body.style.setProperty('--top-bar-content-opacity', '0');
+	}, []);
+
+	useEffect(() => {
 		if (mainSize) {
 			document.documentElement.style.setProperty(
 				'--main-width',
