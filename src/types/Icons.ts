@@ -32,6 +32,8 @@ import shuffle from '@/assets/icons/shuffle.svg';
 import threeDots from '@/assets/icons/three-dots.svg';
 import volume from '@/assets/icons/volume.svg';
 import clock from '@/assets/icons/clock.svg';
+import grid from '@/assets/icons/grid.svg';
+import list from '@/assets/icons/list.svg';
 
 export const Icons = {
 	clock: clock,
@@ -47,11 +49,13 @@ export const Icons = {
 	cross: cross,
 	externalUrl: externalUrl,
 	fullscreen: fullscreen,
+	grid: grid,
 	heart: heart,
 	homeActive: homeActive,
 	homeDefault: homeDefault,
 	likeActive: likeActive,
 	likeDefault: likeDefault,
+	list: list,
 	logo: logo,
 	lyrics: lyrics,
 	next: next,
