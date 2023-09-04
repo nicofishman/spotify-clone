@@ -13,6 +13,7 @@ type LayoutProps = {
 	divClassName?: string;
 	style?: React.CSSProperties;
 	topBarContent?: React.ReactNode;
+	topBarOpacity?: boolean;
 } & (
 	| {
 			includeSearchInput: true;
@@ -36,15 +37,25 @@ const Layout = ({
 	searchInput,
 	onSearchInputChange,
 	topBarContent,
+	topBarOpacity = true,
 }: LayoutProps) => {
 	const { data: session } = useSession();
 
 	const [mainRef, mainSize] = useElementSize(mainSizeStore);
 
 	useEffect(() => {
-		document.body.style.setProperty('--top-bar-opacity', '0');
-		document.body.style.setProperty('--top-bar-content-opacity', '0');
-	}, []);
+		if (!topBarOpacity) {
+			document.body.style.setProperty(
+				'--top-bar-color',
+				'rgb(24, 24, 24)'
+			);
+			document.body.style.setProperty('--top-bar-opacity', '1');
+			document.body.style.setProperty('--top-bar-content-opacity', '1');
+		} else {
+			document.body.style.setProperty('--top-bar-opacity', '0');
+			document.body.style.setProperty('--top-bar-content-opacity', '0');
+		}
+	}, [topBarOpacity]);
 
 	useEffect(() => {
 		if (mainSize) {
@@ -80,6 +91,7 @@ const Layout = ({
 							searchInput !== undefined &&
 							onSearchInputChange ? (
 								<TopBar
+									changeOpacity={topBarOpacity}
 									includeSearchInput={true}
 									searchInput={searchInput}
 									setSearchInput={onSearchInputChange}
@@ -87,6 +99,7 @@ const Layout = ({
 								/>
 							) : (
 								<TopBar
+									changeOpacity={topBarOpacity}
 									includeSearchInput={false}
 									content={topBarContent}
 								/>

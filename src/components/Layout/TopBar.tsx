@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 type TopBarProps = {
+	changeOpacity?: boolean;
 	content?: React.ReactNode;
 } & (
 	| {
@@ -27,6 +28,7 @@ export const TopBar = ({
 	searchInput = '',
 	setSearchInput,
 	content,
+	changeOpacity = true,
 }: TopBarProps) => {
 	const router = useRouter();
 
@@ -47,16 +49,19 @@ export const TopBar = ({
 		}
 	};
 	useEffect(() => {
+		if (!changeOpacity) return;
 		const container = document.querySelector('main');
 		if (!container) return;
 
 		container.addEventListener('scroll', handleScroll);
 		return () => container.removeEventListener('scroll', handleScroll);
-	}, []);
+	}, [changeOpacity]);
 
 	return (
 		<header className='grid-in-top-bar sticky top-0 z-10 h-16 w-full bg-[rgba(var(--top-bar-color),var(--top-bar-opacity))]'>
-			<div className='z-1 absolute inset-0 bg-black/30 opacity-[--top-bar-opacity]' />
+			{content && (
+				<div className='z-1 absolute inset-0 bg-black/30 opacity-[--top-bar-opacity]' />
+			)}
 			<div className='relative flex h-full w-full items-center justify-between gap-x-4 px-8'>
 				<div className='z-10 flex items-center gap-x-4 py-4'>
 					<GoBackButton
