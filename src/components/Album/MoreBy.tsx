@@ -10,10 +10,15 @@ interface MoreByProps {
 }
 
 const MoreBy = ({ artistId, artistName }: MoreByProps) => {
-	const { data: moreBy, isLoading } = api.artist.getAlbums.useQuery({
-		artistId,
-		include_groups: ['album'],
-	});
+	const { data: moreBy, isLoading } = api.artist.getAlbums.useQuery(
+		{
+			artistId,
+			include_groups: ['album'],
+		},
+		{
+			enabled: !!artistId,
+		}
+	);
 
 	return (
 		<section className='mt-12 gap-y-3'>

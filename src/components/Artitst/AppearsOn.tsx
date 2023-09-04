@@ -9,10 +9,15 @@ interface FeaturingProps {
 }
 
 const AppearsOn = ({ artistId }: FeaturingProps) => {
-	const { data: featuring, isLoading } = api.artist.getAlbums.useQuery({
-		artistId,
-		include_groups: ['appears_on'],
-	});
+	const { data: featuring, isLoading } = api.artist.getAlbums.useQuery(
+		{
+			artistId,
+			include_groups: ['appears_on'],
+		},
+		{
+			enabled: !!artistId,
+		}
+	);
 
 	return (
 		<section>
@@ -22,7 +27,10 @@ const AppearsOn = ({ artistId }: FeaturingProps) => {
 						Appears on
 					</span>
 				</Link>
-				<Link className='hidden sm:block' href={`/artist/${artistId}/featuring`}>
+				<Link
+					className='hidden sm:block'
+					href={`/artist/${artistId}/featuring`}
+				>
 					<span className='text-sm font-bold text-zinc-400 hover:underline'>
 						Show all
 					</span>

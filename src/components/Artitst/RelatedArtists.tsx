@@ -9,7 +9,9 @@ interface RelatedArtistsProps {
 
 const RelatedArtists = ({ artistId }: RelatedArtistsProps) => {
 	const { data: relatedArtists, isLoading } =
-		api.artist.getRelatedArtists.useQuery(artistId);
+		api.artist.getRelatedArtists.useQuery(artistId, {
+			enabled: !!artistId,
+		});
 
 	return relatedArtists?.artists && relatedArtists?.artists.length > 0 ? (
 		<section>

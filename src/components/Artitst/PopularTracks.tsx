@@ -14,8 +14,12 @@ interface PopularTracksProps {
 const PopularTracks = ({ artistId }: PopularTracksProps) => {
 	const router = useRouter();
 
-	const { data: tracks, isLoading } =
-		api.artist.getTopTracks.useQuery(artistId);
+	const { data: tracks, isLoading } = api.artist.getTopTracks.useQuery(
+		artistId,
+		{
+			enabled: !!artistId,
+		}
+	);
 	const {
 		data: playlistsToAdd = {
 			items: [] as SpotifyApi.PlaylistObjectSimplified[],

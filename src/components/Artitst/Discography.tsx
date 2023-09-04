@@ -2,6 +2,7 @@ import AlbumCardSquare from '@/components/Artitst/AlbumCardSquare';
 import CardSquareGrid from '@/components/Artitst/CardSquareGrid';
 import Chip from '@/components/UI/Chip';
 import { api } from '@/utils/api';
+import { discographyTypes } from '@/utils/discographyTypes';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
@@ -10,39 +11,26 @@ interface DiscographyProps {
 }
 
 const Discography = ({ artistId }: DiscographyProps) => {
-	const { data: discography, isLoading } = api.artist.getAlbums.useQuery({
-		artistId,
-		include_groups: ['album', 'single', 'compilation'],
-	});
+	const { data: discography, isLoading } = api.artist.getAlbums.useQuery(
+		{
+			artistId,
+			include_groups: ['album', 'single', 'compilation'],
+		},
+		{
+			enabled: !!artistId,
+		}
+	);
 
-	const selectTypes = [
-		{
-			name: 'Popular Releases',
-			value: 'all',
-			visible: true,
-		},
-		{
-			name: 'Albums',
-			value: 'album',
-			visible: discography?.items.some(
-				(album) => album.album_type === 'album'
-			),
-		},
-		{
-			name: 'Singles & EPs',
-			value: 'single',
-			visible: discography?.items.some(
-				(album) => album.album_type === 'single'
-			),
-		},
-		{
-			name: 'Compilations',
-			value: 'compilation',
-			visible: discography?.items.some(
-				(album) => album.album_type === 'compilation'
-			),
-		},
-	] as const;
+	const selectTypes = discographyTypes.map((type) => {
+		return {
+			...type,
+			visible:
+				type.value === 'all' ||
+				(discography?.items.some(
+					(album) => album.album_type === type.value
+				) as boolean),
+		};
+	});
 
 	const [selection, setSelection] =
 		useState<(typeof selectTypes)[number]['value']>('all');
@@ -104,7 +92,7 @@ const Discography = ({ artistId }: DiscographyProps) => {
 
 			<CardSquareGrid isLoading={isLoading}>
 				{({ columnCount }) =>
-					discographyArray.slice(0, columnCount).map((album) => {
+					discographyArray?.slice(0, columnCount).map((album) => {
 						return <AlbumCardSquare key={album.id} album={album} />;
 					})
 				}
