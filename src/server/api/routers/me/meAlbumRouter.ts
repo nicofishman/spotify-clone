@@ -33,4 +33,30 @@ export const meAlbumRouter = createTRPCRouter({
 			);
 			await checkRes(res, 200);
 		}),
+	get: protectedProcedureWithAccount.query(async ({ ctx }) => {
+		const res = await fetch(`${API_URL}/me/albums?limit=50`, {
+			headers: {
+				Authorization: `Bearer ${ctx.session.account.access_token}`,
+			},
+		});
+
+		await checkRes(res, 200);
+		const resJson =
+			(await res.json()) as SpotifyApi.UsersSavedAlbumsResponse;
+
+		while (resJson.next) {
+			const nextRes = await fetch(resJson.next, {
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+			});
+			await checkRes(nextRes, 200);
+			const nextResJson =
+				(await nextRes.json()) as SpotifyApi.UsersSavedAlbumsResponse;
+			resJson.items.push(...nextResJson.items);
+			resJson.next = nextResJson.next;
+		}
+
+		return resJson.items.map((item) => item.album);
+	}),
 });
