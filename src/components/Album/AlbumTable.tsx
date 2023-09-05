@@ -10,33 +10,29 @@ import {
 } from '@/components/UI/Table';
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
+import { cn } from '@/utils/cn';
 import { useRouter } from 'next/router';
 
-interface AlbumTableProps {
+type AlbumTableProps = {
 	albumId: string;
-	albumImage: string | undefined;
-}
+	className?: string;
+} & (
+	| {
+			showImage?: true;
+			albumImage: string | undefined;
+	  }
+	| {
+			showImage: false;
+			albumImage?: never;
+	  }
+);
 
-const AlbumTable = ({ albumId, albumImage }: AlbumTableProps) => {
-	const { data: likedSongs, refetch: refetchSaved } =
-		api.me.tracks.saved.get.useQuery(undefined, {
-			onSettled: () => {
-				if (!likedSongs) {
-					void refetchSaved();
-				}
-				tracksStore.set(
-					'likedTracks',
-					likedSongs?.items.map((item) => item.track.id) ?? []
-				);
-			},
-		});
-
-	const {
-		data: playlistsToAdd = {
-			items: [] as SpotifyApi.PlaylistObjectSimplified[],
-		} as SpotifyApi.ListOfUsersPlaylistsResponse,
-	} = api.me.playlists.get.useQuery();
-
+const AlbumTable = ({
+	albumId,
+	albumImage,
+	className,
+	showImage = true,
+}: AlbumTableProps) => {
 	const {
 		data: albumTracks,
 		refetch: refetchGetTracks,
@@ -54,7 +50,12 @@ const AlbumTable = ({ albumId, albumImage }: AlbumTableProps) => {
 	const [likedTracks] = tracksStore.use('likedTracks');
 
 	return (
-		<div className='pl-[--contentSpacing] pr-3 text-gray-300'>
+		<div
+			className={cn(
+				'pl-[--contentSpacing] pr-3 text-gray-300',
+				className
+			)}
+		>
 			<Table className='table-fixed'>
 				<TableHeader>
 					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>
@@ -78,8 +79,8 @@ const AlbumTable = ({ albumId, albumImage }: AlbumTableProps) => {
 								index={index}
 								isLiked={likedTracks.includes(item.id)}
 								router={router}
-								playlistsToAdd={playlistsToAdd}
 								track={item}
+								showImage={showImage}
 							/>
 						))}
 					</TableBody>

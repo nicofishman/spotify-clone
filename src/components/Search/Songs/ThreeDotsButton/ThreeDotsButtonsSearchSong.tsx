@@ -8,11 +8,9 @@ import { type useRouter } from 'next/router';
 interface ThreeDotsButtonsProps {
 	track: SpotifyApi.TrackObjectSimplified;
 	router: ReturnType<typeof useRouter>;
-	playlists: SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'];
 }
 
 const ThreeDotsButtonsSearchSong = ({
-	playlists,
 	router,
 	track,
 }: ThreeDotsButtonsProps) => {
@@ -51,12 +49,7 @@ const ThreeDotsButtonsSearchSong = ({
 		{
 			sub: true,
 			name: 'Add to playlist',
-			content: (
-				<AddToPlaylistSubMenu
-					tracksId={track.id}
-					playlists={playlists}
-				/>
-			),
+			content: <AddToPlaylistSubMenu tracksId={track.id} />,
 		},
 		{
 			separator: true,
