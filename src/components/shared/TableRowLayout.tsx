@@ -22,6 +22,7 @@ interface TableRowLayoutProps {
 		lastColumn?: string;
 	};
 	artistId?: string;
+	showImage?: boolean;
 }
 
 const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
@@ -36,6 +37,7 @@ const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
 			styles = {},
 			showArtists = true,
 			artistId = '',
+			showImage = true,
 		},
 		ref
 	) => {
@@ -64,18 +66,21 @@ const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
 				</TableCell>
 				<TableCell
 					className={cn(
-						'mr-2 grid grid-cols-[40px_1fr] gap-x-4 truncate',
+						'mr-2 grid gap-x-4 truncate',
+						showImage ? 'grid-cols-[40px_1fr]' : 'col-span-2',
 						styles.secondColumn
 					)}
 				>
-					<Image
-						loading='eager'
-						src={image ?? DEFAULT_PLAYLISTORALBUM_IMAGE}
-						width={40}
-						height={40}
-						alt={`Cover art for ${track?.name ?? ''}`}
-						className='aspect-square object-cover'
-					/>
+					{showImage && (
+						<Image
+							loading='eager'
+							src={image ?? DEFAULT_PLAYLISTORALBUM_IMAGE}
+							width={40}
+							height={40}
+							alt={`Cover art for ${track?.name ?? ''}`}
+							className='aspect-square object-cover'
+						/>
+					)}
 					<div
 						className={cn('flex flex-col justify-center truncate')}
 					>

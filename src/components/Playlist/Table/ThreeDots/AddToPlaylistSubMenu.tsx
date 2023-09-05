@@ -7,11 +7,16 @@ import { api } from '@/utils/api';
 import React, { useState } from 'react';
 
 interface PlaylistSearchProps {
-	playlists: SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'];
 	tracksId: string | string[];
 }
 
-const AddToPlaylistSubMenu = ({ playlists, tracksId }: PlaylistSearchProps) => {
+const AddToPlaylistSubMenu = ({ tracksId }: PlaylistSearchProps) => {
+	const {
+		data: playlistsToAdd = {
+			items: [] as SpotifyApi.PlaylistObjectSimplified[],
+		} as SpotifyApi.ListOfUsersPlaylistsResponse,
+	} = api.me.playlists.get.useQuery();
+
 	const [searchInput, setSearchInput] = useState('');
 
 	const addToPlaylist = api.playlist.addTrack.useMutation();
@@ -59,7 +64,7 @@ const AddToPlaylistSubMenu = ({ playlists, tracksId }: PlaylistSearchProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 			</div>
-			{playlists
+			{playlistsToAdd?.items
 				?.filter((pl) =>
 					pl.name
 						.toLocaleLowerCase()

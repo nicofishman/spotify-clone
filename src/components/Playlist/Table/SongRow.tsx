@@ -1,7 +1,6 @@
 import ThreeDotsSongRow from '@/components/Playlist/Table/ThreeDotsSongRow';
 import { TableCell } from '@/components/UI/Table';
 import TableRowLayout from '@/components/shared/TableRowLayout';
-import { type RouterOutputs } from '@/utils/api';
 import Link from 'next/link';
 import { type useRouter } from 'next/router';
 import { forwardRef } from 'react';
@@ -11,22 +10,11 @@ interface SongRowProps {
 	isLiked: boolean;
 	index: number;
 	router: ReturnType<typeof useRouter>;
-	playlistsToAdd: RouterOutputs['me']['playlists']['get'];
 	isOwner: boolean;
 }
 
 const SongRow = forwardRef<HTMLTableRowElement, SongRowProps>(
-	(
-		{
-			song: { track, added_at },
-			index,
-			isLiked,
-			router,
-			playlistsToAdd,
-			isOwner,
-		},
-		ref
-	) => {
+	({ song: { track, added_at }, index, isLiked, router, isOwner }, ref) => {
 		return (
 			track && (
 				<TableRowLayout
@@ -38,7 +26,6 @@ const SongRow = forwardRef<HTMLTableRowElement, SongRowProps>(
 					threeDotsButton={
 						<ThreeDotsSongRow
 							isOwner={isOwner}
-							playlistsToAdd={playlistsToAdd}
 							isLiked={isLiked}
 							router={router}
 							track={track}

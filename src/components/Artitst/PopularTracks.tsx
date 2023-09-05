@@ -20,11 +20,6 @@ const PopularTracks = ({ artistId }: PopularTracksProps) => {
 			enabled: !!artistId,
 		}
 	);
-	const {
-		data: playlistsToAdd = {
-			items: [] as SpotifyApi.PlaylistObjectSimplified[],
-		} as SpotifyApi.ListOfUsersPlaylistsResponse,
-	} = api.me.playlists.get.useQuery();
 
 	const [likedTracks] = tracksStore.use('likedTracks');
 
@@ -63,7 +58,6 @@ const PopularTracks = ({ artistId }: PopularTracksProps) => {
 											}
 											track={track}
 											isOwner={false}
-											playlistsToAdd={playlistsToAdd}
 											router={router}
 										/>
 									}

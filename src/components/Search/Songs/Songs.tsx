@@ -1,10 +1,8 @@
 import ThreeDotsButtonsSearchSong from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtonsSearchSong';
-import { type RouterOutputs, api } from '@/utils/api';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type useRouter } from 'next/router';
-import React from 'react';
 
 interface SongsProps {
 	songs: SpotifyApi.TrackObjectFull[];
@@ -12,10 +10,6 @@ interface SongsProps {
 }
 
 const Songs = ({ songs, router }: SongsProps) => {
-	const {
-		data: playlistListToAddTracksTo = {} as RouterOutputs['me']['playlists']['get'],
-	} = api.me.playlists.get.useQuery();
-
 	return (
 		<div>
 			{songs.map((song) => (
@@ -66,7 +60,6 @@ const Songs = ({ songs, router }: SongsProps) => {
 							<ThreeDotsButtonsSearchSong
 								router={router}
 								track={song}
-								playlists={playlistListToAddTracksTo.items}
 							/>
 						</div>
 					</div>

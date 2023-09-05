@@ -4,7 +4,7 @@ import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/P
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import tracksStore from '@/stores/tracksStore';
 import { type DropdownItem } from '@/types/UI';
-import { api, type RouterOutputs } from '@/utils/api';
+import { api } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 import { type useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -13,7 +13,6 @@ interface ThreeDotsSongRowProps {
 	router: ReturnType<typeof useRouter>;
 	track: SpotifyApi.PlaylistTrackObject['track'];
 	isLiked: boolean;
-	playlistsToAdd: RouterOutputs['me']['playlists']['get'];
 	isOwner: boolean;
 }
 
@@ -21,7 +20,6 @@ const ThreeDotsSongRow = ({
 	isOwner,
 	track,
 	router,
-	playlistsToAdd,
 }: ThreeDotsSongRowProps) => {
 	const utils = api.useContext();
 	const [likedSongs] = tracksStore.use('likedTracks');
@@ -82,15 +80,7 @@ const ThreeDotsSongRow = ({
 		{
 			name: 'Add to playlist',
 			sub: true,
-			content: (
-				<AddToPlaylistSubMenu
-					tracksId={track?.id ?? ''}
-					playlists={
-						playlistsToAdd?.items ??
-						([] as SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'])
-					}
-				/>
-			),
+			content: <AddToPlaylistSubMenu tracksId={track?.id ?? ''} />,
 		},
 		isOwner
 			? {

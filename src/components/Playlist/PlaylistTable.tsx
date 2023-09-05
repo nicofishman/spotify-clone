@@ -35,12 +35,6 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 		});
 
 	const {
-		data: playlistsToAdd = {
-			items: [] as SpotifyApi.PlaylistObjectSimplified[],
-		} as SpotifyApi.ListOfUsersPlaylistsResponse,
-	} = api.me.playlists.get.useQuery();
-
-	const {
 		data: res,
 		refetch: refetchGetTracks,
 		isFetching,
@@ -119,7 +113,6 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 										key={`${
 											song.track?.id ?? ''
 										}__${index}`}
-										playlistsToAdd={playlistsToAdd}
 										router={router}
 										index={index}
 										song={song}
@@ -134,7 +127,6 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 								<SongRow
 									isOwner={isOwner}
 									key={`${song.track?.id ?? ''}__${index}`}
-									playlistsToAdd={playlistsToAdd}
 									router={router}
 									index={index}
 									song={song}

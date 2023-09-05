@@ -3,22 +3,20 @@ import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/P
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import tracksStore from '@/stores/tracksStore';
 import { type DropdownItem } from '@/types/UI';
-import { api, type RouterOutputs } from '@/utils/api';
+import { api } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 import { type useRouter } from 'next/router';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 interface ThreeDotsAlbumRowProps {
 	router: ReturnType<typeof useRouter>;
 	track: SpotifyApi.TrackObjectSimplified;
 	isLiked: boolean;
-	playlistsToAdd: RouterOutputs['me']['playlists']['get'];
 	albumId: string | undefined;
 }
 
 const ThreeDotsAlbumRow = ({
 	isLiked,
-	playlistsToAdd,
 	router,
 	track,
 	albumId,
@@ -63,12 +61,7 @@ const ThreeDotsAlbumRow = ({
 		{
 			name: 'Add to Playlist',
 			sub: true,
-			content: (
-				<AddToPlaylistSubMenu
-					playlists={playlistsToAdd.items}
-					tracksId={track.id}
-				/>
-			),
+			content: <AddToPlaylistSubMenu tracksId={track.id} />,
 		},
 		itemLiked,
 		{
