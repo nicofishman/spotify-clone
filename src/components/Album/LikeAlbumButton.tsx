@@ -5,26 +5,44 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/UI/Tooltip';
-import { albumLiked } from '@/stores/albumLiked';
+import { likedAlbumsStore } from '@/stores/albumLiked';
 import { api } from '@/utils/api';
 import { cn } from '@/utils/cn';
-import React from 'react';
 
 interface LikeAlbumButtonProps {
 	albumId: string;
+	className?: string;
+	width?: number;
+	height?: number;
 }
 
-const LikeAlbumButton = ({ albumId }: LikeAlbumButtonProps) => {
-	const [isLiked] = albumLiked.use('albumLiked');
+const LikeAlbumButton = ({
+	albumId,
+	className,
+	height,
+	width,
+	...props
+}: LikeAlbumButtonProps) => {
+	const [albumsLiked] = likedAlbumsStore.use('albumsLiked');
+
+	const isLiked = albumsLiked.includes(albumId);
 
 	const { mutate: add } = api.me.album.add.useMutation({
 		onMutate: () => {
-			albumLiked.set('albumLiked', true);
+			likedAlbumsStore.set('albumsLiked', [
+				...likedAlbumsStore.get('albumsLiked'),
+				albumId,
+			]);
 		},
 	});
 	const { mutate: remove } = api.me.album.remove.useMutation({
 		onMutate: () => {
-			albumLiked.set('albumLiked', false);
+			likedAlbumsStore.set(
+				'albumsLiked',
+				likedAlbumsStore
+					.get('albumsLiked')
+					.filter((id) => id !== albumId)
+			);
 		},
 	});
 
@@ -40,16 +58,22 @@ const LikeAlbumButton = ({ albumId }: LikeAlbumButtonProps) => {
 	return (
 		<TooltipProvider>
 			<Tooltip>
-				<TooltipTrigger className='grid h-8 w-8 place-content-center'>
+				<TooltipTrigger
+					className={cn(
+						'grid h-8 w-8 place-content-center',
+						className
+					)}
+				>
 					<Icon
 						onClick={likeAlbum}
 						name={isLiked ? 'likeActive' : 'likeDefault'}
-						height={16}
-						width={16}
+						height={height ?? 16}
+						width={width ?? 16}
 						className={cn(
-							'scale-[2] transition-colors hover:fill-white',
+							'transition-colors hover:fill-white',
 							isLiked ? 'fill-spotify-green' : 'fill-gray-text'
 						)}
+						{...props}
 					/>
 				</TooltipTrigger>
 				<TooltipContent align='start' side='top'>

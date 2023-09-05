@@ -1,7 +1,7 @@
 import { createGlobalStore } from '@/utils/createGlobalStore';
 
-export const albumLiked = createGlobalStore<{
-	albumLiked: boolean;
+export const likedAlbumsStore = createGlobalStore<{
+	albumsLiked: string[];
 }>({
-	albumLiked: false,
+	albumsLiked: [],
 });

@@ -1,6 +1,6 @@
 import AddToPlaylistSubMenu from '@/components/Playlist/Table/ThreeDots/AddToPlaylistSubMenu';
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
-import { albumLiked } from '@/stores/albumLiked';
+import { likedAlbumsStore } from '@/stores/albumLiked';
 import { type DropdownItem } from '@/types/UI';
 import { api, type RouterOutputs } from '@/utils/api';
 
@@ -13,23 +13,26 @@ const ThreeDotsButtonAlbumTitle = ({
 	album,
 	iconClassName,
 }: ThreeDotsButtonAlbumTitleProps) => {
-	const {
-		data: playlistsToAdd = {
-			items: [] as SpotifyApi.PlaylistObjectSimplified[],
-		} as SpotifyApi.ListOfUsersPlaylistsResponse,
-	} = api.me.playlists.get.useQuery();
-
-	const [isLiked] = albumLiked.use('albumLiked');
+	const [albumsLiked] = likedAlbumsStore.use('albumsLiked');
+	const isLiked = albumsLiked.includes(album.id);
 
 	const { mutate: add } = api.me.album.add.useMutation({
 		onSuccess: () => {
-			albumLiked.set('albumLiked', true);
+			likedAlbumsStore.set('albumsLiked', [
+				...likedAlbumsStore.get('albumsLiked'),
+				album.id,
+			]);
 		},
 	});
 
 	const { mutate: remove } = api.me.album.remove.useMutation({
 		onSuccess: () => {
-			albumLiked.set('albumLiked', false);
+			likedAlbumsStore.set(
+				'albumsLiked',
+				likedAlbumsStore
+					.get('albumsLiked')
+					.filter((id) => id !== album.id)
+			);
 		},
 	});
 
@@ -59,10 +62,6 @@ const ThreeDotsButtonAlbumTitle = ({
 			content: (
 				<AddToPlaylistSubMenu
 					tracksId={album.tracks.items.map((item) => item.id)}
-					playlists={
-						playlistsToAdd?.items ??
-						([] as SpotifyApi.ListOfCurrentUsersPlaylistsResponse['items'])
-					}
 				/>
 			),
 		},
