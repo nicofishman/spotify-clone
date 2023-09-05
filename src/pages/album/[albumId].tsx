@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 
 import MoreBy from '@/components/Album/MoreBy';
 import TopBarContent from '@/components/Layout/TopBar/TopBarContent';
-import { addDays, format } from 'date-fns';
+import { formatDate } from '@/utils/time';
 
 const PlaylistPage = () => {
 	const albumId = useRouter().query.albumId as string;
@@ -70,13 +70,17 @@ const PlaylistPage = () => {
 										isPlaying={isPlaying}
 										className='scale-110 hover:scale-125 '
 									/>
-									<LikeAlbumButton albumId={album.id} />
+									<LikeAlbumButton
+										className='scale-150'
+										albumId={album.id}
+									/>
 									<ThreeDotsButtonAlbumTitle
 										iconClassName='scale-150'
 										album={album}
 									/>
 								</div>
 								<AlbumTable
+									className='pl-0 pr-0'
 									albumImage={album.images[0]?.url}
 									albumId={album.id}
 								/>
@@ -108,7 +112,7 @@ const CopyrightSection = ({
 	copyrights,
 }: {
 	releaseDate: string;
-	datePrecision: string;
+	datePrecision: SpotifyApi.AlbumObjectSimplified['release_date_precision'];
 	copyrights: Array<{
 		text: string;
 	}>;
@@ -116,14 +120,7 @@ const CopyrightSection = ({
 	return (
 		<div className='mt-8 text-zinc-400'>
 			<p className='text-sm text-[inherit]'>
-				{format(
-					addDays(new Date(releaseDate), 1),
-					datePrecision === 'day'
-						? 'MMMM d, yyyy'
-						: datePrecision === 'month'
-						? 'MMMM yyyy'
-						: 'yyyy'
-				)}
+				{formatDate(releaseDate, datePrecision)}
 			</p>
 			{copyrights.map((copy, index) => (
 				<p key={index} className='text-xxs text-[inherit]'>
