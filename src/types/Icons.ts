@@ -34,6 +34,9 @@ import volume from '@/assets/icons/volume.svg';
 import clock from '@/assets/icons/clock.svg';
 import grid from '@/assets/icons/grid.svg';
 import list from '@/assets/icons/list.svg';
+import instagram from '@/assets/icons/instagram.svg';
+import twitter from '@/assets/icons/twitter.svg';
+import facebook from '@/assets/icons/facebook.svg';
 
 export const Icons = {
 	clock: clock,
@@ -48,11 +51,13 @@ export const Icons = {
 	connect: connect,
 	cross: cross,
 	externalUrl: externalUrl,
+	facebook: facebook,
 	fullscreen: fullscreen,
 	grid: grid,
 	heart: heart,
 	homeActive: homeActive,
 	homeDefault: homeDefault,
+	instagram: instagram,
 	likeActive: likeActive,
 	likeDefault: likeDefault,
 	list: list,
@@ -70,5 +75,6 @@ export const Icons = {
 	searchDefault: searchDefault,
 	shuffle: shuffle,
 	threeDots: threeDots,
+	twitter: twitter,
 	volume: volume,
 } as const;

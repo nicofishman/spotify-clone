@@ -1,10 +1,11 @@
 import { NowPlaying, Sidebar, TopBar } from '@/components/Layout';
+import Footer from '@/components/Layout/Footer';
 import useElementSize from '@/hooks/useElementSize';
 import { mainSizeStore } from '@/stores/mainSizeStore';
 import { myFont } from '@/styles/font';
 import { cn } from '@/utils/cn';
 import { signIn, useSession } from 'next-auth/react';
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 type LayoutProps = {
 	children: React.ReactElement | React.ReactElement[];
@@ -83,7 +84,7 @@ const Layout = ({
 						<main
 							ref={mainRef}
 							className={cn(
-								'flex flex-col gap-y-6 overflow-x-hidden px-8 text-white grid-in-main-view @container/main',
+								'grid grid-rows-[1fr_auto] overflow-x-hidden px-8 text-white grid-in-main-view @container/main',
 								mainClassName
 							)}
 						>
@@ -106,12 +107,13 @@ const Layout = ({
 							)}
 							<div
 								className={cn(
-									'-mt-[88px] flex h-full flex-1 flex-col gap-y-4 pt-16',
+									'-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 pb-8 pt-16',
 									divClassName
 								)}
 							>
 								{children}
 							</div>
+							<Footer />
 						</main>
 						<NowPlaying />
 					</>
