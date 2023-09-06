@@ -23,14 +23,14 @@ const MoreBy = ({ artistId, artistName }: MoreByProps) => {
 	return (
 		<section className='mt-12 gap-y-3'>
 			<h2 className='flex justify-between'>
-				<Link href={`/artist/${artistId}/discography`}>
+				<Link href={`/artist/${artistId}/discography/all`}>
 					<span className='text-2xl font-bold hover:underline'>
 						More by {artistName}
 					</span>
 				</Link>
 				<Link
 					className='hidden sm:block'
-					href={`/artist/${artistId}/discography`}
+					href={`/artist/${artistId}/discography/all`}
 				>
 					<span className='text-sm font-bold text-zinc-400 hover:underline'>
 						Show all

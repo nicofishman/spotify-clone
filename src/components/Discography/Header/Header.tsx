@@ -24,7 +24,7 @@ const Header = ({
 	artistId,
 }: HeaderProps) => {
 	return (
-		<section className='sticky top-16 z-20 flex justify-between bg-gray-bg'>
+		<section className='sticky top-16 z-20 flex justify-between bg-bg-color pb-2'>
 			<Link
 				href={`/artist/${artistId}`}
 				className='text-2xl font-bold hover:underline'

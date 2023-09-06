@@ -1,13 +1,19 @@
 import { SquaredPlaylistsLoading } from '@/components/Index/FeaturedPlaylists';
 import { mainSizeStore } from '@/stores/mainSizeStore';
+import { cn } from '@/utils/cn';
 import React, { useMemo } from 'react';
 
 interface CardSquareGridProps {
 	isLoading: boolean;
 	children: ({ columnCount }: { columnCount: number }) => React.ReactNode;
+	className?: string;
 }
 
-const CardSquareGrid = ({ isLoading, children }: CardSquareGridProps) => {
+const CardSquareGrid = ({
+	isLoading,
+	children,
+	className,
+}: CardSquareGridProps) => {
 	const [width] = mainSizeStore.use('width');
 
 	const [columnCount, columnWidth] = useMemo(() => {
@@ -33,7 +39,10 @@ const CardSquareGrid = ({ isLoading, children }: CardSquareGridProps) => {
 
 	return (
 		<div
-			className='featuredGrid grid w-full min-w-[384px] gap-x-4 overflow-x-hidden py-2'
+			className={cn(
+				'featuredGrid grid w-full min-w-[384px] gap-x-4 overflow-x-hidden py-2',
+				className
+			)}
 			style={{
 				gridTemplateColumns: `repeat(${columnCount}, ${
 					columnWidth - 24

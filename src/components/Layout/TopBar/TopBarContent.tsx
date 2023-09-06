@@ -9,8 +9,8 @@ const TopBarContent = ({
 }) => {
 	return (
 		<div className='flex h-full items-center gap-x-4'>
-			<PlayPauseButton isPlaying={isPlaying} />
-			<span className='text-2xl font-bold'>{name}</span>
+			<PlayPauseButton className='aspect-square' isPlaying={isPlaying} />
+			<span className='line-clamp-1 text-2xl font-bold'>{name}</span>
 		</div>
 	);
 };

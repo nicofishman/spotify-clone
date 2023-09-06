@@ -25,7 +25,7 @@ export const NowPlaying = () => {
 	);
 
 	return (
-		<footer className='flex h-24 items-center justify-between border-t border-gray-border bg-gray-bg px-4 grid-in-now-playing-bar'>
+		<div className='flex h-24 items-center justify-between border-t border-gray-border bg-gray-bg px-4 grid-in-now-playing-bar'>
 			{currentPlaying?.available ? (
 				<>
 					<CurrentSong playing={currentPlaying} />
@@ -33,6 +33,6 @@ export const NowPlaying = () => {
 					<Controls playing={currentPlaying} />
 				</>
 			) : undefined}
-		</footer>
+		</div>
 	);
 };

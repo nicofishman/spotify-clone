@@ -64,7 +64,7 @@ const PlaylistPage = () => {
 					{album ? (
 						<>
 							<AlbumTitle album={album} />
-							<div className='flex-1 bg-black/30 px-[--contentSpacing]'>
+							<div className='flex-1 bg-black/30 px-[--contentSpacing] pb-8'>
 								<div className='flex items-center gap-x-8 py-[--contentSpacing]'>
 									<PlayPauseButton
 										isPlaying={isPlaying}
