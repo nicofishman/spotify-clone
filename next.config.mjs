@@ -9,6 +9,13 @@
 /** @type {import("next").NextConfig} */
 const config = {
 	reactStrictMode: true,
+	redirects: async () => [
+		{
+			source: '/artist/:id/discography',
+			destination: '/artist/:id/discography/all',
+			permanent: true,
+		},
+	],
 	images: {
 		domains: [
 			'',
