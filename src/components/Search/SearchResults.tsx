@@ -11,7 +11,7 @@ interface SearchResultsProps {
 	query: string;
 }
 
-const searchFilters = {
+export const searchFilters = {
 	all: 'All',
 	artist: 'Artists',
 	playlist: 'Playlists',
@@ -74,7 +74,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 	const { data: searchResult, refetch } = api.browse.query.get.useQuery(
 		{
 			query: query,
-			filter: activeFilter,
+			filter: ['all'],
 		},
 		{
 			// refetch when activeFilter changes
