@@ -2,6 +2,7 @@ import PlaylistSearchSubContent from '@/components/Search/Songs/ThreeDotsButton/
 import PlaylistShareSubContent from '@/components/Search/Songs/ThreeDotsButton/PlaylistShareSubContent';
 import ThreeDotsButtonLayout from '@/components/UI/ThreeDotsButtonLayout';
 import { type DropdownItem } from '@/types/UI';
+import { api } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 
 interface ThreeDotsButtonProps {
@@ -13,6 +14,15 @@ const ThreeDotsButtonPlaylistTitle = ({
 	playlistId,
 	iconClassName,
 }: ThreeDotsButtonProps) => {
+	const utils = api.useContext();
+	const deleteMutation = api.user.playlists.unfollow.useMutation({
+		onSuccess: () => {
+			void utils.user.playlists.list.invalidate({
+				me: true,
+			});
+		},
+	});
+
 	const items: DropdownItem[] = [
 		{
 			name: 'Add to queue',
@@ -31,6 +41,7 @@ const ThreeDotsButtonPlaylistTitle = ({
 		},
 		{
 			name: 'Delete',
+			onClick: () => deleteMutation.mutate(playlistId),
 		},
 		{
 			name: 'Exclude from your taste profile',

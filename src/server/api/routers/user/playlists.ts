@@ -97,4 +97,16 @@ export const playlistsRouter = createTRPCRouter({
 			(await res.json()) as SpotifyApi.ListOfFeaturedPlaylistsResponse;
 		return data;
 	}),
+	unfollow: protectedProcedureWithAccount
+		.input(z.string())
+		.mutation(async ({ ctx, input }) => {
+			const res = await fetch(`${API_URL}/playlists/${input}/followers`, {
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+				method: 'DELETE',
+			});
+			await checkRes(res, 200);
+			return true;
+		}),
 });
