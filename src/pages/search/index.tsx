@@ -18,7 +18,8 @@ const Search = () => {
 	const [searchInput, setSearchInput] = useState('');
 
 	useEffect(() => {
-		document.body.style.setProperty('--top-bar-color', 'rgb(18, 18, 18)');
+		document.body.style.setProperty('--top-bar-color', '18, 18, 18');
+		document.body.style.setProperty('--top-bar-opacity', '1');
 	}, []);
 
 	useEffect(() => {
@@ -36,6 +37,7 @@ const Search = () => {
 				onSearchInputChange={(val) => setSearchInput(val)}
 				includeSearchInput={true}
 				mainClassName='pt-0 bg-bg-color'
+				topBarOpacity={false}
 			>
 				{searchInput.length === 0 ? (
 					<CategoriesGrid
