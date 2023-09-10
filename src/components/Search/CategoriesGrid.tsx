@@ -28,7 +28,7 @@ const CategoriesGrid = ({ title, categories }: CategoriesGridProps) => {
 	}, [width]);
 
 	return (
-		<section className='mt-4'>
+		<section className='mt-8'>
 			<h2 className='mb-4 text-2xl font-bold text-white'>{title}</h2>
 			<div
 				className='genresGrid grid w-full min-w-[384px] gap-6 overflow-x-auto py-2'
