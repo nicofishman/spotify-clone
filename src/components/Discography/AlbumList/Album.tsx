@@ -19,8 +19,8 @@ const Album = ({ album }: PlaylistProps) => {
 		api.album.getTracks.useQuery(album.id);
 
 	return (
-		<div>
-			<div className='flex gap-x-6 pb-8 pt-16'>
+		<>
+			<div className='flex gap-x-6 pt-16'>
 				<Image
 					className='aspect-square h-36 w-36'
 					src={album.images[0]?.url ?? ''}
@@ -65,7 +65,7 @@ const Album = ({ album }: PlaylistProps) => {
 				albumId={album.id}
 				className='pl-0 pr-0'
 			/>
-		</div>
+		</>
 	);
 };
 
