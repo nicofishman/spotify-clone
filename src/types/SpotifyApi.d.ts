@@ -1821,7 +1821,7 @@ declare namespace SpotifyApi {
 		actions: ActionsObject;
 		progress_ms: number | null;
 		is_playing: boolean;
-		item: TrackObjectFull | null;
+		item: TrackObjectFull | EpisodeObjectFull | null;
 		context: ContextObject | null;
 		currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
 	}

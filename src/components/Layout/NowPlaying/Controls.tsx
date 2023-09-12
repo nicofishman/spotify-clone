@@ -24,9 +24,11 @@ const Controls = ({ playing }: ControlsProps) => {
 		},
 	});
 
+	const isTrack = playing.item?.type === 'track';
+
 	return (
 		<div className='hidden w-1/3 min-w-[180px] justify-end sm:flex'>
-			<LyricsButton />
+			{isTrack && <LyricsButton />}
 			<QueueButton />
 			<ConnectButton />
 			<MuteButton />

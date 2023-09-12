@@ -7,50 +7,65 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export const playerRouter = createTRPCRouter({
-	currentlyPlaying: protectedProcedureWithAccount.query(async ({ ctx }) => {
-		const res = await fetch(`${API_URL}/me/player`, {
-			headers: {
-				Authorization: `Bearer ${ctx.session.account.access_token}`,
-			},
-		});
+	currentlyPlaying: protectedProcedureWithAccount
+		.input(
+			z
+				.object({
+					type: z.enum(['track', 'episode']).nullable(),
+				})
+				.optional()
+		)
+		.query(async ({ ctx, input }) => {
+			const additionalTypes = input?.type
+				? '?' +
+				  new URLSearchParams({
+						additional_types: input.type,
+				  }).toString()
+				: '';
 
-		if (res.status === 204) {
-			return {
-				available: false,
-				item: null,
-			} as SpotifyApi.CurrentPlaybackResponse & {
-				available: false;
-			};
-		}
-		const resJson =
-			(await res.json()) as SpotifyApi.CurrentPlaybackResponse;
+			const res = await fetch(`${API_URL}/me/player` + additionalTypes, {
+				headers: {
+					Authorization: `Bearer ${ctx.session.account.access_token}`,
+				},
+			});
 
-		if (res.status === 204) {
+			if (res.status === 204) {
+				return {
+					available: false,
+					item: null,
+				} as SpotifyApi.CurrentPlaybackResponse & {
+					available: false;
+				};
+			}
+			const resJson =
+				(await res.json()) as SpotifyApi.CurrentPlaybackResponse;
+
+			if (res.status === 204) {
+				return {
+					available: true,
+					is_playing: false,
+					item: null,
+				} as SpotifyApi.CurrentPlaybackResponse & {
+					available: true;
+				};
+			}
+
+			if (res.status !== 200) {
+				const error = resJson as unknown as {
+					message: string;
+					status: number;
+				};
+
+				throw new TRPCError({
+					code: 'INTERNAL_SERVER_ERROR',
+					message: `Status code ${res.status}: ${error.message}`,
+				});
+			}
 			return {
 				available: true,
-				is_playing: false,
-				item: null,
-			} as SpotifyApi.CurrentPlaybackResponse & {
-				available: true;
+				...resJson,
 			};
-		}
-
-		if (res.status !== 200) {
-			const error = resJson as unknown as {
-				message: string;
-				status: number;
-			};
-
-			throw new TRPCError({
-				code: 'INTERNAL_SERVER_ERROR',
-				message: `Status code ${res.status}: ${error.message}`,
-			});
-		}
-		return {
-			available: true,
-			...resJson,
-		};
-	}),
+		}),
 	play: protectedProcedureWithAccount.mutation(async ({ ctx }) => {
 		const res = await fetch(`${API_URL}/me/player/play`, {
 			headers: {
