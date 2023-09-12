@@ -37,6 +37,7 @@ import list from '@/assets/icons/list.svg';
 import instagram from '@/assets/icons/instagram.svg';
 import twitter from '@/assets/icons/twitter.svg';
 import facebook from '@/assets/icons/facebook.svg';
+import warning from '@/assets/icons/warning.svg';
 
 export const Icons = {
 	clock: clock,
@@ -77,4 +78,5 @@ export const Icons = {
 	threeDots: threeDots,
 	twitter: twitter,
 	volume: volume,
+	warning: warning,
 } as const;

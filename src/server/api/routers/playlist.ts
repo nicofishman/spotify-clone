@@ -115,4 +115,29 @@ export const playlistRouter = createTRPCRouter({
 			await checkRes(res, 200);
 			return true;
 		}),
+	edit: protectedProcedureWithAccount
+		.input(
+			z.object({
+				playlistId: z.string(),
+				body: z.object({
+					name: z.string(),
+					description: z.string().optional(),
+				}),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			const res = await fetch(
+				`${API_URL}/playlists/${input.playlistId}`,
+				{
+					headers: {
+						Authorization: `Bearer ${ctx.session.account.access_token}`,
+					},
+					method: 'PUT',
+					body: JSON.stringify(input.body),
+				}
+			);
+
+			await checkRes(res, 200);
+			return true;
+		}),
 });

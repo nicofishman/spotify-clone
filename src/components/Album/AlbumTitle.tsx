@@ -25,6 +25,7 @@ const AlbumTitle = ({ album }: AlbumTitleProps) => {
 			total_tracks={album.total_tracks}
 			secondText={releaseDate}
 			totalDuration={totalDuration}
+			playlistOrAlbumId={album.id}
 		/>
 	);
 };

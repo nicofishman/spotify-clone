@@ -1,8 +1,10 @@
+import { DEFAULT_PLAYLISTORALBUM_IMAGE, DEFAULT_USER_IMAGE } from '@/consts';
+import { useModal } from '@/hooks/useModal';
+import { cn } from '@/utils/cn';
+import formatDistance from 'date-fns/formatDistance';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import formatDistance from 'date-fns/formatDistance';
-import { DEFAULT_PLAYLISTORALBUM_IMAGE, DEFAULT_USER_IMAGE } from '@/consts';
-import { cn } from '@/utils/cn';
 
 interface PlaylistTitleProps {
 	type: 'playlist' | 'album';
@@ -15,6 +17,7 @@ interface PlaylistTitleProps {
 	total_tracks: number;
 	totalDuration: number;
 	playlistOrAlbumImage: string | undefined;
+	playlistOrAlbumId: string;
 	description?: string | null;
 }
 
@@ -30,7 +33,34 @@ export const PlaylistOrAlbumTitle = ({
 	total_tracks,
 	type,
 	description,
+	playlistOrAlbumId,
 }: PlaylistTitleProps) => {
+	const { data: session } = useSession();
+	const isOwner =
+		artistOrOwnerType === 'user' &&
+		artistOrOwnerName === session?.user?.name;
+
+	const { onOpen } = useModal();
+
+	function handleNameClick() {
+		if (!isOwner) return;
+
+		onOpen('editPlaylist', {
+			playlist: {
+				id: playlistOrAlbumId,
+				name,
+				description: description ?? null,
+				images: [
+					{
+						url:
+							playlistOrAlbumImage ??
+							DEFAULT_PLAYLISTORALBUM_IMAGE,
+					},
+				],
+			},
+		});
+	}
+
 	return (
 		<div className='mt-[calc(var(--contentSpacing)*2)] flex h-[30vh] px-[--contentSpacing] pb-[--contentSpacing]'>
 			<div className='relative mr-[--contentSpacing] aspect-square w-full min-w-[150px] max-w-[232px]'>
@@ -50,8 +80,10 @@ export const PlaylistOrAlbumTitle = ({
 						'overflow-hidden break-words font-black',
 						name.length < 20
 							? 'sm:text-4xl md:text-5xl lg:text-7xl'
-							: 'sm:text-2xl md:text-3xl lg:text-5xl'
+							: 'sm:text-2xl md:text-3xl lg:text-5xl',
+						isOwner && 'cursor-pointer'
 					)}
+					onClick={handleNameClick}
 				>
 					{name ?? ''}
 				</span>

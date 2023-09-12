@@ -17,12 +17,16 @@
         "preinstall": "npx only-allow pnpm"
     },
     "dependencies": {
+        "@hookform/resolvers": "^3.3.1",
         "@next-auth/prisma-adapter": "^1.0.5",
         "@prisma/client": "^4.9.0",
+        "@radix-ui/react-dialog": "^1.0.4",
         "@radix-ui/react-dropdown-menu": "^2.0.4",
+        "@radix-ui/react-label": "^2.0.2",
         "@radix-ui/react-progress": "^1.0.2",
         "@radix-ui/react-select": "^1.2.2",
         "@radix-ui/react-slider": "^1.1.1",
+        "@radix-ui/react-slot": "^1.0.2",
         "@radix-ui/react-tooltip": "^1.0.5",
         "@svgr/webpack": "^6.5.1",
         "@tailwindcss/container-queries": "^0.1.1",
@@ -33,6 +37,7 @@
         "@trpc/react-query": "^10.9.0",
         "@trpc/server": "^10.9.0",
         "@types/react-resizable": "^3.0.3",
+        "class-variance-authority": "^0.7.0",
         "clsx": "^1.2.1",
         "date-fns": "^2.30.0",
         "fast-average-color": "^9.3.0",
@@ -41,10 +46,11 @@
         "only-allow": "^1.1.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
+        "react-hook-form": "^7.46.1",
         "react-resizable": "^3.0.4",
         "superjson": "1.9.1",
         "tailwind-merge": "^1.10.0",
-        "zod": "^3.20.6",
+        "zod": "^3.21.4",
         "zustand": "^4.3.6"
     },
     "devDependencies": {
