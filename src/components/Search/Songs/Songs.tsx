@@ -1,4 +1,5 @@
 import ThreeDotsButtonsSearchSong from '@/components/Search/Songs/ThreeDotsButton/ThreeDotsButtonsSearchSong';
+import { DEFAULT_PLAYLISTORALBUM_IMAGE } from '@/consts';
 import { millisToMinutesAndSeconds } from '@/utils/time';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,9 +23,7 @@ const Songs = ({ songs, router }: SongsProps) => {
 							className='mr-4 aspect-square w-10'
 							src={
 								song.album.images[0]?.url ??
-								`https://via.placeholder.com/${
-									song.album.images[0]?.width ?? 40
-								}${song.album.images[0]?.height ?? 40}`
+								DEFAULT_PLAYLISTORALBUM_IMAGE
 							}
 							width={song.album.images[0]?.width}
 							height={song.album.images[0]?.height}

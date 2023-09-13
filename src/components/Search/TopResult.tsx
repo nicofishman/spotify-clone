@@ -17,13 +17,7 @@ const TopResult = ({ topResult }: TopResultProps) => {
 		>
 			<div className='group relative h-[90%] w-full rounded-sm bg-gray-bg p-5 shadow-lg shadow-black/50 transition-colors hover:bg-gray-border'>
 				<InnerCard
-					image={
-						images[0] ?? {
-							url: 'https://via.placeholder.com/100x100',
-							width: 100,
-							height: 100,
-						}
-					}
+					image={images[0]}
 					artists={artists}
 					name={topResult.name}
 					type={topResult.type}

@@ -1,5 +1,4 @@
 import PlaylistOrAlbumCardSquare from '@/components/shared/PlaylistOrAlbumCardSquare';
-import React from 'react';
 
 interface RelatedArtistCardSquareProps {
 	artist: SpotifyApi.ArtistObjectFull;
@@ -8,7 +7,7 @@ interface RelatedArtistCardSquareProps {
 const RelatedArtistCardSquare = ({ artist }: RelatedArtistCardSquareProps) => {
 	return (
 		<PlaylistOrAlbumCardSquare
-			imageUrl={artist.images[0]?.url ?? ''}
+			imageUrl={artist.images[0]?.url}
 			type='artist'
 			name={artist.name}
 			id={artist.id}
