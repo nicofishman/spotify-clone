@@ -38,6 +38,7 @@ import instagram from '@/assets/icons/instagram.svg';
 import twitter from '@/assets/icons/twitter.svg';
 import facebook from '@/assets/icons/facebook.svg';
 import warning from '@/assets/icons/warning.svg';
+import noArtist from '@/assets/icons/no-artist.svg';
 
 export const Icons = {
 	clock: clock,
@@ -65,6 +66,7 @@ export const Icons = {
 	logo: logo,
 	lyrics: lyrics,
 	next: next,
+	noArtist: noArtist,
 	pause: pause,
 	pictureInPicture: pictureInPicture,
 	play: play,
