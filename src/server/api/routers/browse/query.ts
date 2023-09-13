@@ -11,7 +11,6 @@ function zodEnumFromObjKeys<K extends string>(
 	obj: Record<K, unknown>
 ): z.ZodEnum<[K, ...K[]]> {
 	const [firstKey, ...otherKeys] = Object.keys(obj) as K[];
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	return z.enum([firstKey!, ...otherKeys]);
 }
 

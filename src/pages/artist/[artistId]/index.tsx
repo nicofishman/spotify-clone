@@ -19,11 +19,10 @@ const ArtistPage = () => {
 	const { data: artist } = api.artist.get.useQuery(artistId, {
 		enabled: !!artistId,
 		onSuccess: async (artist) => {
-			if (!artist.images[0]?.url) return;
-			await getGcAndSetVariable(artist.images[0].url, '--top-bar-color');
+			await getGcAndSetVariable(artist.images[0]?.url, '--top-bar-color');
 			document.body.style.setProperty(
 				'--bg-image',
-				`url(${artist.images[0].url})`
+				`url(${artist.images[0]?.url ?? ''})`
 			);
 		},
 	});

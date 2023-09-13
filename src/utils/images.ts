@@ -1,4 +1,7 @@
-import { FastAverageColor } from 'fast-average-color';
+import {
+	FastAverageColor,
+	type FastAverageColorResult,
+} from 'fast-average-color';
 
 export async function getAverageColor(url: string) {
 	const fac = new FastAverageColor();
@@ -9,15 +12,18 @@ export async function getAverageColor(url: string) {
 }
 
 export const getGcAndSetVariable = async (
-	imageUrl: string,
+	imageUrl: string | undefined,
 	variable: string
 ) => {
 	const fac = new FastAverageColor();
 
-	const gC = await fac.getColorAsync(imageUrl);
+	let gC: Partial<FastAverageColorResult> = { rgb: 'rgb(127, 127, 127)' };
+	if (imageUrl) {
+		gC = await fac.getColorAsync(imageUrl);
+	}
 
 	document.body.style.setProperty(
 		variable,
-		`${gC.rgb.replace('rgb(', '').replace(')', '')}`
+		`${gC.rgb!.replace('rgb(', '').replace(')', '')}`
 	);
 };

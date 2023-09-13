@@ -74,7 +74,6 @@ export const playlistsRouter = createTRPCRouter({
 			return data;
 		}),
 	featured: protectedProcedureWithAccount.query(async ({ ctx }) => {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const now = new Date().toISOString().split('.')[0]!;
 
 		const settings = {
