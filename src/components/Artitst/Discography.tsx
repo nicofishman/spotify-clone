@@ -57,47 +57,62 @@ const Discography = ({ artistId }: DiscographyProps) => {
 	}, [discography, selection]);
 
 	return (
-		<section>
-			<h2 className='flex justify-between'>
-				<Link href={`/artist/${artistId}/discography/${selection}`}>
-					<span className='text-2xl font-bold hover:underline'>
-						Discography
-					</span>
-				</Link>
-				<Link
-					className='hidden sm:block'
-					href={`/artist/${artistId}/discography/${selection}`}
-				>
-					<span className='text-sm font-bold text-zinc-400 hover:underline'>
-						Show all
-					</span>
-				</Link>
-			</h2>
-			<ul className='my-4 flex gap-x-2'>
-				{selectTypes.map((type) => {
-					return (
-						type.visible && (
-							<li key={type.value}>
-								<Chip
-									onClick={() => setSelection(type.value)}
-									active={selection === type.value}
-								>
-									{type.name}
-								</Chip>
-							</li>
-						)
-					);
-				})}
-			</ul>
+		<>
+			{discographyArray.length > 0 ? (
+				<section>
+					<h2 className='flex justify-between'>
+						<Link
+							href={`/artist/${artistId}/discography/${selection}`}
+						>
+							<span className='text-2xl font-bold hover:underline'>
+								Discography
+							</span>
+						</Link>
+						<Link
+							className='hidden sm:block'
+							href={`/artist/${artistId}/discography/${selection}`}
+						>
+							<span className='text-sm font-bold text-zinc-400 hover:underline'>
+								Show all
+							</span>
+						</Link>
+					</h2>
+					<ul className='my-4 flex gap-x-2'>
+						{selectTypes.map((type) => {
+							return (
+								type.visible && (
+									<li key={type.value}>
+										<Chip
+											onClick={() =>
+												setSelection(type.value)
+											}
+											active={selection === type.value}
+										>
+											{type.name}
+										</Chip>
+									</li>
+								)
+							);
+						})}
+					</ul>
 
-			<CardSquareGrid isLoading={isLoading}>
-				{({ columnCount }) =>
-					discographyArray?.slice(0, columnCount).map((album) => {
-						return <AlbumCardSquare key={album.id} album={album} />;
-					})
-				}
-			</CardSquareGrid>
-		</section>
+					<CardSquareGrid isLoading={isLoading}>
+						{({ columnCount }) =>
+							discographyArray
+								?.slice(0, columnCount)
+								.map((album) => {
+									return (
+										<AlbumCardSquare
+											key={album.id}
+											album={album}
+										/>
+									);
+								})
+						}
+					</CardSquareGrid>
+				</section>
+			) : undefined}
+		</>
 	);
 };
 

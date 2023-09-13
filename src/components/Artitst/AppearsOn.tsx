@@ -20,32 +20,39 @@ const AppearsOn = ({ artistId }: FeaturingProps) => {
 	);
 
 	return (
-		<section>
-			<h2 className='flex justify-between'>
-				<Link href={`/artist/${artistId}/featuring`}>
-					<span className='text-2xl font-bold hover:underline'>
-						Appears on
-					</span>
-				</Link>
-				<Link
-					className='hidden sm:block'
-					href={`/artist/${artistId}/featuring`}
-				>
-					<span className='text-sm font-bold text-zinc-400 hover:underline'>
-						Show all
-					</span>
-				</Link>
-			</h2>
-			<CardSquareGrid isLoading={isLoading}>
-				{({ columnCount }) =>
-					featuring?.items
-						.slice(0, columnCount)
-						.map((album) => (
-							<AlbumCardSquare key={album.id} album={album} />
-						))
-				}
-			</CardSquareGrid>
-		</section>
+		<>
+			{(featuring?.items.length ?? 0) > 0 ? (
+				<section>
+					<h2 className='flex justify-between'>
+						<Link href={`/artist/${artistId}/featuring`}>
+							<span className='text-2xl font-bold hover:underline'>
+								Appears on
+							</span>
+						</Link>
+						<Link
+							className='hidden sm:block'
+							href={`/artist/${artistId}/featuring`}
+						>
+							<span className='text-sm font-bold text-zinc-400 hover:underline'>
+								Show all
+							</span>
+						</Link>
+					</h2>
+					<CardSquareGrid isLoading={isLoading}>
+						{({ columnCount }) =>
+							featuring?.items
+								.slice(0, columnCount)
+								.map((album) => (
+									<AlbumCardSquare
+										key={album.id}
+										album={album}
+									/>
+								))
+						}
+					</CardSquareGrid>
+				</section>
+			) : undefined}
+		</>
 	);
 };
 
