@@ -32,7 +32,7 @@ const GenrePage = () => {
 	return (
 		<Layout mainClassName='bg-bg-color'>
 			<>
-				<div className='flex max-h-[400px] min-h-[30vh] flex-col justify-end px-[--contentSpacing] pb-[--contentSpacing]'>
+				<div className='flex max-h-[400px] min-h-[30vh] flex-col justify-end pb-[--contentSpacing]'>
 					<h1 className='line-clamp-1 truncate text-8xl font-black'>
 						{genre?.name ?? 'Genre'}
 					</h1>

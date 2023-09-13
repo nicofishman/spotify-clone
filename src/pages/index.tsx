@@ -29,9 +29,9 @@ const Home = () => {
 				className={cn(
 					'bg-[linear-gradient(rgba(88,232,128,.5)_0,#121212_100%)]'
 				)}
-				mainClassName='px-0'
+				mainClassName='px-[--contentSpacing]'
 			>
-				<div className='flex flex-col gap-y-4 pl-[--contentSpacing] pt-8'>
+				<div className='flex flex-col gap-y-4 pt-8'>
 					<Last6Playlists />
 					<FeaturedPlaylists />
 				</div>

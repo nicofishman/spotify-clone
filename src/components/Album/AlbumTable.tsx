@@ -50,12 +50,7 @@ const AlbumTable = ({
 	const [likedTracks] = tracksStore.use('likedTracks');
 
 	return (
-		<div
-			className={cn(
-				'pl-[--contentSpacing] pr-3 text-gray-300',
-				className
-			)}
-		>
+		<div className={cn('pr-3 text-gray-300', className)}>
 			<Table className='table-fixed'>
 				<TableHeader>
 					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>

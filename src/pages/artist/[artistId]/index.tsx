@@ -36,7 +36,6 @@ const ArtistPage = () => {
 			</Head>
 			<Layout
 				divClassName='pt-0 gap-y-0'
-				mainClassName='px-0'
 				topBarContent={
 					<TopBarContent
 						isPlaying={
@@ -46,6 +45,7 @@ const ArtistPage = () => {
 						name={artist?.name ?? ''}
 					/>
 				}
+				mainClassName='px-0'
 			>
 				<>
 					<div className='relative flex bg-cover bg-center [background-image:--bg-image]'>

@@ -73,7 +73,7 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
 		return res?.pages.flatMap((page) => page.items) ?? [];
 	}, [res?.pages]);
 	return (
-		<div className='pl-[--contentSpacing] pr-3 text-gray-300'>
+		<div className='pr-3 text-gray-300'>
 			<Table className='table-fixed'>
 				<TableHeader>
 					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>

@@ -75,23 +75,24 @@ const DiscographyTypePage = () => {
 			<Head>
 				<title>{`Spotify - ${artist?.name ?? ''} - Discography`}</title>
 			</Head>
-			<Layout mainClassName='px-0 bg-bg-color' topBarOpacity={false}>
-				<div className='px-[--contentSpacing]'>
-					<Header
-						artistId={artistId}
-						artistName={artist?.name ?? ''}
-						availableTypes={availableTypes}
-						type={type}
+			<Layout
+				mainClassName='bg-bg-color px-[--contentSpacing]'
+				topBarOpacity={false}
+			>
+				<Header
+					artistId={artistId}
+					artistName={artist?.name ?? ''}
+					availableTypes={availableTypes}
+					type={type}
+				/>
+				{view === 'list' ? (
+					<AlbumList albums={discography?.items ?? []} />
+				) : (
+					<AlbumGrid
+						albums={discography?.items ?? []}
+						isLoading={discographyIsLoading}
 					/>
-					{view === 'list' ? (
-						<AlbumList albums={discography?.items ?? []} />
-					) : (
-						<AlbumGrid
-							albums={discography?.items ?? []}
-							isLoading={discographyIsLoading}
-						/>
-					)}
-				</div>
+				)}
 			</Layout>
 		</>
 	);

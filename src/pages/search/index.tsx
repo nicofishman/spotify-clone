@@ -38,6 +38,7 @@ const Search = () => {
 				includeSearchInput={true}
 				mainClassName='pt-0 bg-bg-color'
 				topBarOpacity={false}
+				divClassName='-mt-[64px]'
 			>
 				{searchInput.length === 0 ? (
 					<CategoriesGrid

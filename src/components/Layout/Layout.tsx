@@ -75,41 +75,42 @@ const Layout = ({
 				style={style}
 			>
 				<Sidebar />
-
-				<main
-					ref={mainRef}
-					className={cn(
-						'grid grid-rows-[1fr_auto] overflow-x-hidden px-8 text-white grid-in-main-view @container/main',
-						mainClassName
-					)}
-				>
-					{includeSearchInput &&
-					searchInput !== undefined &&
-					onSearchInputChange ? (
-						<TopBar
-							changeOpacity={topBarOpacity}
-							includeSearchInput={true}
-							searchInput={searchInput}
-							setSearchInput={onSearchInputChange}
-							content={topBarContent}
-						/>
-					) : (
-						<TopBar
-							changeOpacity={topBarOpacity}
-							includeSearchInput={false}
-							content={topBarContent}
-						/>
-					)}
-					<div
+				<div className='flex flex-col overflow-x-hidden text-white grid-in-main-view @container/main'>
+					<main
+						ref={mainRef}
 						className={cn(
-							'-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 py-16',
-							divClassName
+							'grid flex-1 grid-rows-[1fr_auto] px-[--contentSpacing]',
+							mainClassName
 						)}
 					>
-						{children}
-					</div>
+						{includeSearchInput &&
+						searchInput !== undefined &&
+						onSearchInputChange ? (
+							<TopBar
+								changeOpacity={topBarOpacity}
+								includeSearchInput={true}
+								searchInput={searchInput}
+								setSearchInput={onSearchInputChange}
+								content={topBarContent}
+							/>
+						) : (
+							<TopBar
+								changeOpacity={topBarOpacity}
+								includeSearchInput={false}
+								content={topBarContent}
+							/>
+						)}
+						<div
+							className={cn(
+								'-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 py-16',
+								divClassName
+							)}
+						>
+							{children}
+						</div>
+					</main>
 					<Footer />
-				</main>
+				</div>
 				<NowPlaying />
 			</div>
 		</div>
