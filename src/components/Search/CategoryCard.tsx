@@ -26,7 +26,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
 				backgroundColor: bgColor,
 			}}
 		>
-			<h2 className='h-fit w-full break-words p-4 text-2xl font-bold'>
+			<h2 className='h-fit w-full break-words p-4 text-2xl font-bold capitalize'>
 				{category.name}
 			</h2>
 			{

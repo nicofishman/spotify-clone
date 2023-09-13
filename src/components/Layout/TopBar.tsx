@@ -4,7 +4,7 @@ import {
 } from '@/components/Layout/TopBar/ButtonsWithTooltip';
 import SearchInput from '@/components/Layout/TopBar/SearchInput';
 import UserChipWithDropdown from '@/components/Layout/TopBar/UserChipWithDropdown';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 type TopBarProps = {
@@ -50,7 +50,7 @@ export const TopBar = ({
 	};
 	useEffect(() => {
 		if (!changeOpacity) return;
-		const container = document.querySelector('main');
+		const container = document.querySelector('main')?.parentElement;
 		if (!container) return;
 
 		container.addEventListener('scroll', handleScroll);
@@ -79,11 +79,9 @@ export const TopBar = ({
 					<div className='flex-1'>
 						<SearchInput
 							value={searchInput}
-							onChange={async (e) => {
+							onChange={(e) => {
 								setSearchInput(e.target.value);
-								await router.push(
-									`/search?q=${e.target.value}`
-								);
+								router.push(`/search?q=${e.target.value}`);
 							}}
 						/>
 					</div>
