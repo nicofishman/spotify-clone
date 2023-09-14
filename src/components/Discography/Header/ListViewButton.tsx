@@ -6,12 +6,12 @@ import React from 'react';
 type ListViewButtonProps = React.HTMLAttributes<HTMLButtonElement>;
 
 const ListViewButton = ({ ...props }: ListViewButtonProps) => {
-	const [view] = typeViewStore.use('view');
-	return (
-		<IconButtonLayout {...props} selected={view === 'list'}>
-			<Icon name='list' className='text-[inherit]' />
-		</IconButtonLayout>
-	);
+  const [view] = typeViewStore.use('view');
+  return (
+    <IconButtonLayout {...props} selected={view === 'list'}>
+      <Icon name='list' className='text-[inherit]' />
+    </IconButtonLayout>
+  );
 };
 
 export default ListViewButton;

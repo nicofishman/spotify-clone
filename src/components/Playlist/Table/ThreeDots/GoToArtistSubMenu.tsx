@@ -7,17 +7,17 @@ interface GoToArtistSubMenuProps {
 }
 
 const GoToArtistSubMenu = ({ artists }: GoToArtistSubMenuProps) => {
-	return (
-		<ul className='max-h-[50vw] overflow-y-scroll bg-gray-border py-2'>
-			{artists.map((artist) => (
-				<Link href={`/artist/${artist.id}`} key={artist.id}>
-					<DropdownMenuItem key={artist.id}>
-						{artist.name}
-					</DropdownMenuItem>
-				</Link>
-			))}
-		</ul>
-	);
+  return (
+    <ul className='max-h-[50vw] overflow-y-scroll bg-gray-border py-2'>
+      {artists.map((artist) => (
+        <Link href={`/artist/${artist.id}`} key={artist.id}>
+          <DropdownMenuItem key={artist.id}>
+            {artist.name}
+          </DropdownMenuItem>
+        </Link>
+      ))}
+    </ul>
+  );
 };
 
 export default GoToArtistSubMenu;

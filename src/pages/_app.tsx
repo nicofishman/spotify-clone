@@ -10,29 +10,29 @@ import EditPlaylistModal from '@/components/shared/modals/EditPlaylistModal';
 import { useEffect, useState } from 'react';
 
 const MyApp: AppType<{ session: Session | null }> = ({
-	Component,
-	pageProps: { session, ...pageProps },
+  Component,
+  pageProps: { session, ...pageProps },
 }) => {
-	return (
-		<SessionProvider session={session}>
-			<ModalProvider />
-			<Component {...pageProps} />
-			<ReactQueryDevtools />
-		</SessionProvider>
-	);
+  return (
+    <SessionProvider session={session}>
+      <ModalProvider />
+      <Component {...pageProps} />
+      <ReactQueryDevtools />
+    </SessionProvider>
+  );
 };
 
 export default api.withTRPC(MyApp);
 
 const ModalProvider = () => {
-	const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-	if (!isMounted) {
-		return null;
-	}
-	return <EditPlaylistModal />;
+  if (!isMounted) {
+    return null;
+  }
+  return <EditPlaylistModal />;
 };

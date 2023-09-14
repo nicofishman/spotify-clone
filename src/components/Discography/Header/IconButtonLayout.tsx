@@ -8,23 +8,23 @@ interface IconButtonLayoutProps
 }
 
 const IconButtonLayout = ({
-	children,
-	selected,
-	className,
-	...props
+  children,
+  selected,
+  className,
+  ...props
 }: IconButtonLayoutProps) => {
-	return (
-		<button
-			className={cn(
-				'flex h-8 w-8 items-center justify-center rounded-full fill-white/70 p-2 transition-colors duration-200 hover:bg-white/20',
-				selected && 'bg-white/10 fill-white',
-				className
-			)}
-			{...props}
-		>
-			{children}
-		</button>
-	);
+  return (
+    <button
+      className={cn(
+        'flex h-8 w-8 items-center justify-center rounded-full fill-white/70 p-2 transition-colors duration-200 hover:bg-white/20',
+        selected && 'bg-white/10 fill-white',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default IconButtonLayout;

@@ -3,6 +3,6 @@ import { queryRouter } from '@/server/api/routers/browse/query';
 import { createTRPCRouter } from '@/server/api/trpc';
 
 export const browseRouter = createTRPCRouter({
-	categories: categoriesRouter,
-	query: queryRouter,
+  categories: categoriesRouter,
+  query: queryRouter,
 });

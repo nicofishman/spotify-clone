@@ -28,93 +28,93 @@ type LayoutProps = {
 );
 
 const Layout = ({
-	children,
-	className,
-	style,
-	mainClassName,
-	divClassName,
-	includeSearchInput = false,
-	searchInput,
-	onSearchInputChange,
-	topBarContent,
-	topBarOpacity = true,
+  children,
+  className,
+  style,
+  mainClassName,
+  divClassName,
+  includeSearchInput = false,
+  searchInput,
+  onSearchInputChange,
+  topBarContent,
+  topBarOpacity = true,
 }: LayoutProps) => {
-	const [mainRef, mainSize] = useElementSize(mainSizeStore);
+  const [mainRef, mainSize] = useElementSize(mainSizeStore);
 
-	useEffect(() => {
-		if (!topBarOpacity) {
-			document.body.style.setProperty(
-				'--top-bar-color',
-				'rgb(24, 24, 24)'
-			);
-			document.body.style.setProperty('--top-bar-opacity', '1');
-			document.body.style.setProperty('--top-bar-content-opacity', '1');
-		} else {
-			document.body.style.setProperty('--top-bar-opacity', '0');
-			document.body.style.setProperty('--top-bar-content-opacity', '0');
-		}
-	}, [topBarOpacity]);
+  useEffect(() => {
+    if (!topBarOpacity) {
+      document.body.style.setProperty(
+        '--top-bar-color',
+        'rgb(24, 24, 24)'
+      );
+      document.body.style.setProperty('--top-bar-opacity', '1');
+      document.body.style.setProperty('--top-bar-content-opacity', '1');
+    } else {
+      document.body.style.setProperty('--top-bar-opacity', '0');
+      document.body.style.setProperty('--top-bar-content-opacity', '0');
+    }
+  }, [topBarOpacity]);
 
-	useEffect(() => {
-		if (mainSize) {
-			document.documentElement.style.setProperty(
-				'--main-width',
-				`${mainSize.width}px`
-			);
-		}
-	}, [mainSize]);
+  useEffect(() => {
+    if (mainSize) {
+      document.documentElement.style.setProperty(
+        '--main-width',
+        `${mainSize.width}px`
+      );
+    }
+  }, [mainSize]);
 
-	return (
-		<div className='h-screen w-full bg-black'>
-			<div
-				className={cn(
-					'grid-cols[1fr] grid h-screen w-full grid-rows-[auto_1fr_auto] bg-gray-bg grid-areas-layoutSmall md:grid-cols-[auto_1fr] md:grid-areas-layoutLarge',
-					className,
-					myFont.className
-				)}
-				style={style}
-			>
-				<Sidebar />
-				<div className='flex flex-col overflow-x-hidden text-white grid-in-main-view @container/main'>
-					<main
-						ref={mainRef}
-						className={cn(
-							'grid flex-1 grid-rows-[1fr_auto] px-[--contentSpacing]',
-							mainClassName
-						)}
-					>
-						{includeSearchInput &&
+  return (
+    <div className='h-screen w-full bg-black'>
+      <div
+        className={cn(
+          'grid-cols[1fr] grid h-screen w-full grid-rows-[auto_1fr_auto] bg-gray-bg grid-areas-layoutSmall md:grid-cols-[auto_1fr] md:grid-areas-layoutLarge',
+          className,
+          myFont.className
+        )}
+        style={style}
+      >
+        <Sidebar />
+        <div className='flex flex-col overflow-x-hidden text-white grid-in-main-view @container/main'>
+          <main
+            ref={mainRef}
+            className={cn(
+              'grid flex-1 grid-rows-[1fr_auto] px-[--contentSpacing]',
+              mainClassName
+            )}
+          >
+            {includeSearchInput &&
 						searchInput !== undefined &&
 						onSearchInputChange ? (
-							<TopBar
-								changeOpacity={topBarOpacity}
-								includeSearchInput={true}
-								searchInput={searchInput}
-								setSearchInput={onSearchInputChange}
-								content={topBarContent}
-							/>
-						) : (
-							<TopBar
-								changeOpacity={topBarOpacity}
-								includeSearchInput={false}
-								content={topBarContent}
-							/>
-						)}
-						<div
-							className={cn(
-								'-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 py-16',
-								divClassName
-							)}
-						>
-							{children}
-						</div>
-					</main>
-					<Footer />
-				</div>
-				<NowPlaying />
-			</div>
-		</div>
-	);
+                <TopBar
+                  changeOpacity={topBarOpacity}
+                  includeSearchInput={true}
+                  searchInput={searchInput}
+                  setSearchInput={onSearchInputChange}
+                  content={topBarContent}
+                />
+              ) : (
+                <TopBar
+                  changeOpacity={topBarOpacity}
+                  includeSearchInput={false}
+                  content={topBarContent}
+                />
+              )}
+            <div
+              className={cn(
+                '-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 py-16',
+                divClassName
+              )}
+            >
+              {children}
+            </div>
+          </main>
+          <Footer />
+        </div>
+        <NowPlaying />
+      </div>
+    </div>
+  );
 };
 
 export default Layout;

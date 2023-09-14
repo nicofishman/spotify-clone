@@ -18,30 +18,30 @@ interface HeaderProps {
 }
 
 const Header = ({
-	type,
-	artistName,
-	availableTypes,
-	artistId,
+  type,
+  artistName,
+  availableTypes,
+  artistId,
 }: HeaderProps) => {
-	return (
-		<section className='sticky top-16 z-20 flex justify-between bg-bg-color pb-2'>
-			<Link
-				href={`/artist/${artistId}`}
-				className='text-2xl font-bold hover:underline'
-			>
-				{artistName}
-			</Link>
-			<div className='flex gap-x-3'>
-				<SelectType availableTypes={availableTypes} selected={type} />
-				<ListViewButton
-					onClick={() => typeViewStore.set('view', 'list')}
-				/>
-				<GridViewButton
-					onClick={() => typeViewStore.set('view', 'grid')}
-				/>
-			</div>
-		</section>
-	);
+  return (
+    <section className='sticky top-16 z-20 flex justify-between bg-bg-color pb-2'>
+      <Link
+        href={`/artist/${artistId}`}
+        className='text-2xl font-bold hover:underline'
+      >
+        {artistName}
+      </Link>
+      <div className='flex gap-x-3'>
+        <SelectType availableTypes={availableTypes} selected={type} />
+        <ListViewButton
+          onClick={() => typeViewStore.set('view', 'list')}
+        />
+        <GridViewButton
+          onClick={() => typeViewStore.set('view', 'grid')}
+        />
+      </div>
+    </section>
+  );
 };
 
 export default Header;

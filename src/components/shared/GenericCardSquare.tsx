@@ -12,18 +12,18 @@ interface GenericCardSquareProps {
 }
 
 const GenericCardSquare = ({ obj }: GenericCardSquareProps) => {
-	switch (obj.type) {
-		case 'album':
-			return <AlbumCardSquare album={obj} />;
-		case 'artist':
-			return <RelatedArtistCardSquare artist={obj} />;
-		case 'playlist':
-			return <PlaylistCardSquare playlist={obj} />;
-		case 'show':
-			return <ShowCardSquare show={obj} />;
-		case 'episode':
-			return <ShowCardSquare show={obj} />;
-	}
+  switch (obj.type) {
+  case 'album':
+    return <AlbumCardSquare album={obj} />;
+  case 'artist':
+    return <RelatedArtistCardSquare artist={obj} />;
+  case 'playlist':
+    return <PlaylistCardSquare playlist={obj} />;
+  case 'show':
+    return <ShowCardSquare show={obj} />;
+  case 'episode':
+    return <ShowCardSquare show={obj} />;
+  }
 };
 
 export default GenericCardSquare;

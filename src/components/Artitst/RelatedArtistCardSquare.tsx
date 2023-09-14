@@ -5,15 +5,15 @@ interface RelatedArtistCardSquareProps {
 }
 
 const RelatedArtistCardSquare = ({ artist }: RelatedArtistCardSquareProps) => {
-	return (
-		<PlaylistOrAlbumCardSquare
-			imageUrl={artist.images[0]?.url}
-			type='artist'
-			name={artist.name}
-			id={artist.id}
-			description='Artist'
-		/>
-	);
+  return (
+    <PlaylistOrAlbumCardSquare
+      imageUrl={artist.images[0]?.url}
+      type='artist'
+      name={artist.name}
+      id={artist.id}
+      description='Artist'
+    />
+  );
 };
 
 export default RelatedArtistCardSquare;

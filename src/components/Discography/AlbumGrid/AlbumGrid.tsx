@@ -10,17 +10,17 @@ interface AlbumGridProps {
 }
 
 const AlbumGrid = ({ albums, isLoading, slice = false }: AlbumGridProps) => {
-	return (
-		<CardSquareGrid className='gap-y-6' isLoading={isLoading}>
-			{({ columnCount }) =>
-				albums
-					.slice(0, slice ? columnCount : albums.length)
-					.map((album) => {
-						return <AlbumCardSquare key={album.id} album={album} />;
-					})
-			}
-		</CardSquareGrid>
-	);
+  return (
+    <CardSquareGrid className='gap-y-6' isLoading={isLoading}>
+      {({ columnCount }) =>
+        albums
+          .slice(0, slice ? columnCount : albums.length)
+          .map((album) => {
+            return <AlbumCardSquare key={album.id} album={album} />;
+          })
+      }
+    </CardSquareGrid>
+  );
 };
 
 export default AlbumGrid;

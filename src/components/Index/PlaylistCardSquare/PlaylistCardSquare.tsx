@@ -5,15 +5,15 @@ interface PlaylistCardSquareProps {
 }
 
 const PlaylistCardSquare = ({ playlist }: PlaylistCardSquareProps) => {
-	return (
-		<PlaylistOrAlbumCardSquare
-			id={playlist.id}
-			imageUrl={playlist.images[0]?.url ?? ''}
-			name={playlist.name}
-			type='playlist'
-			description={playlist.description ?? ''}
-		/>
-	);
+  return (
+    <PlaylistOrAlbumCardSquare
+      id={playlist.id}
+      imageUrl={playlist.images[0]?.url ?? ''}
+      name={playlist.name}
+      type='playlist'
+      description={playlist.description ?? ''}
+    />
+  );
 };
 
 export default PlaylistCardSquare;

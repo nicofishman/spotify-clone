@@ -2,9 +2,9 @@ import { DropdownMenuItem } from '@/components/UI/Dropdown';
 import React from 'react';
 
 async function copyLink(id: string, type: string) {
-	await navigator.clipboard.writeText(
-		`https://open.spotify.com/${type}/${id}`
-	);
+  await navigator.clipboard.writeText(
+    `https://open.spotify.com/${type}/${id}`
+  );
 }
 
 interface PlaylistShareSubContentProps {
@@ -13,17 +13,17 @@ interface PlaylistShareSubContentProps {
 }
 
 const PlaylistShareSubContent = ({
-	trackId,
-	type,
+  trackId,
+  type,
 }: PlaylistShareSubContentProps) => {
-	return (
-		<ul className='py-2'>
-			<DropdownMenuItem onClick={() => copyLink(trackId, type)}>
+  return (
+    <ul className='py-2'>
+      <DropdownMenuItem onClick={() => copyLink(trackId, type)}>
 				Copy Link
-			</DropdownMenuItem>
-			<DropdownMenuItem>Embed</DropdownMenuItem>
-		</ul>
-	);
+      </DropdownMenuItem>
+      <DropdownMenuItem>Embed</DropdownMenuItem>
+    </ul>
+  );
 };
 
 export default PlaylistShareSubContent;

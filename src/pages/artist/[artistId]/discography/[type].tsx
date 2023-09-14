@@ -11,91 +11,91 @@ import AlbumGrid from '@/components/Discography/AlbumGrid/AlbumGrid';
 import Head from 'next/head';
 
 const DiscographyTypePage = () => {
-	const { artistId, type } = useRouter().query as {
+  const { artistId, type } = useRouter().query as {
 		artistId: string;
 		type: (typeof discographyTypes)[number]['value'];
 	};
-	const { data: artist } = api.artist.get.useQuery(artistId, {
-		enabled: !!artistId,
-	});
+  const { data: artist } = api.artist.get.useQuery(artistId, {
+    enabled: !!artistId,
+  });
 
-	api.me.album.get.useQuery(undefined, {
-		onSuccess: (data) => {
-			likedAlbumsStore.set(
-				'albumsLiked',
-				data.map((album) => album.id)
-			);
-		},
-	});
+  api.me.album.get.useQuery(undefined, {
+    onSuccess: (data) => {
+      likedAlbumsStore.set(
+        'albumsLiked',
+        data.map((album) => album.id)
+      );
+    },
+  });
 
-	const { data: allDiscography } = api.artist.getAlbums.useQuery(
-		{
-			artistId,
-			include_groups: ['album', 'single', 'compilation'],
-		},
-		{
-			enabled: !!artistId,
-		}
-	);
+  const { data: allDiscography } = api.artist.getAlbums.useQuery(
+    {
+      artistId,
+      include_groups: ['album', 'single', 'compilation'],
+    },
+    {
+      enabled: !!artistId,
+    }
+  );
 
-	const { data: discography, isLoading: discographyIsLoading } =
+  const { data: discography, isLoading: discographyIsLoading } =
 		api.artist.getAlbums.useQuery(
-			{
-				artistId,
-				include_groups:
+		  {
+		    artistId,
+		    include_groups:
 					type === 'all'
-						? ['album', 'single', 'compilation']
-						: [type],
-			},
-			{
-				enabled: !!artistId,
-			}
+					  ? ['album', 'single', 'compilation']
+					  : [type],
+		  },
+		  {
+		    enabled: !!artistId,
+		  }
 		);
 
-	const availableTypes = discographyTypes.map((type) => {
-		return {
-			...type,
-			visible:
+  const availableTypes = discographyTypes.map((type) => {
+    return {
+      ...type,
+      visible:
 				type.value === 'all' ||
 				(allDiscography?.items.some(
-					(album) => album.album_type === type.value
+				  (album) => album.album_type === type.value
 				) as boolean),
-		};
-	});
+    };
+  });
 
-	useEffect(() => {
-		document.body.style.setProperty('--top-bar-color', '18, 18, 18');
-		document.body.style.setProperty('--top-bar-opacity', '1');
-	}, []);
+  useEffect(() => {
+    document.body.style.setProperty('--top-bar-color', '18, 18, 18');
+    document.body.style.setProperty('--top-bar-opacity', '1');
+  }, []);
 
-	const [view] = typeViewStore.use('view');
+  const [view] = typeViewStore.use('view');
 
-	return (
-		<>
-			<Head>
-				<title>{`Spotify - ${artist?.name ?? ''} - Discography`}</title>
-			</Head>
-			<Layout
-				mainClassName='bg-bg-color px-[--contentSpacing]'
-				topBarOpacity={false}
-			>
-				<Header
-					artistId={artistId}
-					artistName={artist?.name ?? ''}
-					availableTypes={availableTypes}
-					type={type}
-				/>
-				{view === 'list' ? (
-					<AlbumList albums={discography?.items ?? []} />
-				) : (
-					<AlbumGrid
-						albums={discography?.items ?? []}
-						isLoading={discographyIsLoading}
-					/>
-				)}
-			</Layout>
-		</>
-	);
+  return (
+    <>
+      <Head>
+        <title>{`Spotify - ${artist?.name ?? ''} - Discography`}</title>
+      </Head>
+      <Layout
+        mainClassName='bg-bg-color px-[--contentSpacing]'
+        topBarOpacity={false}
+      >
+        <Header
+          artistId={artistId}
+          artistName={artist?.name ?? ''}
+          availableTypes={availableTypes}
+          type={type}
+        />
+        {view === 'list' ? (
+          <AlbumList albums={discography?.items ?? []} />
+        ) : (
+          <AlbumGrid
+            albums={discography?.items ?? []}
+            isLoading={discographyIsLoading}
+          />
+        )}
+      </Layout>
+    </>
+  );
 };
 
 export default DiscographyTypePage;
@@ -103,5 +103,5 @@ export default DiscographyTypePage;
 export const typeViewStore = createGlobalStore<{
 	view: 'grid' | 'list';
 }>({
-	view: 'list',
+  view: 'list',
 });

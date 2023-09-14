@@ -7,10 +7,10 @@ const tracksStore = createGlobalStore<{
 	followingArtists: string[];
 	currentlyPlaying: RouterOutputs['me']['player']['currentlyPlaying'] | null;
 }>({
-	tracks: [],
-	likedTracks: [],
-	followingArtists: [],
-	currentlyPlaying: null,
+  tracks: [],
+  likedTracks: [],
+  followingArtists: [],
+  currentlyPlaying: null,
 });
 
 export default tracksStore;

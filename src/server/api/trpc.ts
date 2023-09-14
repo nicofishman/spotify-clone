@@ -35,10 +35,10 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
-	return {
-		session: opts.session,
-		prisma,
-	};
+  return {
+    session: opts.session,
+    prisma,
+  };
 };
 
 /**
@@ -48,14 +48,14 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-	const { req, res } = opts;
+  const { req, res } = opts;
 
-	// Get the session from the server using the getServerSession wrapper function
-	const session = await getServerAuthSession({ req, res });
+  // Get the session from the server using the getServerSession wrapper function
+  const session = await getServerAuthSession({ req, res });
 
-	return createInnerTRPCContext({
-		session,
-	});
+  return createInnerTRPCContext({
+    session,
+  });
 };
 
 /**
@@ -68,10 +68,10 @@ import superjson from 'superjson';
 import { getAccessToken } from '@/utils/spotify';
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
-	transformer: superjson,
-	errorFormatter({ shape }) {
-		return shape;
-	},
+  transformer: superjson,
+  errorFormatter({ shape }) {
+    return shape;
+  },
 });
 
 /**
@@ -99,15 +99,15 @@ export const publicProcedure = t.procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-	if (!ctx.session || !ctx.session.user) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
-	}
-	return next({
-		ctx: {
-			// infers the `session` as non-nullable
-			session: { ...ctx.session, user: ctx.session.user },
-		},
-	});
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
 });
 
 /**
@@ -121,54 +121,54 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
 
 const passAccount = t.middleware(async ({ ctx, next }) => {
-	if (!ctx.session || !ctx.session.user) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
-	}
-	const account = await ctx.prisma.account.findFirst({
-		where: {
-			userId: ctx.session.user.id,
-		},
-	});
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  const account = await ctx.prisma.account.findFirst({
+    where: {
+      userId: ctx.session.user.id,
+    },
+  });
 
-	if (!account || !account.access_token) {
-		throw new TRPCError({ code: 'UNAUTHORIZED' });
-	}
+  if (!account || !account.access_token) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
 
-	const expires = account.expires_at ?? Infinity;
+  const expires = account.expires_at ?? Infinity;
 
-	if (expires < new Date().getTime() / 1000) {
-		const { access_token: newToken, expires_in } = await getAccessToken(
-			account
-		);
-		const newExpire = Math.floor(Date.now() / 1000) + expires_in;
-		await ctx.prisma.account.update({
-			where: { id: account.id },
-			data: {
-				access_token: newToken,
-				expires_at: newExpire,
-			},
-		});
-		return next({
-			ctx: {
-				// infers the `session` as non-nullable
-				session: {
-					...ctx.session,
-					user: ctx.session.user,
-					account: {
-						...account,
-						access_token: newToken,
-					},
-				},
-			},
-		});
-	}
+  if (expires < new Date().getTime() / 1000) {
+    const { access_token: newToken, expires_in } = await getAccessToken(
+      account
+    );
+    const newExpire = Math.floor(Date.now() / 1000) + expires_in;
+    await ctx.prisma.account.update({
+      where: { id: account.id },
+      data: {
+        access_token: newToken,
+        expires_at: newExpire,
+      },
+    });
+    return next({
+      ctx: {
+        // infers the `session` as non-nullable
+        session: {
+          ...ctx.session,
+          user: ctx.session.user,
+          account: {
+            ...account,
+            access_token: newToken,
+          },
+        },
+      },
+    });
+  }
 
-	return next({
-		ctx: {
-			// infers the `session` as non-nullable
-			session: { ...ctx.session, user: ctx.session.user, account },
-		},
-	});
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user, account },
+    },
+  });
 });
 
 export const protectedProcedureWithAccount =

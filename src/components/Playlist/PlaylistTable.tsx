@@ -2,12 +2,12 @@ import SongRow from '@/components/Playlist/Table/SongRow';
 import Icon from '@/components/UI/Icon';
 import { Skeleton } from '@/components/UI/Skeleton';
 import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/UI/Table';
 import tracksStore from '@/stores/tracksStore';
 import { api } from '@/utils/api';
@@ -21,140 +21,140 @@ interface PlaylistTableProps {
 }
 
 const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
-	const { data: likedSongs, refetch: refetchSaved } =
+  const { data: likedSongs, refetch: refetchSaved } =
 		api.me.tracks.saved.get.useQuery(undefined, {
-			onSettled: () => {
-				if (!likedSongs) {
-					void refetchSaved();
-				}
-				tracksStore.set(
-					'likedTracks',
-					likedSongs?.items.map((item) => item.track.id) ?? []
-				);
-			},
+		  onSettled: () => {
+		    if (!likedSongs) {
+		      void refetchSaved();
+		    }
+		    tracksStore.set(
+		      'likedTracks',
+		      likedSongs?.items.map((item) => item.track.id) ?? []
+		    );
+		  },
 		});
 
-	const {
-		data: res,
-		refetch: refetchGetTracks,
-		isFetching,
-		isFetchingNextPage,
-		fetchNextPage,
-		hasNextPage,
-	} = api.playlist.getTracks.useInfiniteQuery(
-		{ playlistId },
-		{
-			onSettled: () => {
-				if (!res) {
-					void refetchGetTracks();
-				}
-			},
-			getNextPageParam: (lastPage) => lastPage.next ?? null,
-			enabled: !!playlistId,
-		}
-	);
+  const {
+    data: res,
+    refetch: refetchGetTracks,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = api.playlist.getTracks.useInfiniteQuery(
+    { playlistId },
+    {
+      onSettled: () => {
+        if (!res) {
+          void refetchGetTracks();
+        }
+      },
+      getNextPageParam: (lastPage) => lastPage.next ?? null,
+      enabled: !!playlistId,
+    }
+  );
 
-	const router = useRouter();
-	const [likedTracks] = tracksStore.use('likedTracks');
+  const router = useRouter();
+  const [likedTracks] = tracksStore.use('likedTracks');
 
-	const lastRowRef = useRef<HTMLTableRowElement | null>(null);
-	const entry = useIntersectionObserver(lastRowRef, {
-		threshold: 0.5,
-		rootMargin: '0px',
-	});
+  const lastRowRef = useRef<HTMLTableRowElement | null>(null);
+  const entry = useIntersectionObserver(lastRowRef, {
+    threshold: 0.5,
+    rootMargin: '0px',
+  });
 
-	useEffect(() => {
-		if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
-			void fetchNextPage();
-		}
-	}, [entry, fetchNextPage, hasNextPage, isFetchingNextPage]);
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+      void fetchNextPage();
+    }
+  }, [entry, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-	const _tracks = useMemo(() => {
-		return res?.pages.flatMap((page) => page.items) ?? [];
-	}, [res?.pages]);
-	return (
-		<div className='pr-3 text-gray-300'>
-			<Table className='table-fixed'>
-				<TableHeader>
-					<TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>
-						<TableHead className='w-10 text-center'>#</TableHead>
-						<TableHead className='flex-1'>Title</TableHead>
-						<TableHead className='flex-1'>Album</TableHead>
-						<TableHead className='w-1/6'>Date added</TableHead>
-						<TableHead className='mr-4 w-32'>
-							<Icon
-								name='clock'
-								className='mx-auto -translate-x-1/2'
-							/>
-						</TableHead>
-					</TableRow>
-				</TableHeader>
-				{isFetching && !isFetchingNextPage ? (
-					<TableBody className='before:block before:leading-4 before:content-["\200C"]'>
-						{Array.from({
-							length:
+  const _tracks = useMemo(() => {
+    return res?.pages.flatMap((page) => page.items) ?? [];
+  }, [res?.pages]);
+  return (
+    <div className='pr-3 text-gray-300'>
+      <Table className='table-fixed'>
+        <TableHeader>
+          <TableRow className='border-b-gray-400/50 [&>th]:fill-gray-300 [&>th]:font-normal [&>th]:text-gray-300'>
+            <TableHead className='w-10 text-center'>#</TableHead>
+            <TableHead className='flex-1'>Title</TableHead>
+            <TableHead className='flex-1'>Album</TableHead>
+            <TableHead className='w-1/6'>Date added</TableHead>
+            <TableHead className='mr-4 w-32'>
+              <Icon
+                name='clock'
+                className='mx-auto -translate-x-1/2'
+              />
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        {isFetching && !isFetchingNextPage ? (
+          <TableBody className='before:block before:leading-4 before:content-["\200C"]'>
+            {Array.from({
+              length:
 								res?.pages[0]?.total && res?.pages[0]?.total < 5
-									? res?.pages[0]?.total
-									: 5,
-						}).map((_, index) => (
-							<LoadingRow cellCount={5} key={index} />
-						))}
-					</TableBody>
-				) : (
-					<TableBody
-						id='playlistBody'
-						className='before:block before:leading-4 before:content-["\200C"]'
-					>
-						{_tracks.map((song, index) => {
-							if (index === _tracks.length - 2) {
-								return (
-									<SongRow
-										isOwner={isOwner}
-										key={`${
-											song.track?.id ?? ''
-										}__${index}`}
-										router={router}
-										index={index}
-										song={song}
-										isLiked={likedTracks.includes(
-											song.track?.id ?? ''
-										)}
-										ref={lastRowRef}
-									/>
-								);
-							}
-							return (
-								<SongRow
-									isOwner={isOwner}
-									key={`${song.track?.id ?? ''}__${index}`}
-									router={router}
-									index={index}
-									song={song}
-									isLiked={likedTracks.includes(
-										song.track?.id ?? ''
-									)}
-								/>
-							);
-						})}
-						{isFetchingNextPage &&
+								  ? res?.pages[0]?.total
+								  : 5,
+            }).map((_, index) => (
+              <LoadingRow cellCount={5} key={index} />
+            ))}
+          </TableBody>
+        ) : (
+          <TableBody
+            id='playlistBody'
+            className='before:block before:leading-4 before:content-["\200C"]'
+          >
+            {_tracks.map((song, index) => {
+              if (index === _tracks.length - 2) {
+                return (
+                  <SongRow
+                    isOwner={isOwner}
+                    key={`${
+                      song.track?.id ?? ''
+                    }__${index}`}
+                    router={router}
+                    index={index}
+                    song={song}
+                    isLiked={likedTracks.includes(
+                      song.track?.id ?? ''
+                    )}
+                    ref={lastRowRef}
+                  />
+                );
+              }
+              return (
+                <SongRow
+                  isOwner={isOwner}
+                  key={`${song.track?.id ?? ''}__${index}`}
+                  router={router}
+                  index={index}
+                  song={song}
+                  isLiked={likedTracks.includes(
+                    song.track?.id ?? ''
+                  )}
+                />
+              );
+            })}
+            {isFetchingNextPage &&
 							Array.from({ length: 5 }).map((_, index) => (
-								<LoadingRow cellCount={5} key={index} />
+							  <LoadingRow cellCount={5} key={index} />
 							))}
-					</TableBody>
-				)}
-			</Table>
-		</div>
-	);
+          </TableBody>
+        )}
+      </Table>
+    </div>
+  );
 };
 
 export default PlaylistTable;
 
 export const LoadingRow = ({ cellCount }: { cellCount: number }) => (
-	<TableRow className='h-14 border-b-0  [&>td>div]:w-4/5 [&>td>div]:rounded-md [&>td]:h-[inherit] [&>td]:animate-pulse [&>td]:items-center [&>td]:px-1 [&>td]:py-2'>
-		{Array.from({ length: cellCount }).map((_, i) => (
-			<TableCell key={i}>
-				<Skeleton />
-			</TableCell>
-		))}
-	</TableRow>
+  <TableRow className='h-14 border-b-0  [&>td>div]:w-4/5 [&>td>div]:rounded-md [&>td]:h-[inherit] [&>td]:animate-pulse [&>td]:items-center [&>td]:px-1 [&>td]:py-2'>
+    {Array.from({ length: cellCount }).map((_, i) => (
+      <TableCell key={i}>
+        <Skeleton />
+      </TableCell>
+    ))}
+  </TableRow>
 );

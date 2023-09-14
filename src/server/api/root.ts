@@ -14,14 +14,14 @@ import { artistRouter } from '@/server/api/routers/artist';
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-	example: exampleRouter,
-	auth: authRouter,
-	user: userRouter,
-	me: meRouter,
-	playlist: playlistRouter,
-	browse: browseRouter,
-	album: albumRouter,
-	artist: artistRouter,
+  example: exampleRouter,
+  auth: authRouter,
+  user: userRouter,
+  me: meRouter,
+  playlist: playlistRouter,
+  browse: browseRouter,
+  album: albumRouter,
+  artist: artistRouter,
 });
 
 // export type definition of API

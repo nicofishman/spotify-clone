@@ -1,8 +1,8 @@
 import { type GetServerSidePropsContext } from 'next';
 import {
-	getServerSession,
-	type NextAuthOptions,
-	type DefaultSession,
+  getServerSession,
+  type NextAuthOptions,
+  type DefaultSession,
 } from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -38,27 +38,27 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-	callbacks: {
-		session({ session, user, token }) {
-			session.user.token = token;
+  callbacks: {
+    session({ session, user, token }) {
+      session.user.token = token;
 
-			if (session.user) {
-				session.user.id = user.id;
-			}
-			return session;
-		},
-	},
-	adapter: {
-		...PrismaAdapter(prisma),
-	},
-	providers: [
-		SpotifyProvider({
-			clientId: env.SPOTIFY_CLIENT_ID,
-			clientSecret: env.SPOTIFY_CLIENT_SECRET,
-			authorization:
+      if (session.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
+  adapter: {
+    ...PrismaAdapter(prisma),
+  },
+  providers: [
+    SpotifyProvider({
+      clientId: env.SPOTIFY_CLIENT_ID,
+      clientSecret: env.SPOTIFY_CLIENT_SECRET,
+      authorization:
 				'https://accounts.spotify.com/authorize?scope=user-read-email,user-top-read,playlist-read-private,playlist-read-collaborative,playlist-modify-private,playlist-modify-public,user-follow-modify,user-follow-read,user-read-playback-position,user-top-read,user-read-recently-played,user-library-modify,user-library-read,user-read-email,user-read-private,user-read-playback-state,user-modify-playback-state,user-read-currently-playing',
-		}),
-		/**
+    }),
+    /**
 		 * ...add more providers here.
 		 *
 		 * Most other providers require a bit more work than the Discord provider. For example, the
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
 		 *
 		 * @see https://next-auth.js.org/providers/github
 		 */
-	],
+  ],
 };
 
 /**
@@ -79,5 +79,5 @@ export const getServerAuthSession = (ctx: {
 	req: GetServerSidePropsContext['req'];
 	res: GetServerSidePropsContext['res'];
 }) => {
-	return getServerSession(ctx.req, ctx.res, authOptions);
+  return getServerSession(ctx.req, ctx.res, authOptions);
 };

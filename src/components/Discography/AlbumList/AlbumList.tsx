@@ -8,26 +8,26 @@ interface PlaylistsListProps {
 }
 
 const AlbumsList = ({ albums }: PlaylistsListProps) => {
-	const { data: likedSongs, refetch: refetchSaved } =
+  const { data: likedSongs, refetch: refetchSaved } =
 		api.me.tracks.saved.get.useQuery(undefined, {
-			onSettled: () => {
-				if (!likedSongs) {
-					void refetchSaved();
-				}
-				tracksStore.set(
-					'likedTracks',
-					likedSongs?.items.map((item) => item.track.id) ?? []
-				);
-			},
+		  onSettled: () => {
+		    if (!likedSongs) {
+		      void refetchSaved();
+		    }
+		    tracksStore.set(
+		      'likedTracks',
+		      likedSongs?.items.map((item) => item.track.id) ?? []
+		    );
+		  },
 		});
 
-	return (
-		<section>
-			{albums.map((album) => {
-				return <Album key={album.id} album={album} />;
-			})}
-		</section>
-	);
+  return (
+    <section>
+      {albums.map((album) => {
+        return <Album key={album.id} album={album} />;
+      })}
+    </section>
+  );
 };
 
 export default AlbumsList;

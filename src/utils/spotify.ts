@@ -2,7 +2,7 @@ import { type Account } from '@prisma/client';
 import { env } from '@/env.mjs';
 
 const basic = Buffer.from(
-	`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
+  `${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
 ).toString('base64');
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
@@ -14,20 +14,20 @@ type spotifyRefeshTokenResponse = {
 };
 
 export const getAccessToken = async (account: Account) => {
-	if (!account.refresh_token) throw new Error('No refresh token');
-	const response = await fetch(TOKEN_ENDPOINT, {
-		method: 'POST',
-		headers: {
-			Authorization: `Basic ${basic}`,
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-		body: new URLSearchParams({
-			grant_type: 'refresh_token',
-			refresh_token: account.refresh_token,
-		}),
-	});
-	const res = (await response.json()) as spotifyRefeshTokenResponse;
-	return res;
+  if (!account.refresh_token) throw new Error('No refresh token');
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: account.refresh_token,
+    }),
+  });
+  const res = (await response.json()) as spotifyRefeshTokenResponse;
+  return res;
 };
 
 export const API_URL = 'https://api.spotify.com/v1';

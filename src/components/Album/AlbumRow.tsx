@@ -13,31 +13,31 @@ interface AlbumRowProps {
 }
 
 const AlbumRow = ({
-	index,
-	isLiked,
-	router,
-	track,
-	albumImage,
-	albumId,
-	showImage = true,
+  index,
+  isLiked,
+  router,
+  track,
+  albumImage,
+  albumId,
+  showImage = true,
 }: AlbumRowProps) => {
-	return (
-		<TableRowLayout
-			threeDotsButton={
-				<ThreeDotsAlbumRow
-					albumId={albumId}
-					isLiked={isLiked}
-					router={router}
-					track={track}
-				/>
-			}
-			isLiked={isLiked}
-			index={index}
-			track={track}
-			image={albumImage}
-			showImage={showImage}
-		/>
-	);
+  return (
+    <TableRowLayout
+      threeDotsButton={
+        <ThreeDotsAlbumRow
+          albumId={albumId}
+          isLiked={isLiked}
+          router={router}
+          track={track}
+        />
+      }
+      isLiked={isLiked}
+      index={index}
+      track={track}
+      image={albumImage}
+      showImage={showImage}
+    />
+  );
 };
 
 export default AlbumRow;
