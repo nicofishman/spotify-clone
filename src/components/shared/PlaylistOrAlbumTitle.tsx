@@ -89,7 +89,7 @@ export const PlaylistOrAlbumTitle = ({
 				</span>
 				{description && (
 					<p
-						className='line-clamp-3 max-h-[74px] w-full truncate text-sm text-white/70 [&>a]:underline'
+						className='line-clamp-3 max-h-[74px] w-full text-sm text-white/70 [&>a]:underline'
 						dangerouslySetInnerHTML={{
 							__html: description,
 						}}

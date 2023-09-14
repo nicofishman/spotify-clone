@@ -9,7 +9,7 @@ interface PlaylistOrAlbumCardSquareProps {
 	id: string;
 	imageUrl: string | undefined;
 	name: string;
-	type: 'playlist' | 'album' | 'artist';
+	type: 'playlist' | 'album' | 'artist' | 'show' | 'episode';
 	description: string | JSX.Element;
 }
 

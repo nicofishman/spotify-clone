@@ -48,23 +48,19 @@ export const InnerCard = ({ image, name, artists, type }: InnerCardProps) => {
 						<span>By {artists[0]?.name ?? 'Unknown'}</span>
 					)}
 					<span className='min-h-[30px] rounded-full bg-black/20 px-3 py-1.5 text-sm font-bold text-white'>
-						{(() => {
-							switch (type) {
-								case 'track':
-									return 'Song';
-								case 'album':
-									return 'Album';
-								case 'artist':
-									return 'Artist';
-								case 'playlist':
-									return 'Playlist';
-								case 'show':
-									return 'Podcast';
-							}
-						})()}
+						{KeyToWord[type]}
 					</span>
 				</div>
 			</div>
 		</div>
 	);
 };
+
+const KeyToWord = {
+	track: 'Song',
+	album: 'Album',
+	artist: 'Artist',
+	playlist: 'Playlist',
+	show: 'Podcast',
+	episode: 'Episode',
+} as const;
