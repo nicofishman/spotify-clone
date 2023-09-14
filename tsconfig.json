@@ -24,10 +24,11 @@
 	"include": [
 		".eslintrc.cjs",
 		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"**/*.cjs",
-		"**/*.mjs",
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		".eslintrc.cjs",
+		"postcss.config.cjs",
+		"prettier.config.cjs"
 	],
 	"exclude": ["node_modules"]
 }
