@@ -3,8 +3,8 @@ import { mainSizeStore } from '@/stores/mainSizeStore';
 import React, { useMemo } from 'react';
 
 interface CategoriesGridProps {
-	title: string;
-	categories: SpotifyApi.CategoryObject[];
+  title: string;
+  categories: SpotifyApi.CategoryObject[];
 }
 
 const CategoriesGrid = ({ title, categories }: CategoriesGridProps) => {
@@ -12,17 +12,17 @@ const CategoriesGrid = ({ title, categories }: CategoriesGridProps) => {
 
   const [columnCount, columnWidth] = useMemo(() => {
     const count =
-			width > 1600
-			  ? 8
-			  : width > 1400
-			    ? 7
-			    : width > 1200
-			      ? 6
-			      : width > 1000
-			        ? 5
-			        : width > 700
-			          ? 4
-			          : 3;
+      width > 1600
+        ? 8
+        : width > 1400
+        ? 7
+        : width > 1200
+        ? 6
+        : width > 1000
+        ? 5
+        : width > 700
+        ? 4
+        : 3;
 
     return [count, width / count];
   }, [width]);
@@ -33,9 +33,7 @@ const CategoriesGrid = ({ title, categories }: CategoriesGridProps) => {
       <div
         className='genresGrid grid w-full min-w-[384px] gap-6 overflow-x-auto py-2'
         style={{
-          gridTemplateColumns: `repeat(${columnCount}, ${
-            columnWidth - 24
-          }px)`,
+          gridTemplateColumns: `repeat(${columnCount}, ${columnWidth - 24}px)`,
           width: width,
         }}
       >

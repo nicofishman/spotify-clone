@@ -4,8 +4,8 @@ const TopBarContent = ({
   name,
   isPlaying,
 }: {
-	name: string;
-	isPlaying: boolean;
+  name: string;
+  isPlaying: boolean;
 }) => {
   return (
     <div className='flex h-full items-center gap-x-4'>

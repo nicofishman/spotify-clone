@@ -7,10 +7,10 @@ const basic = Buffer.from(
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
 type spotifyRefeshTokenResponse = {
-	access_token: string;
-	token_type: string;
-	scope: string;
-	expires_in: number;
+  access_token: string;
+  token_type: string;
+  scope: string;
+  expires_in: number;
 };
 
 export const getAccessToken = async (account: Account) => {

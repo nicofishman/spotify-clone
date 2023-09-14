@@ -4,22 +4,22 @@ import { api, type RouterOutputs } from '@/utils/api';
 import React from 'react';
 
 interface PlaylistsListProps {
-	albums: RouterOutputs['artist']['getAlbums']['items'];
+  albums: RouterOutputs['artist']['getAlbums']['items'];
 }
 
 const AlbumsList = ({ albums }: PlaylistsListProps) => {
   const { data: likedSongs, refetch: refetchSaved } =
-		api.me.tracks.saved.get.useQuery(undefined, {
-		  onSettled: () => {
-		    if (!likedSongs) {
-		      void refetchSaved();
-		    }
-		    tracksStore.set(
-		      'likedTracks',
-		      likedSongs?.items.map((item) => item.track.id) ?? []
-		    );
-		  },
-		});
+    api.me.tracks.saved.get.useQuery(undefined, {
+      onSettled: () => {
+        if (!likedSongs) {
+          void refetchSaved();
+        }
+        tracksStore.set(
+          'likedTracks',
+          likedSongs?.items.map((item) => item.track.id) ?? []
+        );
+      },
+    });
 
   return (
     <section>

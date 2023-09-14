@@ -38,8 +38,7 @@ const ArtistPage = () => {
         topBarContent={
           <TopBarContent
             isPlaying={
-              currentPlaying?.context?.uri ===
-							`spotify:artist:${artistId}`
+              currentPlaying?.context?.uri === `spotify:artist:${artistId}`
             }
             name={artist?.name ?? ''}
           />

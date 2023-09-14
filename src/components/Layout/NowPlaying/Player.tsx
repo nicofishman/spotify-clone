@@ -9,7 +9,7 @@ import TimeBar from '@/components/Layout/NowPlaying/TimeBar';
 import React from 'react';
 
 interface PlayerProps {
-	playing: SpotifyApi.CurrentPlaybackResponse;
+  playing: SpotifyApi.CurrentPlaybackResponse;
 }
 
 const Player = ({ playing }: PlayerProps) => {
@@ -24,9 +24,7 @@ const Player = ({ playing }: PlayerProps) => {
         <div className='flex flex-1 items-center justify-start gap-x-2'>
           <NextButton />
           <RepeatButton
-            isRepeating={
-              playing.repeat_state === 'off' ? false : true
-            }
+            isRepeating={playing.repeat_state === 'off' ? false : true}
           />
         </div>
       </div>

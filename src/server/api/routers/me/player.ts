@@ -18,9 +18,9 @@ export const playerRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const additionalTypes = input?.type
         ? '?' +
-				  new URLSearchParams({
-				    additional_types: input.type,
-				  }).toString()
+          new URLSearchParams({
+            additional_types: input.type,
+          }).toString()
         : '';
 
       const res = await fetch(`${API_URL}/me/player` + additionalTypes, {
@@ -34,11 +34,10 @@ export const playerRouter = createTRPCRouter({
           available: false,
           item: null,
         } as SpotifyApi.CurrentPlaybackResponse & {
-					available: false;
-				};
+          available: false;
+        };
       }
-      const resJson =
-				(await res.json()) as SpotifyApi.CurrentPlaybackResponse;
+      const resJson = (await res.json()) as SpotifyApi.CurrentPlaybackResponse;
 
       if (res.status === 204) {
         return {
@@ -46,15 +45,15 @@ export const playerRouter = createTRPCRouter({
           is_playing: false,
           item: null,
         } as SpotifyApi.CurrentPlaybackResponse & {
-					available: true;
-				};
+          available: true;
+        };
       }
 
       if (res.status !== 200) {
         const error = resJson as unknown as {
-					message: string;
-					status: number;
-				};
+          message: string;
+          status: number;
+        };
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -121,9 +120,7 @@ export const playerRouter = createTRPCRouter({
     .input(z.boolean())
     .mutation(async ({ ctx, input }) => {
       const res = await fetch(
-        `${API_URL}/me/player/shuffle?state=${
-          input ? 'true' : 'false'
-        }`,
+        `${API_URL}/me/player/shuffle?state=${input ? 'true' : 'false'}`,
         {
           headers: {
             Authorization: `Bearer ${ctx.session.account.access_token}`,
@@ -137,15 +134,12 @@ export const playerRouter = createTRPCRouter({
   repeat: protectedProcedureWithAccount
     .input(z.enum(['track', 'off']))
     .mutation(async ({ ctx, input }) => {
-      const res = await fetch(
-        `${API_URL}/me/player/repeat?state=${input}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'PUT',
-        }
-      );
+      const res = await fetch(`${API_URL}/me/player/repeat?state=${input}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'PUT',
+      });
       await checkRes(res, 204);
     }),
   volume: protectedProcedureWithAccount
@@ -173,32 +167,26 @@ export const playerRouter = createTRPCRouter({
   }),
   recentlyPlayed: protectedProcedureWithAccount.query(async ({ ctx }) => {
     // get the 6 most recent playlists heard
-    const res = await fetch(
-      `${API_URL}/me/player/recently-played?limit=50`,
-      {
-        headers: {
-          Authorization: `Bearer ${ctx.session.account.access_token}`,
-        },
-        method: 'GET',
-      }
-    );
+    const res = await fetch(`${API_URL}/me/player/recently-played?limit=50`, {
+      headers: {
+        Authorization: `Bearer ${ctx.session.account.access_token}`,
+      },
+      method: 'GET',
+    });
     await checkRes(res, 200);
     return ((await res.json()) ??
-			{}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
+      {}) as SpotifyApi.UsersRecentlyPlayedTracksResponse;
   }),
   addToQueue: protectedProcedureWithAccount
     .input(z.array(z.string()))
     .mutation(async ({ ctx, input }) => {
       for (const uri of input) {
-        const res = await fetch(
-          `${API_URL}/me/player/queue?uri=${uri}`,
-          {
-            headers: {
-              Authorization: `Bearer ${ctx.session.account.access_token}`,
-            },
-            method: 'POST',
-          }
-        );
+        const res = await fetch(`${API_URL}/me/player/queue?uri=${uri}`, {
+          headers: {
+            Authorization: `Bearer ${ctx.session.account.access_token}`,
+          },
+          method: 'POST',
+        });
         await checkRes(res, 204);
       }
     }),
@@ -207,9 +195,9 @@ export const playerRouter = createTRPCRouter({
 export const checkRes = async (res: Response, status: number) => {
   if (res.status !== status) {
     const error = (await res.json()) as {
-			message: string;
-			status: number;
-		};
+      message: string;
+      status: number;
+    };
     throw new TRPCError({
       code: 'INTERNAL_SERVER_ERROR',
       message: `Status code ${res.status}: ${error.message}`,

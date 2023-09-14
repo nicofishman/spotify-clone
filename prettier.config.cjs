@@ -5,7 +5,7 @@ const config = {
   singleQuote: true,
   semi: true,
   bracketSameLine: false,
-  plugins: [require.resolve('prettier-plugin-tailwindcss')],
+  plugins: [require.resolve('prettier-plugin-tailwindcss')]
 };
 
 module.exports = config;

@@ -3,8 +3,8 @@ import { cn } from '@/utils/cn';
 import React from 'react';
 
 interface SearchInputProps extends React.HTMLAttributes<HTMLInputElement> {
-	value: string;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchInput = ({

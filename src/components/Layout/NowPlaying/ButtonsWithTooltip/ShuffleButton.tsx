@@ -10,7 +10,7 @@ import { cn } from '@/utils/cn';
 import { useState } from 'react';
 
 interface ShuffleButtonProps {
-	shuffle: boolean;
+  shuffle: boolean;
 }
 
 export const ShuffleButton = ({ shuffle }: ShuffleButtonProps) => {

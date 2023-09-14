@@ -12,9 +12,9 @@ import Head from 'next/head';
 
 const DiscographyTypePage = () => {
   const { artistId, type } = useRouter().query as {
-		artistId: string;
-		type: (typeof discographyTypes)[number]['value'];
-	};
+    artistId: string;
+    type: (typeof discographyTypes)[number]['value'];
+  };
   const { data: artist } = api.artist.get.useQuery(artistId, {
     enabled: !!artistId,
   });
@@ -39,27 +39,25 @@ const DiscographyTypePage = () => {
   );
 
   const { data: discography, isLoading: discographyIsLoading } =
-		api.artist.getAlbums.useQuery(
-		  {
-		    artistId,
-		    include_groups:
-					type === 'all'
-					  ? ['album', 'single', 'compilation']
-					  : [type],
-		  },
-		  {
-		    enabled: !!artistId,
-		  }
-		);
+    api.artist.getAlbums.useQuery(
+      {
+        artistId,
+        include_groups:
+          type === 'all' ? ['album', 'single', 'compilation'] : [type],
+      },
+      {
+        enabled: !!artistId,
+      }
+    );
 
   const availableTypes = discographyTypes.map((type) => {
     return {
       ...type,
       visible:
-				type.value === 'all' ||
-				(allDiscography?.items.some(
-				  (album) => album.album_type === type.value
-				) as boolean),
+        type.value === 'all' ||
+        (allDiscography?.items.some(
+          (album) => album.album_type === type.value
+        ) as boolean),
     };
   });
 
@@ -101,7 +99,7 @@ const DiscographyTypePage = () => {
 export default DiscographyTypePage;
 
 export const typeViewStore = createGlobalStore<{
-	view: 'grid' | 'list';
+  view: 'grid' | 'list';
 }>({
   view: 'list',
 });

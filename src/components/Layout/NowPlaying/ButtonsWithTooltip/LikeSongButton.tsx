@@ -11,9 +11,9 @@ import { cn } from '@/utils/cn';
 import React, { useEffect, useState } from 'react';
 
 interface LikeSongButtonProps {
-	tooltip?: boolean;
-	isLiked: boolean;
-	trackId: string;
+  tooltip?: boolean;
+  isLiked: boolean;
+  trackId: string;
 }
 
 export const LikeSongButton = ({
@@ -63,17 +63,13 @@ export const LikeSongButton = ({
               name={isLiked ? 'likeActive' : 'likeDefault'}
               className={cn(
                 'h-4 w-4 transition-colors hover:fill-white',
-                isLiked
-                  ? 'fill-spotify-green'
-                  : 'fill-gray-text'
+                isLiked ? 'fill-spotify-green' : 'fill-gray-text'
               )}
             />
           </div>
         </TooltipTrigger>
         <TooltipContent className='mb-4' side='top' sideOffset={4}>
-          {isLiked
-            ? 'Remove from your library'
-            : 'Add to your library'}
+          {isLiked ? 'Remove from your library' : 'Add to your library'}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

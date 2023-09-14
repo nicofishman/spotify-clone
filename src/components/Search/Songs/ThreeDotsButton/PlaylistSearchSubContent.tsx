@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 import React, { useMemo, useState } from 'react';
 
 interface PlaylistSearchSubContentProps {
-	trackId: string;
+  trackId: string;
 }
 
 const PlaylistSearchSubContent = ({
@@ -24,7 +24,7 @@ const PlaylistSearchSubContent = ({
     const myPlaylists = playlistsData?.items.filter((playlist) => {
       return (
         playlist.collaborative ||
-				playlist.owner.display_name === session?.user.name
+        playlist.owner.display_name === session?.user.name
       );
     });
     return myPlaylists;
@@ -62,9 +62,7 @@ const PlaylistSearchSubContent = ({
             </button>
           )}
         </div>
-        <DropdownMenuItem className='mt-2 '>
-					Create playlist
-        </DropdownMenuItem>
+        <DropdownMenuItem className='mt-2 '>Create playlist</DropdownMenuItem>
         <DropdownMenuSeparator />
       </div>
       {playlists?.map((playlist) => (

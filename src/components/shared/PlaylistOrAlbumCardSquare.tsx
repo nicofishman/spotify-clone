@@ -6,11 +6,11 @@ import { cn } from '@/utils/cn';
 import Icon from '@/components/UI/Icon';
 
 interface PlaylistOrAlbumCardSquareProps {
-	id: string;
-	imageUrl: string | undefined;
-	name: string;
-	type: 'playlist' | 'album' | 'artist' | 'show' | 'episode';
-	description: string | JSX.Element;
+  id: string;
+  imageUrl: string | undefined;
+  name: string;
+  type: 'playlist' | 'album' | 'artist' | 'show' | 'episode';
+  description: string | JSX.Element;
 }
 
 const PlaylistOrAlbumCardSquare = ({
@@ -39,10 +39,7 @@ const PlaylistOrAlbumCardSquare = ({
           />
         ) : (
           <div className='flex aspect-square w-full items-center justify-center rounded-full bg-[#333] object-cover shadow-xl shadow-black/40'>
-            <Icon
-              name='noArtist'
-              className='fill-[rgb(179,179,179)]'
-            />
+            <Icon name='noArtist' className='fill-[rgb(179,179,179)]' />
           </div>
         )}
         <PlayPauseButton

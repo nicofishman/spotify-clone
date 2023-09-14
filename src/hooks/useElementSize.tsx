@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react';
 import { useEventListener, useIsomorphicLayoutEffect } from 'usehooks-ts';
 
 interface Size {
-	width: number;
-	height: number;
+  width: number;
+  height: number;
 }
 
 function useElementSize<T extends HTMLElement = HTMLDivElement>(
@@ -29,22 +29,17 @@ function useElementSize<T extends HTMLElement = HTMLDivElement>(
     if (globalStore && ref) {
       const cs = getComputedStyle(ref);
 
-      const paddingX =
-				parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-      const paddingY =
-				parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+      const paddingX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+      const paddingY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
 
       const borderX =
-				parseFloat(cs.borderLeftWidth) +
-				parseFloat(cs.borderRightWidth);
+        parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
       const borderY =
-				parseFloat(cs.borderTopWidth) +
-				parseFloat(cs.borderBottomWidth);
+        parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
 
       const scrollbar = ref.offsetHeight > window.innerHeight ? 0 : 17;
 
-      const elementWidth =
-				ref?.offsetWidth - paddingX - borderX - scrollbar;
+      const elementWidth = ref?.offsetWidth - paddingX - borderX - scrollbar;
       const elementHeight = ref?.offsetHeight - paddingY - borderY;
 
       globalStore.setAll({

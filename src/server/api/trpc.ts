@@ -21,7 +21,7 @@ import { getServerAuthSession } from '@/server/auth';
 import { prisma } from '@/server/db';
 
 type CreateContextOptions = {
-	session: Session | null;
+  session: Session | null;
 };
 
 /**
@@ -172,4 +172,4 @@ const passAccount = t.middleware(async ({ ctx, next }) => {
 });
 
 export const protectedProcedureWithAccount =
-	protectedProcedure.use(passAccount);
+  protectedProcedure.use(passAccount);

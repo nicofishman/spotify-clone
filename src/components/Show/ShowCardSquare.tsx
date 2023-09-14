@@ -2,7 +2,7 @@ import PlaylistOrAlbumCardSquare from '@/components/shared/PlaylistOrAlbumCardSq
 import React from 'react';
 
 interface ShowCardSquareProps {
-	show: SpotifyApi.ShowObjectSimplified | SpotifyApi.EpisodeObjectSimplified;
+  show: SpotifyApi.ShowObjectSimplified | SpotifyApi.EpisodeObjectSimplified;
 }
 
 const ShowCardSquare = ({ show }: ShowCardSquareProps) => {

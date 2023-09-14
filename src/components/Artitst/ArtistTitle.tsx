@@ -3,7 +3,7 @@ import { cn } from '@/utils/cn';
 import React from 'react';
 
 interface ArtistTitleProps {
-	artist: RouterOutputs['artist']['get'];
+  artist: RouterOutputs['artist']['get'];
 }
 
 const ArtistTitle = ({ artist }: ArtistTitleProps) => {

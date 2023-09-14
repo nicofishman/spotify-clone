@@ -8,8 +8,8 @@ import { type SetStateAction, useCallback } from 'react';
 import { create } from 'zustand';
 
 export type EqualityFn<T> = (
-	left: T | null | undefined,
-	right: T | null | undefined
+  left: T | null | undefined,
+  right: T | null | undefined
 ) => boolean;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -120,22 +120,19 @@ export const createGlobalStore = <State extends object>(
  * control who is able to write to a store.
  */
 export function createReadonlyStore<
-	T extends ReturnType<typeof createGlobalStore>
+  T extends ReturnType<typeof createGlobalStore>
 >(store: T) {
-	type State = ReturnType<T['getAll']>;
-	return {
-	  get: store.get,
-	  getAll: store.getAll,
-	  use: <K extends keyof State>(
-	    key: K,
-	    equalityFn?: EqualityFn<State[K]>
-	  ) =>
-			(store.use as any)(key, undefined, equalityFn)[0] as
-				| State[K]
-				| undefined
-				| null,
-	  useAll: store.useAll,
-	};
+  type State = ReturnType<T['getAll']>;
+  return {
+    get: store.get,
+    getAll: store.getAll,
+    use: <K extends keyof State>(key: K, equalityFn?: EqualityFn<State[K]>) =>
+      (store.use as any)(key, undefined, equalityFn)[0] as
+        | State[K]
+        | undefined
+        | null,
+    useAll: store.useAll,
+  };
 }
 
 /**
@@ -152,20 +149,14 @@ function deepClone<T>(obj: T): T {
   }
   if (type === 'Map') {
     return new Map(
-      [...(obj as Set<any>)].map((kv) => [
-        deepClone(kv[0]),
-        deepClone(kv[1]),
-      ])
+      [...(obj as Set<any>)].map((kv) => [deepClone(kv[0]), deepClone(kv[1])])
     ) as any;
   }
   if (type === 'Date') {
     return new Date((obj as Date).getTime()) as any;
   }
   if (type === 'RegExp') {
-    return RegExp(
-      (obj as RegExp).source,
-      getRegExpFlags(obj as RegExp)
-    ) as any;
+    return RegExp((obj as RegExp).source, getRegExpFlags(obj as RegExp)) as any;
   }
   if (type === 'Array' || type === 'Object') {
     result = Array.isArray(obj) ? [] : ({} as any);

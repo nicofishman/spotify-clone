@@ -3,7 +3,7 @@ import { type RouterOutputs } from '@/utils/api';
 import React from 'react';
 
 interface AlbumTitleProps {
-	album: RouterOutputs['album']['get'];
+  album: RouterOutputs['album']['get'];
 }
 
 const AlbumTitle = ({ album }: AlbumTitleProps) => {

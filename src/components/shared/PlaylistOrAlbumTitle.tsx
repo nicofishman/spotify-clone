@@ -7,18 +7,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface PlaylistTitleProps {
-	type: 'playlist' | 'album';
-	name: string;
-	artistOrOwnerImage: string | undefined;
-	artistOrOwnerName: string;
-	artistOrOwnerId: string;
-	artistOrOwnerType: 'artist' | 'user';
-	secondText: string;
-	total_tracks: number;
-	totalDuration: number;
-	playlistOrAlbumImage: string | undefined;
-	playlistOrAlbumId: string;
-	description?: string | null;
+  type: 'playlist' | 'album';
+  name: string;
+  artistOrOwnerImage: string | undefined;
+  artistOrOwnerName: string;
+  artistOrOwnerId: string;
+  artistOrOwnerType: 'artist' | 'user';
+  secondText: string;
+  total_tracks: number;
+  totalDuration: number;
+  playlistOrAlbumImage: string | undefined;
+  playlistOrAlbumId: string;
+  description?: string | null;
 }
 
 export const PlaylistOrAlbumTitle = ({
@@ -37,8 +37,7 @@ export const PlaylistOrAlbumTitle = ({
 }: PlaylistTitleProps) => {
   const { data: session } = useSession();
   const isOwner =
-		artistOrOwnerType === 'user' &&
-		artistOrOwnerName === session?.user?.name;
+    artistOrOwnerType === 'user' && artistOrOwnerName === session?.user?.name;
 
   const { onOpen } = useModal();
 
@@ -52,9 +51,7 @@ export const PlaylistOrAlbumTitle = ({
         description: description ?? null,
         images: [
           {
-            url:
-							playlistOrAlbumImage ??
-							DEFAULT_PLAYLISTORALBUM_IMAGE,
+            url: playlistOrAlbumImage ?? DEFAULT_PLAYLISTORALBUM_IMAGE,
           },
         ],
       },
@@ -121,7 +118,7 @@ export const PlaylistOrAlbumTitle = ({
             {total_tracks} song{total_tracks > 1 ? 's' : ''},{' '}
           </span>
           <span className='text-gray-200/80'>
-						&nbsp;
+            &nbsp;
             {formatDistance(new Date(0), new Date(totalDuration))}
           </span>
         </div>

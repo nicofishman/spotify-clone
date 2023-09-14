@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from 'react';
 import GenericCardSquare from '@/components/shared/GenericCardSquare';
 
 interface SearchResultsProps {
-	query: string;
+  query: string;
 }
 
 export const searchFilters = {
@@ -25,12 +25,12 @@ export const searchFilters = {
 } as const;
 
 export const searchFiltersKeys = Object.keys(searchFilters) as Array<
-	keyof typeof searchFilters
+  keyof typeof searchFilters
 >;
 
 export type SearchFilterKeyType = `${Exclude<
-	keyof typeof searchFilters,
-	'all'
+  keyof typeof searchFilters,
+  'all'
 >}s`;
 
 function getTopResult(
@@ -43,8 +43,8 @@ function getTopResult(
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const index = (
-		activeFilter === 'all' ? 'tracks' : `${activeFilter}s`
-	) as SearchFilterKeyType;
+    activeFilter === 'all' ? 'tracks' : `${activeFilter}s`
+  ) as SearchFilterKeyType;
 
   // Sort the items by the closeness of the name to the query
   const sorted = searchResult[index]?.items
@@ -83,16 +83,16 @@ const SearchResults = ({ query }: SearchResultsProps) => {
     return width > 1600
       ? [2, 5]
       : width > 1200
-        ? [2, 4]
-        : width > 1000
-          ? [2, 3]
-          : width > 700
-            ? [2, 2]
-            : [1, 1];
+      ? [2, 4]
+      : width > 1000
+      ? [2, 3]
+      : width > 700
+      ? [2, 2]
+      : [1, 1];
   }, [width]);
 
   const [activeFilter, setActiveFilter] =
-		useState<keyof typeof searchFilters>('all');
+    useState<keyof typeof searchFilters>('all');
 
   const {
     data: searchResult,
@@ -129,9 +129,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
           <Chip
             key={key}
             active={activeFilter === key}
-            onClick={() =>
-              setActiveFilter(key as keyof typeof searchFilters)
-            }
+            onClick={() => setActiveFilter(key as keyof typeof searchFilters)}
           >
             {value}
           </Chip>
@@ -146,9 +144,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
                 flex: leftCols,
               }}
             >
-              <h2 className='mb-4 truncate text-2xl font-bold'>
-								Top result
-              </h2>
+              <h2 className='mb-4 truncate text-2xl font-bold'>Top result</h2>
               <TopResult topResult={topResult} />
             </section>
           ) : undefined}
@@ -158,54 +154,39 @@ const SearchResults = ({ query }: SearchResultsProps) => {
               flex: rightCols,
             }}
           >
-            <h2 className='mb-4 truncate text-2xl font-bold'>
-							Songs
-            </h2>
+            <h2 className='mb-4 truncate text-2xl font-bold'>Songs</h2>
             <Songs
               router={router}
-              songs={
-                searchResult?.tracks?.items.slice(0, 4) ?? []
-              }
+              songs={searchResult?.tracks?.items.slice(0, 4) ?? []}
             />
           </section>
         </div>
         {searchResult &&
-					entries<
-						SearchFilterKeyType,
-						SpotifyApi.SearchResponse[Exclude<
-							SearchFilterKeyType,
-							'tracks'
-						>]
-						// @ts-ignore
-					>(searchResult).map(([key, value]) => {
-					  if (key === 'tracks') return undefined;
-					  return (
-					    <Section
-					      title={
-					        searchFilters[
-										key.slice(
-										  0,
-										  -1
-										) as keyof typeof searchFilters
-					        ]
-					      }
-					      items={value}
-					      key={key}
-					      isLoading={isLoading}
-					    >
-					      {({ objectFull }) => {
-					        return (
-					          objectFull?.id && (
-					            <GenericCardSquare
-					              key={objectFull.id}
-					              obj={objectFull}
-					            />
-					          )
-					        );
-					      }}
-					    </Section>
-					  );
-					})}
+          entries<
+            SearchFilterKeyType,
+            SpotifyApi.SearchResponse[Exclude<SearchFilterKeyType, 'tracks'>]
+            // @ts-ignore
+          >(searchResult).map(([key, value]) => {
+            if (key === 'tracks') return undefined;
+            return (
+              <Section
+                title={
+                  searchFilters[key.slice(0, -1) as keyof typeof searchFilters]
+                }
+                items={value}
+                key={key}
+                isLoading={isLoading}
+              >
+                {({ objectFull }) => {
+                  return (
+                    objectFull?.id && (
+                      <GenericCardSquare key={objectFull.id} obj={objectFull} />
+                    )
+                  );
+                }}
+              </Section>
+            );
+          })}
       </div>
     </div>
   );
@@ -223,16 +204,16 @@ const Section = ({
   isLoading,
   items,
 }: {
-	title: string;
-	items: SpotifyApi.SearchResponse[Exclude<SearchFilterKeyType, 'tracks'>];
-	children: ({
-	  objectFull,
-	}: {
-		objectFull: NonNullable<
-			SpotifyApi.SearchResponse[Exclude<SearchFilterKeyType, 'tracks'>]
-		>['items'][number];
-	}) => React.ReactNode;
-	isLoading: boolean;
+  title: string;
+  items: SpotifyApi.SearchResponse[Exclude<SearchFilterKeyType, 'tracks'>];
+  children: ({
+    objectFull,
+  }: {
+    objectFull: NonNullable<
+      SpotifyApi.SearchResponse[Exclude<SearchFilterKeyType, 'tracks'>]
+    >['items'][number];
+  }) => React.ReactNode;
+  isLoading: boolean;
 }) => (
   <>
     {(items?.items.length ?? 0) > 0 ? (

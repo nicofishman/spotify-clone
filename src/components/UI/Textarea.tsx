@@ -3,10 +3,10 @@ import * as React from 'react';
 import { cn } from '@/utils/cn';
 
 export type TextareaProps =
-	React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-		label?: string;
-		containerClassName?: string;
-	};
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    label?: string;
+    containerClassName?: string;
+  };
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, name, containerClassName, ...props }, ref) => {

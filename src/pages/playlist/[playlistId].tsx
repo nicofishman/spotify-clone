@@ -18,8 +18,7 @@ const PlaylistPage = () => {
   const [currentPlaylist] = tracksStore.use('currentlyPlaying');
 
   const isPlaying = useMemo(
-    () =>
-      currentPlaylist?.context?.uri === `spotify:playlist:${playlistId}`,
+    () => currentPlaylist?.context?.uri === `spotify:playlist:${playlistId}`,
     [currentPlaylist?.context?.uri, playlistId]
   );
 
@@ -27,17 +26,13 @@ const PlaylistPage = () => {
     enabled: !!playlistId,
     onSuccess: async (playlist) => {
       if (!playlist.images[0]?.url) return;
-      await getGcAndSetVariable(
-        playlist.images[0].url,
-        '--top-bar-color'
-      );
+      await getGcAndSetVariable(playlist.images[0].url, '--top-bar-color');
     },
   });
 
   const isOwner = useMemo(
     () =>
-      playlist?.collaborative ||
-			playlist?.owner?.display_name === user?.name,
+      playlist?.collaborative || playlist?.owner?.display_name === user?.name,
     [playlist?.collaborative, playlist?.owner?.display_name, user?.name]
   );
 
@@ -47,8 +42,8 @@ const PlaylistPage = () => {
         <title>
           {playlist
             ? `${playlist?.name} - playlist by ${
-              playlist?.owner?.display_name ?? ''
-						  }`
+                playlist?.owner?.display_name ?? ''
+              }`
             : 'Loading...'}
         </title>
         <link rel='icon' href='/favicon.png' />
@@ -59,10 +54,7 @@ const PlaylistPage = () => {
           backgroundImage: `linear-gradient(180deg, rgba(var(--top-bar-color), 0.8) 0%, #121212 100%)`,
         }}
         topBarContent={
-          <TopBarContent
-            isPlaying={isPlaying}
-            name={playlist?.name ?? ''}
-          />
+          <TopBarContent isPlaying={isPlaying} name={playlist?.name ?? ''} />
         }
       >
         <>
@@ -80,10 +72,7 @@ const PlaylistPage = () => {
                     playlistId={playlist.id}
                   />
                 </div>
-                <PlaylistTable
-                  isOwner={isOwner}
-                  playlistId={playlist.id}
-                />
+                <PlaylistTable isOwner={isOwner} playlistId={playlist.id} />
               </div>
             </>
           ) : undefined}

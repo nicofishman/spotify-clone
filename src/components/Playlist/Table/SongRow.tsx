@@ -6,11 +6,11 @@ import { type useRouter } from 'next/router';
 import { forwardRef } from 'react';
 
 interface SongRowProps {
-	song: SpotifyApi.PlaylistTrackObject;
-	isLiked: boolean;
-	index: number;
-	router: ReturnType<typeof useRouter>;
-	isOwner: boolean;
+  song: SpotifyApi.PlaylistTrackObject;
+  isLiked: boolean;
+  index: number;
+  router: ReturnType<typeof useRouter>;
+  isOwner: boolean;
 }
 
 const SongRow = forwardRef<HTMLTableRowElement, SongRowProps>(
@@ -42,14 +42,11 @@ const SongRow = forwardRef<HTMLTableRowElement, SongRowProps>(
           <TableCell className='h-0'>
             <div className='flex h-full items-center justify-between'>
               <span className='flex flex-1 text-stone-400 group-hover:text-stone-300'>
-                {new Date(added_at).toLocaleDateString(
-                  'en-US',
-                  {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  }
-                )}
+                {new Date(added_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
               </span>
             </div>
           </TableCell>

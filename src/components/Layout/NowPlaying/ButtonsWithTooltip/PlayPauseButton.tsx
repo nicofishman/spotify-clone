@@ -8,7 +8,7 @@ import {
 import { api } from '@/utils/api';
 
 interface PlayPauseButtonProps {
-	isPlaying: boolean;
+  isPlaying: boolean;
 }
 
 export const PlayPauseButton = ({ isPlaying }: PlayPauseButtonProps) => {
@@ -24,9 +24,7 @@ export const PlayPauseButton = ({ isPlaying }: PlayPauseButtonProps) => {
       <Tooltip>
         <TooltipTrigger
           onClick={() => {
-            isPlaying
-              ? pauseMutation.mutate()
-              : playMutation.mutate();
+            isPlaying ? pauseMutation.mutate() : playMutation.mutate();
           }}
           className='flex h-8 w-8 items-center justify-center rounded-full bg-white transition-transform hover:scale-110'
         >

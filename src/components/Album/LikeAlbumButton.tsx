@@ -10,10 +10,10 @@ import { api } from '@/utils/api';
 import { cn } from '@/utils/cn';
 
 interface LikeAlbumButtonProps {
-	albumId: string;
-	className?: string;
-	width?: number;
-	height?: number;
+  albumId: string;
+  className?: string;
+  width?: number;
+  height?: number;
 }
 
 const LikeAlbumButton = ({
@@ -39,9 +39,7 @@ const LikeAlbumButton = ({
     onMutate: () => {
       likedAlbumsStore.set(
         'albumsLiked',
-        likedAlbumsStore
-          .get('albumsLiked')
-          .filter((id) => id !== albumId)
+        likedAlbumsStore.get('albumsLiked').filter((id) => id !== albumId)
       );
     },
   });
@@ -59,10 +57,7 @@ const LikeAlbumButton = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger
-          className={cn(
-            'grid h-8 w-8 place-content-center',
-            className
-          )}
+          className={cn('grid h-8 w-8 place-content-center', className)}
         >
           <Icon
             onClick={likeAlbum}
@@ -77,11 +72,7 @@ const LikeAlbumButton = ({
           />
         </TooltipTrigger>
         <TooltipContent align='start' side='top'>
-          <p>
-            {isLiked
-              ? 'Remove from your library'
-              : 'Add to your library'}
-          </p>
+          <p>{isLiked ? 'Remove from your library' : 'Add to your library'}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

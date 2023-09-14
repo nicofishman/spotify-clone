@@ -13,48 +13,30 @@ const Footer = () => {
             <ul className='flex flex-col'>
               <p className='mb-2 text-xl font-bold'>Company</p>
               <MyLink href='https://www.spotify.com/ar/about-us/contact/'>
-								About
+                About
               </MyLink>
-              <MyLink href='https://www.lifeatspotify.com/'>
-								Jobs
-              </MyLink>
+              <MyLink href='https://www.lifeatspotify.com/'>Jobs</MyLink>
               <MyLink href='https://newsroom.spotify.com/'>
-								For the Record
+                For the Record
               </MyLink>
             </ul>
           </div>
           <div className='mb-8 mr-6 min-h-[50px] w-full md:w-[162px] lg:w-[214px]'>
             <ul className='flex flex-col'>
-              <p className='mb-2 text-xl font-bold'>
-								Communities
-              </p>
-              <MyLink href='https://artists.spotify.com/'>
-								For artists
-              </MyLink>
-              <MyLink href='https://developer.spotify.com/'>
-								Developers
-              </MyLink>
-              <MyLink href='https://ads.spotify.com/'>
-								Advertising
-              </MyLink>
-              <MyLink href='https://investors.spotify.com/'>
-								Investors
-              </MyLink>
-              <MyLink href='https://spotifyforvendors.com/'>
-								Vendors
-              </MyLink>
+              <p className='mb-2 text-xl font-bold'>Communities</p>
+              <MyLink href='https://artists.spotify.com/'>For artists</MyLink>
+              <MyLink href='https://developer.spotify.com/'>Developers</MyLink>
+              <MyLink href='https://ads.spotify.com/'>Advertising</MyLink>
+              <MyLink href='https://investors.spotify.com/'>Investors</MyLink>
+              <MyLink href='https://spotifyforvendors.com/'>Vendors</MyLink>
             </ul>
           </div>
           <div className='mb-8 mr-6 min-h-[50px] w-full md:w-[162px] lg:w-[214px]'>
             <ul className='flex flex-col'>
-              <p className='mb-2 text-xl font-bold'>
-								Useful links
-              </p>
-              <MyLink href='https://support.spotify.com/'>
-								Support
-              </MyLink>
+              <p className='mb-2 text-xl font-bold'>Useful links</p>
+              <MyLink href='https://support.spotify.com/'>Support</MyLink>
               <MyLink href='https://www.spotify.com/ar/download/'>
-								Free mobile app
+                Free mobile app
               </MyLink>
             </ul>
           </div>
@@ -74,41 +56,35 @@ const Footer = () => {
       <hr className='mb-6 border-white/10' />
       <div className='flex flex-wrap justify-between pt-4'>
         <div className='pb-4'>
-          <MyLink
-            className='mr-4'
-            href='https://www.spotify.com/ar/legal/'
-          >
-						Legal
+          <MyLink className='mr-4' href='https://www.spotify.com/ar/legal/'>
+            Legal
           </MyLink>
-          <MyLink
-            className='mr-4'
-            href='https://www.spotify.com/ar/privacy/'
-          >
-						Privacy Center
+          <MyLink className='mr-4' href='https://www.spotify.com/ar/privacy/'>
+            Privacy Center
           </MyLink>
           <MyLink
             className='mr-4'
             href='https://www.spotify.com/ar/legal/privacy-policy/'
           >
-						Privacy Policy
+            Privacy Policy
           </MyLink>
           <MyLink
             className='mr-4'
             href='https://www.spotify.com/ar/legal/cookies-policy/'
           >
-						Cookies
+            Cookies
           </MyLink>
           <MyLink
             className='mr-4'
             href='https://www.spotify.com/ar/legal/cookies-policy/#s3'
           >
-						About Ads
+            About Ads
           </MyLink>
           <MyLink
             className='mr-4'
             href='https://www.spotify.com/ar/accessibility/'
           >
-						Accessibility
+            Accessibility
           </MyLink>
         </div>
         <p className='text-sm text-[#a7a7a7]'>© 2023 Spotify AB</p>
@@ -124,9 +100,9 @@ const MyLink = ({
   children,
   className,
 }: {
-	href: string;
-	children: React.ReactNode;
-	className?: string;
+  href: string;
+  children: React.ReactNode;
+  className?: string;
 }) => {
   return (
     <Link
@@ -146,8 +122,8 @@ const MyButtonLink = ({
   href,
   children,
 }: {
-	href: string;
-	children: React.ReactNode;
+  href: string;
+  children: React.ReactNode;
 }) => {
   return (
     <Link href={href} target='_blank'>

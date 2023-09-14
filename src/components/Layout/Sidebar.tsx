@@ -15,10 +15,9 @@ export const Sidebar = ({}) => {
   const { height } = useWindowSize();
   const router = useRouter();
 
-  const { data: likedPlaylists, isLoading } =
-		api.user.playlists.list.useQuery({
-		  me: true,
-		});
+  const { data: likedPlaylists, isLoading } = api.user.playlists.list.useQuery({
+    me: true,
+  });
 
   return (
     <ResizableBox
@@ -45,10 +44,7 @@ export const Sidebar = ({}) => {
             className='mb-[18px] h-16 w-full shrink-0 origin-left px-6'
             href={'/'}
           >
-            <Icon
-              name='logo'
-              className='w-fit max-w-[131px] text-white'
-            />
+            <Icon name='logo' className='w-fit max-w-[131px] text-white' />
           </Link>
           <ul>
             <ListComponent
@@ -80,21 +76,18 @@ export const Sidebar = ({}) => {
             <button className='flex w-full items-center gap-x-4 px-6 py-2 opacity-70 transition-all duration-200 hover:opacity-100'>
               <CreatePlaylistIcon />
               <span className='truncate text-sm font-bold'>
-								Create Playlist
+                Create Playlist
               </span>
             </button>
             <Link
               href={'/collection/tracks'}
               className={cn(
                 'flex w-full items-center gap-x-4 px-6 py-2 opacity-70 transition-all duration-200 hover:opacity-100',
-                router.pathname === '/collection/tracks' &&
-									'opacity-100'
+                router.pathname === '/collection/tracks' && 'opacity-100'
               )}
             >
               <LikedSongsIcon />
-              <span className='truncate text-sm font-bold'>
-								Liked Songs
-              </span>
+              <span className='truncate text-sm font-bold'>Liked Songs</span>
             </Link>
           </div>
           <hr className='mx-6 mt-2 h-px border-none bg-gray-bg' />

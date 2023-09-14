@@ -3,22 +3,22 @@ import { create } from 'zustand';
 export type ModalType = 'editPlaylist';
 
 interface ModalData {
-	playlist?: {
-		id: string;
-		name: string;
-		description: string | null;
-		images: {
-			url: string;
-		}[];
-	};
+  playlist?: {
+    id: string;
+    name: string;
+    description: string | null;
+    images: {
+      url: string;
+    }[];
+  };
 }
 
 interface ModalStore {
-	type: ModalType | null;
-	data: ModalData;
-	isOpen: boolean;
-	onOpen: (type: ModalType, data?: ModalData) => void;
-	onClose: () => void;
+  type: ModalType | null;
+  data: ModalData;
+  isOpen: boolean;
+  onOpen: (type: ModalType, data?: ModalData) => void;
+  onClose: () => void;
 }
 
 export const useModal = create<ModalStore>((set) => ({

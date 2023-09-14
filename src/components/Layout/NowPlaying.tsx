@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 export const NowPlaying = () => {
   const [additionalTypes, setAdditionalTypes] = useState<
-		'episode' | 'track' | null
-	>(null);
+    'episode' | 'track' | null
+  >(null);
 
   const { data: currentPlaying } = api.me.player.currentlyPlaying.useQuery(
     { type: additionalTypes },
@@ -18,7 +18,7 @@ export const NowPlaying = () => {
         const { available, currently_playing_type } = data;
         if (available) {
           setAdditionalTypes(
-						currently_playing_type as 'episode' | 'track' | null
+            currently_playing_type as 'episode' | 'track' | null
           );
         } else {
           setAdditionalTypes(null);

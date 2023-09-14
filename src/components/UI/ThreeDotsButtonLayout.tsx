@@ -13,8 +13,8 @@ import type { DropdownItem } from '@/types/UI';
 import { cn } from '@/utils/cn';
 
 interface ThreeDotsButtonProps {
-	iconClassName?: string;
-	items: DropdownItem[];
+  iconClassName?: string;
+  items: DropdownItem[];
 }
 
 const ThreeDotsButtonLayout = ({
@@ -33,9 +33,7 @@ const ThreeDotsButtonLayout = ({
           } else if ('sub' in item) {
             return (
               <DropdownMenuSub key={index}>
-                <DropdownMenuSubTrigger>
-                  {item.name}
-                </DropdownMenuSubTrigger>
+                <DropdownMenuSubTrigger>{item.name}</DropdownMenuSubTrigger>
                 <DropdownMenuSubContent className='data-[align=start]'>
                   {item.content}
                 </DropdownMenuSubContent>

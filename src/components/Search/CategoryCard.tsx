@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface CategoryCardProps {
-	category: SpotifyApi.CategoryObject;
+  category: SpotifyApi.CategoryObject;
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => {

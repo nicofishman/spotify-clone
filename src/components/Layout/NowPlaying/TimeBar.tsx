@@ -4,7 +4,7 @@ import { millisToMinutesAndSeconds } from '@/utils/time';
 import { useState, useEffect } from 'react';
 
 interface TimeBarProps {
-	playing: SpotifyApi.CurrentlyPlayingResponse;
+  playing: SpotifyApi.CurrentlyPlayingResponse;
 }
 
 const TimeBar = ({ playing }: TimeBarProps) => {

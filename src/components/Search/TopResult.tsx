@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const TopResult = ({ topResult }: TopResultProps) => {
   const images =
-		'images' in topResult ? topResult.images : topResult.album.images;
+    'images' in topResult ? topResult.images : topResult.album.images;
 
   const artists = getArtist(topResult);
   const router = useRouter();

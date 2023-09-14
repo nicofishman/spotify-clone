@@ -9,20 +9,20 @@ import Link from 'next/link';
 import React, { Fragment, forwardRef } from 'react';
 
 interface TableRowLayoutProps {
-	index: number;
-	track: SpotifyApi.TrackObjectSimplified;
-	isLiked: boolean;
-	children?: React.ReactNode;
-	image: string | undefined;
-	threeDotsButton: React.ReactNode;
-	showArtists?: boolean;
-	styles?: {
-		firstColumn?: string;
-		secondColumn?: string;
-		lastColumn?: string;
-	};
-	artistId?: string;
-	showImage?: boolean;
+  index: number;
+  track: SpotifyApi.TrackObjectSimplified;
+  isLiked: boolean;
+  children?: React.ReactNode;
+  image: string | undefined;
+  threeDotsButton: React.ReactNode;
+  showArtists?: boolean;
+  styles?: {
+    firstColumn?: string;
+    secondColumn?: string;
+    lastColumn?: string;
+  };
+  artistId?: string;
+  showImage?: boolean;
 }
 
 const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
@@ -51,10 +51,7 @@ const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
         className='group h-14 rounded-2xl border-b-0 hover:bg-white/10'
       >
         <TableCell
-          className={cn(
-            'w-5 truncate text-center',
-            styles.firstColumn
-          )}
+          className={cn('w-5 truncate text-center', styles.firstColumn)}
         >
           <Icon
             name='play'
@@ -81,9 +78,7 @@ const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
               className='aspect-square object-cover'
             />
           )}
-          <div
-            className={cn('flex flex-col justify-center truncate')}
-          >
+          <div className={cn('flex flex-col justify-center truncate')}>
             <span className='truncate font-normal text-white'>
               {track?.name ?? ''}
             </span>
@@ -102,13 +97,8 @@ const TableRowLayout = forwardRef<HTMLTableRowElement, TableRowLayoutProps>(
                       {artist.name}
                     </span>
                   </Link>
-                  {artist !==
-										otherArtists[
-										  otherArtists.length - 1
-										] && (
-                    <span className='font-light text-stone-400'>
-											,{' '}
-                    </span>
+                  {artist !== otherArtists[otherArtists.length - 1] && (
+                    <span className='font-light text-stone-400'>, </span>
                   )}
                 </Fragment>
               ))}

@@ -16,23 +16,23 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useIntersectionObserver } from 'usehooks-ts';
 
 interface PlaylistTableProps {
-	playlistId: string;
-	isOwner: boolean;
+  playlistId: string;
+  isOwner: boolean;
 }
 
 const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
   const { data: likedSongs, refetch: refetchSaved } =
-		api.me.tracks.saved.get.useQuery(undefined, {
-		  onSettled: () => {
-		    if (!likedSongs) {
-		      void refetchSaved();
-		    }
-		    tracksStore.set(
-		      'likedTracks',
-		      likedSongs?.items.map((item) => item.track.id) ?? []
-		    );
-		  },
-		});
+    api.me.tracks.saved.get.useQuery(undefined, {
+      onSettled: () => {
+        if (!likedSongs) {
+          void refetchSaved();
+        }
+        tracksStore.set(
+          'likedTracks',
+          likedSongs?.items.map((item) => item.track.id) ?? []
+        );
+      },
+    });
 
   const {
     data: res,
@@ -82,10 +82,7 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
             <TableHead className='flex-1'>Album</TableHead>
             <TableHead className='w-1/6'>Date added</TableHead>
             <TableHead className='mr-4 w-32'>
-              <Icon
-                name='clock'
-                className='mx-auto -translate-x-1/2'
-              />
+              <Icon name='clock' className='mx-auto -translate-x-1/2' />
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -93,9 +90,9 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
           <TableBody className='before:block before:leading-4 before:content-["\200C"]'>
             {Array.from({
               length:
-								res?.pages[0]?.total && res?.pages[0]?.total < 5
-								  ? res?.pages[0]?.total
-								  : 5,
+                res?.pages[0]?.total && res?.pages[0]?.total < 5
+                  ? res?.pages[0]?.total
+                  : 5,
             }).map((_, index) => (
               <LoadingRow cellCount={5} key={index} />
             ))}
@@ -110,15 +107,11 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
                 return (
                   <SongRow
                     isOwner={isOwner}
-                    key={`${
-                      song.track?.id ?? ''
-                    }__${index}`}
+                    key={`${song.track?.id ?? ''}__${index}`}
                     router={router}
                     index={index}
                     song={song}
-                    isLiked={likedTracks.includes(
-                      song.track?.id ?? ''
-                    )}
+                    isLiked={likedTracks.includes(song.track?.id ?? '')}
                     ref={lastRowRef}
                   />
                 );
@@ -130,16 +123,14 @@ const PlaylistTable = ({ playlistId, isOwner }: PlaylistTableProps) => {
                   router={router}
                   index={index}
                   song={song}
-                  isLiked={likedTracks.includes(
-                    song.track?.id ?? ''
-                  )}
+                  isLiked={likedTracks.includes(song.track?.id ?? '')}
                 />
               );
             })}
             {isFetchingNextPage &&
-							Array.from({ length: 5 }).map((_, index) => (
-							  <LoadingRow cellCount={5} key={index} />
-							))}
+              Array.from({ length: 5 }).map((_, index) => (
+                <LoadingRow cellCount={5} key={index} />
+              ))}
           </TableBody>
         )}
       </Table>

@@ -3,13 +3,13 @@ import TableRowLayout from '@/components/shared/TableRowLayout';
 import { type useRouter } from 'next/router';
 
 interface AlbumRowProps {
-	index: number;
-	isLiked: boolean;
-	router: ReturnType<typeof useRouter>;
-	track: SpotifyApi.TrackObjectSimplified;
-	albumImage: string | undefined;
-	albumId: string | undefined;
-	showImage?: boolean;
+  index: number;
+  isLiked: boolean;
+  router: ReturnType<typeof useRouter>;
+  track: SpotifyApi.TrackObjectSimplified;
+  albumImage: string | undefined;
+  albumId: string | undefined;
+  showImage?: boolean;
 }
 
 const AlbumRow = ({

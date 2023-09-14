@@ -1,16 +1,16 @@
 export type DropdownItem = {
-	disabled?: boolean;
+  disabled?: boolean;
 } & (
-	| {
-			name: string;
-			onClick?: () => void;
-	  }
-	| {
-			separator: true;
-	  }
-	| {
-			name: string;
-			sub: true;
-			content: React.ReactNode;
-	  }
+  | {
+      name: string;
+      onClick?: () => void;
+    }
+  | {
+      separator: true;
+    }
+  | {
+      name: string;
+      sub: true;
+      content: React.ReactNode;
+    }
 );

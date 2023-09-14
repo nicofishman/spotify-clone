@@ -18,8 +18,7 @@ export const artistRouter = createTRPCRouter({
 
       await checkRes(res, 200);
 
-      const resJson =
-				(await res.json()) as SpotifyApi.SingleArtistResponse;
+      const resJson = (await res.json()) as SpotifyApi.SingleArtistResponse;
 
       return resJson;
     }),
@@ -38,8 +37,7 @@ export const artistRouter = createTRPCRouter({
 
       await checkRes(res, 200);
 
-      const resJson =
-				(await res.json()) as SpotifyApi.ArtistsTopTracksResponse;
+      const resJson = (await res.json()) as SpotifyApi.ArtistsTopTracksResponse;
 
       return resJson;
     }),
@@ -48,18 +46,16 @@ export const artistRouter = createTRPCRouter({
       z.object({
         artistId: z.string(),
         include_groups: z
-          .array(
-            z.enum(['album', 'single', 'appears_on', 'compilation'])
-          )
+          .array(z.enum(['album', 'single', 'appears_on', 'compilation']))
           .optional(),
       })
     )
     .query(async ({ input, ctx }) => {
       const res = await fetch(
         `${API_URL}/artists/${input.artistId}/albums?limit=50&market=ES` +
-					(input.include_groups
-					  ? `&include_groups=${input.include_groups?.join(',')}`
-					  : ''),
+          (input.include_groups
+            ? `&include_groups=${input.include_groups?.join(',')}`
+            : ''),
         {
           headers: {
             Authorization: `Bearer ${ctx.session.account.access_token}`,
@@ -70,28 +66,24 @@ export const artistRouter = createTRPCRouter({
 
       await checkRes(res, 200);
 
-      const resJson =
-				(await res.json()) as SpotifyApi.ArtistsAlbumsResponse;
+      const resJson = (await res.json()) as SpotifyApi.ArtistsAlbumsResponse;
 
       return resJson;
     }),
   getRelatedArtists: protectedProcedureWithAccount
     .input(z.string())
     .query(async ({ input, ctx }) => {
-      const res = await fetch(
-        `${API_URL}/artists/${input}/related-artists`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'GET',
-        }
-      );
+      const res = await fetch(`${API_URL}/artists/${input}/related-artists`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'GET',
+      });
 
       await checkRes(res, 200);
 
       const resJson =
-				(await res.json()) as SpotifyApi.ArtistsRelatedArtistsResponse;
+        (await res.json()) as SpotifyApi.ArtistsRelatedArtistsResponse;
 
       return resJson;
     }),

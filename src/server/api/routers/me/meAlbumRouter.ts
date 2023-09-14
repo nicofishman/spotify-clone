@@ -8,29 +8,23 @@ export const meAlbumRouter = createTRPCRouter({
   add: protectedProcedureWithAccount
     .input(z.array(z.string()).max(20))
     .mutation(async ({ ctx, input }) => {
-      const res = await fetch(
-        `${API_URL}/me/albums?ids=${input.join(',')}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'PUT',
-        }
-      );
+      const res = await fetch(`${API_URL}/me/albums?ids=${input.join(',')}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'PUT',
+      });
       await checkRes(res, 200);
     }),
   remove: protectedProcedureWithAccount
     .input(z.array(z.string()).max(20))
     .mutation(async ({ ctx, input }) => {
-      const res = await fetch(
-        `${API_URL}/me/albums?ids=${input.join(',')}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'DELETE',
-        }
-      );
+      const res = await fetch(`${API_URL}/me/albums?ids=${input.join(',')}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'DELETE',
+      });
       await checkRes(res, 200);
     }),
   get: protectedProcedureWithAccount.query(async ({ ctx }) => {
@@ -41,8 +35,7 @@ export const meAlbumRouter = createTRPCRouter({
     });
 
     await checkRes(res, 200);
-    const resJson =
-			(await res.json()) as SpotifyApi.UsersSavedAlbumsResponse;
+    const resJson = (await res.json()) as SpotifyApi.UsersSavedAlbumsResponse;
 
     while (resJson.next) {
       const nextRes = await fetch(resJson.next, {
@@ -52,7 +45,7 @@ export const meAlbumRouter = createTRPCRouter({
       });
       await checkRes(nextRes, 200);
       const nextResJson =
-				(await nextRes.json()) as SpotifyApi.UsersSavedAlbumsResponse;
+        (await nextRes.json()) as SpotifyApi.UsersSavedAlbumsResponse;
       resJson.items.push(...nextResJson.items);
       resJson.next = nextResJson.next;
     }

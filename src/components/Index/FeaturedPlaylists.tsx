@@ -6,21 +6,21 @@ import { useMemo } from 'react';
 
 const FeaturedPlaylists = () => {
   const { data: featuredPlaylists, isLoading } =
-		api.user.playlists.featured.useQuery();
+    api.user.playlists.featured.useQuery();
 
   const [width] = mainSizeStore.use('width');
 
   const [columnCount, columnWidth] = useMemo(() => {
     const count =
-			width > 1024
-			  ? 5
-			  : width > 815
-			    ? 4
-			    : width > 605
-			      ? 3
-			      : width > 394
-			        ? 2
-			        : 1;
+      width > 1024
+        ? 5
+        : width > 815
+        ? 4
+        : width > 605
+        ? 3
+        : width > 394
+        ? 2
+        : 1;
 
     return [count, width / count];
   }, [width]);
@@ -38,9 +38,7 @@ const FeaturedPlaylists = () => {
       <div
         className='featuredGrid grid w-full min-w-[384px] gap-6 overflow-x-auto py-2'
         style={{
-          gridTemplateColumns: `repeat(${columnCount}, ${
-            columnWidth - 24
-          }px)`,
+          gridTemplateColumns: `repeat(${columnCount}, ${columnWidth - 24}px)`,
           width: width,
         }}
       >
@@ -51,10 +49,7 @@ const FeaturedPlaylists = () => {
             .slice(0, columnCount)
             .map((playlist) => {
               return (
-                <PlaylistCardSquare
-                  key={playlist.id}
-                  playlist={playlist}
-                />
+                <PlaylistCardSquare key={playlist.id} playlist={playlist} />
               );
             })
         )}
@@ -68,7 +63,7 @@ export default FeaturedPlaylists;
 export const SquaredPlaylistsLoading = ({
   columnCount,
 }: {
-	columnCount: number;
+  columnCount: number;
 }) => {
   return (
     <>

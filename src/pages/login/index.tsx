@@ -23,7 +23,7 @@ const LoginPage = () => {
             })
           }
         >
-					Log in
+          Log in
         </button>
       </main>
     </>

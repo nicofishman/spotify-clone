@@ -1,7 +1,7 @@
 import PlaylistOrAlbumCardSquare from '@/components/shared/PlaylistOrAlbumCardSquare';
 
 interface PlaylistCardSquareProps {
-	playlist: SpotifyApi.PlaylistObjectSimplified;
+  playlist: SpotifyApi.PlaylistObjectSimplified;
 }
 
 const PlaylistCardSquare = ({ playlist }: PlaylistCardSquareProps) => {

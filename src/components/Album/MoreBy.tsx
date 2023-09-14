@@ -5,8 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 
 interface MoreByProps {
-	artistName: string;
-	artistId: string;
+  artistName: string;
+  artistId: string;
 }
 
 const MoreBy = ({ artistId, artistName }: MoreByProps) => {
@@ -25,7 +25,7 @@ const MoreBy = ({ artistId, artistName }: MoreByProps) => {
       <h2 className='flex justify-between'>
         <Link href={`/artist/${artistId}/discography/all`}>
           <span className='text-2xl font-bold hover:underline'>
-						More by {artistName}
+            More by {artistName}
           </span>
         </Link>
         <Link
@@ -33,7 +33,7 @@ const MoreBy = ({ artistId, artistName }: MoreByProps) => {
           href={`/artist/${artistId}/discography/all`}
         >
           <span className='text-sm font-bold text-zinc-400 hover:underline'>
-						Show all
+            Show all
           </span>
         </Link>
       </h2>
@@ -41,9 +41,7 @@ const MoreBy = ({ artistId, artistName }: MoreByProps) => {
         {({ columnCount }) =>
           moreBy?.items
             .slice(0, columnCount)
-            .map((album) => (
-              <AlbumCardSquare key={album.id} album={album} />
-            ))
+            .map((album) => <AlbumCardSquare key={album.id} album={album} />)
         }
       </CardSquareGrid>
     </section>

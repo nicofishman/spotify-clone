@@ -2,7 +2,7 @@ import PlaylistOrAlbumCardSquare from '@/components/shared/PlaylistOrAlbumCardSq
 import React from 'react';
 
 interface AlbumCardSquareProps {
-	album: SpotifyApi.AlbumObjectSimplified;
+  album: SpotifyApi.AlbumObjectSimplified;
 }
 
 const AlbumCardSquare = ({ album }: AlbumCardSquareProps) => {
@@ -15,9 +15,7 @@ const AlbumCardSquare = ({ album }: AlbumCardSquareProps) => {
       description={
         <>
           <time
-            dateTime={new Date(album.release_date)
-              .getFullYear()
-              .toString()}
+            dateTime={new Date(album.release_date).getFullYear().toString()}
           >
             {new Date(album.release_date).getFullYear()}
           </time>

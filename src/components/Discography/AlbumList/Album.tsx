@@ -10,13 +10,13 @@ import AlbumTable from '@/components/Album/AlbumTable';
 import { api } from '@/utils/api';
 
 interface PlaylistProps {
-	album: SpotifyApi.AlbumObjectSimplified;
+  album: SpotifyApi.AlbumObjectSimplified;
 }
 
 const Album = ({ album }: PlaylistProps) => {
   const [currentPlaying] = tracksStore.use('currentlyPlaying');
   const { data: tracks = {} as SpotifyApi.AlbumTracksResponse } =
-		api.album.getTracks.useQuery(album.id);
+    api.album.getTracks.useQuery(album.id);
 
   return (
     <>
@@ -40,31 +40,22 @@ const Album = ({ album }: PlaylistProps) => {
               {formatDate(album.release_date, 'year')}
             </span>
             <span className='before:mx-1.5 before:align-middle before:text-[0.75rem] before:leading-4 before:content-["•"]'>
-              {album.total_tracks}{' '}
-              {album.total_tracks === 1 ? 'song' : 'songs'}
+              {album.total_tracks} {album.total_tracks === 1 ? 'song' : 'songs'}
             </span>
           </p>
           <div className='flex items-center gap-x-4'>
             <PlayPauseButton
               isPlaying={
-                currentPlaying?.context?.uri ===
-								`spotify:album:${album.id}`
+                currentPlaying?.context?.uri === `spotify:album:${album.id}`
               }
               className='scale-75 bg-white'
             />
-            <LikeAlbumButton
-              className='scale-150'
-              albumId={album.id}
-            />
+            <LikeAlbumButton className='scale-150' albumId={album.id} />
             <ThreeDotsDiscography tracks={tracks} album={album} />
           </div>
         </div>
       </div>
-      <AlbumTable
-        showImage={false}
-        albumId={album.id}
-        className='pl-0 pr-0'
-      />
+      <AlbumTable showImage={false} albumId={album.id} className='pl-0 pr-0' />
     </>
   );
 };

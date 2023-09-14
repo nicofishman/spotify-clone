@@ -1,7 +1,7 @@
 import PlaylistOrAlbumCardSquare from '@/components/shared/PlaylistOrAlbumCardSquare';
 
 interface RelatedArtistCardSquareProps {
-	artist: SpotifyApi.ArtistObjectFull;
+  artist: SpotifyApi.ArtistObjectFull;
 }
 
 const RelatedArtistCardSquare = ({ artist }: RelatedArtistCardSquareProps) => {

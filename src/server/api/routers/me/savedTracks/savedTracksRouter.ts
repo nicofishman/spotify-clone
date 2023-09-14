@@ -13,13 +13,10 @@ export const savedTracksRouter = createTRPCRouter({
       },
       method: 'GET',
     });
-    const resJson =
-			(await res.json()) as SpotifyApi.UsersSavedTracksResponse;
+    const resJson = (await res.json()) as SpotifyApi.UsersSavedTracksResponse;
 
     const tracksRes = await fetch(
-      `${API_URL}/me/tracks?limit=${
-        resJson.total > 50 ? 50 : resJson.total
-      }`,
+      `${API_URL}/me/tracks?limit=${resJson.total > 50 ? 50 : resJson.total}`,
       {
         headers: {
           Authorization: `Bearer ${ctx.session.account.access_token}`,
@@ -29,7 +26,7 @@ export const savedTracksRouter = createTRPCRouter({
     );
 
     const trackJson =
-			(await tracksRes.json()) as SpotifyApi.UsersSavedTracksResponse;
+      (await tracksRes.json()) as SpotifyApi.UsersSavedTracksResponse;
 
     while (trackJson.next) {
       const nextRes = await fetch(trackJson.next, {
@@ -39,7 +36,7 @@ export const savedTracksRouter = createTRPCRouter({
         method: 'GET',
       });
       const nextJson =
-				(await nextRes.json()) as SpotifyApi.UsersSavedTracksResponse;
+        (await nextRes.json()) as SpotifyApi.UsersSavedTracksResponse;
       trackJson.items.push(...nextJson.items);
       trackJson.next = nextJson.next;
     }

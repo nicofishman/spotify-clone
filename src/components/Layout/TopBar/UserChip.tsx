@@ -10,7 +10,7 @@ import Image from 'next/image';
 import React from 'react';
 
 interface UserChipProps {
-	isOpen: boolean;
+  isOpen: boolean;
 }
 
 const UserChip = ({ isOpen }: UserChipProps) => {
@@ -35,9 +35,7 @@ const UserChip = ({ isOpen }: UserChipProps) => {
             <Icon
               className={cn(
                 'mr-1.5 transition-transform',
-                isOpen
-                  ? 'rotate-180 transform'
-                  : 'rotate-0 transform'
+                isOpen ? 'rotate-180 transform' : 'rotate-0 transform'
               )}
               name='arrowDown'
             />

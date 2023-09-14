@@ -7,7 +7,7 @@ import { openSpotify } from '@/utils/spotifyClient';
 import React from 'react';
 
 interface ThreeDotsArtistProps {
-	artistId: string;
+  artistId: string;
 }
 
 const ThreeDotsArtist = ({ artistId }: ThreeDotsArtistProps) => {
@@ -24,9 +24,7 @@ const ThreeDotsArtist = ({ artistId }: ThreeDotsArtistProps) => {
     onSuccess: () => {
       tracksStore.set(
         'followingArtists',
-        tracksStore
-          .get('followingArtists')
-          .filter((id) => id !== artistId)
+        tracksStore.get('followingArtists').filter((id) => id !== artistId)
       );
     },
   });
@@ -53,9 +51,7 @@ const ThreeDotsArtist = ({ artistId }: ThreeDotsArtistProps) => {
     {
       name: 'Share',
       sub: true,
-      content: (
-        <PlaylistShareSubContent trackId={artistId} type='artist' />
-      ),
+      content: <PlaylistShareSubContent trackId={artistId} type='artist' />,
     },
     {
       separator: true,

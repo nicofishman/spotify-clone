@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 
 interface FeaturingProps {
-	artistId: string;
+  artistId: string;
 }
 
 const AppearsOn = ({ artistId }: FeaturingProps) => {
@@ -26,7 +26,7 @@ const AppearsOn = ({ artistId }: FeaturingProps) => {
           <h2 className='flex justify-between'>
             <Link href={`/artist/${artistId}/featuring`}>
               <span className='text-2xl font-bold hover:underline'>
-								Appears on
+                Appears on
               </span>
             </Link>
             <Link
@@ -34,7 +34,7 @@ const AppearsOn = ({ artistId }: FeaturingProps) => {
               href={`/artist/${artistId}/featuring`}
             >
               <span className='text-sm font-bold text-zinc-400 hover:underline'>
-								Show all
+                Show all
               </span>
             </Link>
           </h2>
@@ -43,10 +43,7 @@ const AppearsOn = ({ artistId }: FeaturingProps) => {
               featuring?.items
                 .slice(0, columnCount)
                 .map((album) => (
-                  <AlbumCardSquare
-                    key={album.id}
-                    album={album}
-                  />
+                  <AlbumCardSquare key={album.id} album={album} />
                 ))
             }
           </CardSquareGrid>

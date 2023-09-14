@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 interface DiscographyProps {
-	artistId: string;
+  artistId: string;
 }
 
 const Discography = ({ artistId }: DiscographyProps) => {
@@ -25,34 +25,34 @@ const Discography = ({ artistId }: DiscographyProps) => {
     return {
       ...type,
       visible:
-				type.value === 'all' ||
-				(discography?.items.some(
-				  (album) => album.album_type === type.value
-				) as boolean),
+        type.value === 'all' ||
+        (discography?.items.some(
+          (album) => album.album_type === type.value
+        ) as boolean),
     };
   });
 
   const [selection, setSelection] =
-		useState<(typeof selectTypes)[number]['value']>('all');
+    useState<(typeof selectTypes)[number]['value']>('all');
 
   const discographyArray = useMemo(() => {
     if (!discography) return [];
 
     switch (selection) {
-    case 'all':
-      return discography.items;
-    case 'album':
-      return discography.items.filter(
-        (album) => album.album_type === 'album'
-      );
-    case 'single':
-      return discography.items.filter(
-        (album) => album.album_type === 'single'
-      );
-    case 'compilation':
-      return discography.items.filter(
-        (album) => album.album_type === 'compilation'
-      );
+      case 'all':
+        return discography.items;
+      case 'album':
+        return discography.items.filter(
+          (album) => album.album_type === 'album'
+        );
+      case 'single':
+        return discography.items.filter(
+          (album) => album.album_type === 'single'
+        );
+      case 'compilation':
+        return discography.items.filter(
+          (album) => album.album_type === 'compilation'
+        );
     }
   }, [discography, selection]);
 
@@ -61,11 +61,9 @@ const Discography = ({ artistId }: DiscographyProps) => {
       {discographyArray.length > 0 ? (
         <section>
           <h2 className='flex justify-between'>
-            <Link
-              href={`/artist/${artistId}/discography/${selection}`}
-            >
+            <Link href={`/artist/${artistId}/discography/${selection}`}>
               <span className='text-2xl font-bold hover:underline'>
-								Discography
+                Discography
               </span>
             </Link>
             <Link
@@ -73,7 +71,7 @@ const Discography = ({ artistId }: DiscographyProps) => {
               href={`/artist/${artistId}/discography/${selection}`}
             >
               <span className='text-sm font-bold text-zinc-400 hover:underline'>
-								Show all
+                Show all
               </span>
             </Link>
           </h2>
@@ -83,9 +81,7 @@ const Discography = ({ artistId }: DiscographyProps) => {
                 type.visible && (
                   <li key={type.value}>
                     <Chip
-                      onClick={() =>
-                        setSelection(type.value)
-                      }
+                      onClick={() => setSelection(type.value)}
                       active={selection === type.value}
                     >
                       {type.name}
@@ -98,16 +94,9 @@ const Discography = ({ artistId }: DiscographyProps) => {
 
           <CardSquareGrid isLoading={isLoading}>
             {({ columnCount }) =>
-              discographyArray
-                ?.slice(0, columnCount)
-                .map((album) => {
-                  return (
-                    <AlbumCardSquare
-                      key={album.id}
-                      album={album}
-                    />
-                  );
-                })
+              discographyArray?.slice(0, columnCount).map((album) => {
+                return <AlbumCardSquare key={album.id} album={album} />;
+              })
             }
           </CardSquareGrid>
         </section>

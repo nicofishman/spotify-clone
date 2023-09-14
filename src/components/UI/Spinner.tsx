@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn';
 import React from 'react';
 
 interface SpinnerProps {
-	className?: string;
+  className?: string;
 }
 
 const Spinner = ({ className }: SpinnerProps) => {

@@ -40,10 +40,8 @@ const PlaylistPage = () => {
         <title>
           {album
             ? `${album?.name} - Album by ${
-              album.artists
-                .map((art) => art.name)
-                .join(', ') ?? ''
-						  }`
+                album.artists.map((art) => art.name).join(', ') ?? ''
+              }`
             : 'Loading...'}
         </title>
         <link rel='icon' href='/favicon.png' />
@@ -54,10 +52,7 @@ const PlaylistPage = () => {
           backgroundImage: `linear-gradient(180deg, rgba(var(--top-bar-color), 0.8) 0%, #121212 100%)`,
         }}
         topBarContent={
-          <TopBarContent
-            isPlaying={isPlaying}
-            name={album?.name ?? ''}
-          />
+          <TopBarContent isPlaying={isPlaying} name={album?.name ?? ''} />
         }
       >
         <>
@@ -70,10 +65,7 @@ const PlaylistPage = () => {
                     isPlaying={isPlaying}
                     className='scale-110 hover:scale-125 '
                   />
-                  <LikeAlbumButton
-                    className='scale-150'
-                    albumId={album.id}
-                  />
+                  <LikeAlbumButton className='scale-150' albumId={album.id} />
                   <ThreeDotsButtonAlbumTitle
                     iconClassName='scale-150'
                     album={album}
@@ -111,11 +103,11 @@ const CopyrightSection = ({
   datePrecision,
   copyrights,
 }: {
-	releaseDate: string;
-	datePrecision: SpotifyApi.AlbumObjectSimplified['release_date_precision'];
-	copyrights: Array<{
-		text: string;
-	}>;
+  releaseDate: string;
+  datePrecision: SpotifyApi.AlbumObjectSimplified['release_date_precision'];
+  copyrights: Array<{
+    text: string;
+  }>;
 }) => {
   return (
     <div className='mt-8 text-zinc-400'>

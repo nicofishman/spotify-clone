@@ -7,14 +7,14 @@ import Link from 'next/link';
 import React from 'react';
 
 interface HeaderProps {
-	type: (typeof discographyTypes)[number]['value'];
-	artistName: string;
-	artistId: string;
-	availableTypes: Array<{
-		value: (typeof discographyTypes)[number]['value'];
-		name: (typeof discographyTypes)[number]['name'];
-		visible: boolean;
-	}>;
+  type: (typeof discographyTypes)[number]['value'];
+  artistName: string;
+  artistId: string;
+  availableTypes: Array<{
+    value: (typeof discographyTypes)[number]['value'];
+    name: (typeof discographyTypes)[number]['name'];
+    visible: boolean;
+  }>;
 }
 
 const Header = ({
@@ -33,12 +33,8 @@ const Header = ({
       </Link>
       <div className='flex gap-x-3'>
         <SelectType availableTypes={availableTypes} selected={type} />
-        <ListViewButton
-          onClick={() => typeViewStore.set('view', 'list')}
-        />
-        <GridViewButton
-          onClick={() => typeViewStore.set('view', 'grid')}
-        />
+        <ListViewButton onClick={() => typeViewStore.set('view', 'list')} />
+        <GridViewButton onClick={() => typeViewStore.set('view', 'grid')} />
       </div>
     </section>
   );

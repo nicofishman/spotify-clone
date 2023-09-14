@@ -6,8 +6,8 @@ import { openSpotify } from '@/utils/spotifyClient';
 import { type useRouter } from 'next/router';
 
 interface ThreeDotsButtonsProps {
-	track: SpotifyApi.TrackObjectSimplified;
-	router: ReturnType<typeof useRouter>;
+  track: SpotifyApi.TrackObjectSimplified;
+  router: ReturnType<typeof useRouter>;
 }
 
 const ThreeDotsButtonsSearchSong = ({
@@ -29,9 +29,7 @@ const ThreeDotsButtonsSearchSong = ({
       name: 'Go to artist',
       onClick: () =>
         router.push(
-          track?.artists[0]?.id
-            ? `/artist/${track?.artists[0]?.id}`
-            : '/'
+          track?.artists[0]?.id ? `/artist/${track?.artists[0]?.id}` : '/'
         ),
     },
     {
@@ -57,9 +55,7 @@ const ThreeDotsButtonsSearchSong = ({
     {
       sub: true,
       name: 'Share',
-      content: (
-        <PlaylistShareSubContent type={track.type} trackId={track.id} />
-      ),
+      content: <PlaylistShareSubContent type={track.type} trackId={track.id} />,
     },
     {
       separator: true,

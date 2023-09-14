@@ -3,12 +3,12 @@ import { api } from '@/utils/api';
 import React from 'react';
 
 interface FollowButtonProps {
-	artistId: string;
+  artistId: string;
 }
 
 const FollowButton = ({ artistId }: FollowButtonProps) => {
   const [followingArtists] = tracksStore.use('followingArtists');
-  const { data } = api.me.following.getArtists.useQuery(undefined, {
+  api.me.following.getArtists.useQuery(undefined, {
     onSuccess: (data) => {
       tracksStore.set('followingArtists', data);
     },
@@ -26,9 +26,7 @@ const FollowButton = ({ artistId }: FollowButtonProps) => {
     onSuccess: () => {
       tracksStore.set(
         'followingArtists',
-        tracksStore
-          .get('followingArtists')
-          .filter((id) => id !== artistId)
+        tracksStore.get('followingArtists').filter((id) => id !== artistId)
       );
     },
   });

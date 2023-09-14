@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface CurrentSongProps {
-	playing: SpotifyApi.CurrentlyPlayingResponse | null;
+  playing: SpotifyApi.CurrentlyPlayingResponse | null;
 }
 
 const CurrentSong = ({ playing }: CurrentSongProps) => {
@@ -47,19 +47,13 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
             <p className='text-xs font-normal text-gray-400'>
               {isTrack ? (
                 playingItem.artists.map((art, i) => (
-                  <Link
-                    key={art.id}
-                    href={`/artist/${art.id}`}
-                  >
+                  <Link key={art.id} href={`/artist/${art.id}`}>
                     <span className='inline hover:text-white hover:underline'>
                       {art.name}
                     </span>
-                    {i !==
-										playingItem.artists.length - 1 ? (
-                        <span className='inline'>
-                          {', '}
-                        </span>
-                      ) : undefined}
+                    {i !== playingItem.artists.length - 1 ? (
+                      <span className='inline'>{', '}</span>
+                    ) : undefined}
                   </Link>
                 ))
               ) : (
@@ -75,10 +69,7 @@ const CurrentSong = ({ playing }: CurrentSongProps) => {
             </p>
           </div>
           <div className='hidden sm:flex'>
-            <LikeSongButton
-              trackId={playing.item?.id ?? ''}
-              isLiked={false}
-            />
+            <LikeSongButton trackId={playing.item?.id ?? ''} isLiked={false} />
             <PictureInPictureButton />
           </div>
         </div>

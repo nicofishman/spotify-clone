@@ -2,9 +2,9 @@ import { cn } from '@/utils/cn';
 import React from 'react';
 
 interface IconButtonLayoutProps
-	extends React.HTMLAttributes<HTMLButtonElement> {
-	selected?: boolean;
-	children: React.ReactNode;
+  extends React.HTMLAttributes<HTMLButtonElement> {
+  selected?: boolean;
+  children: React.ReactNode;
 }
 
 const IconButtonLayout = ({

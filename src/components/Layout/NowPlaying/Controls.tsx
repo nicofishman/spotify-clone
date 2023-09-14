@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { api } from '@/utils/api';
 
 interface ControlsProps {
-	playing: SpotifyApi.CurrentPlaybackResponse;
+  playing: SpotifyApi.CurrentPlaybackResponse;
 }
 
 const Controls = ({ playing }: ControlsProps) => {

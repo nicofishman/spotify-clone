@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 // Define general type for useWindowSize hook, which includes width and height
 export interface Size {
-	width: number | undefined;
-	height: number | undefined;
+  width: number | undefined;
+  height: number | undefined;
 }
 
 // Hook

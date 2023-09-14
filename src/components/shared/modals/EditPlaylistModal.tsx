@@ -65,9 +65,9 @@ const EditPlaylistModal = () => {
       body: {
         name: values.name,
         description:
-					(values.description?.length ?? 0) > 0
-					  ? values.description
-					  : undefined,
+          (values.description?.length ?? 0) > 0
+            ? values.description
+            : undefined,
       },
     });
     handleClose();
@@ -83,15 +83,10 @@ const EditPlaylistModal = () => {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className='text-white'>
         <DialogHeader>
-          <DialogTitle className='text-2xl font-bold'>
-						Edit details
-          </DialogTitle>
+          <DialogTitle className='text-2xl font-bold'>Edit details</DialogTitle>
         </DialogHeader>
         {errors.name?.message && (
-          <div
-            role='alert'
-            className='h-8 w-full rounded bg-red-600 px-2'
-          >
+          <div role='alert' className='h-8 w-full rounded bg-red-600 px-2'>
             <p className='flex h-full items-center gap-x-2 text-xxs'>
               <Icon name='warning' className='fill-white' />
               {errors.name?.message}
@@ -100,10 +95,7 @@ const EditPlaylistModal = () => {
         )}
         <div className='grid grid-cols-[auto_1fr] gap-x-4'>
           <Image
-            src={
-              data.playlist?.images[0]?.url ??
-							DEFAULT_PLAYLISTORALBUM_IMAGE
-            }
+            src={data.playlist?.images[0]?.url ?? DEFAULT_PLAYLISTORALBUM_IMAGE}
             width={180}
             height={180}
             alt='playlist image'
@@ -143,9 +135,7 @@ const EditPlaylistModal = () => {
                         <Textarea
                           label='Description'
                           disabled={isLoading}
-                          containerClassName={cn(
-                            'h-full w-full'
-                          )}
+                          containerClassName={cn('h-full w-full')}
                           className='h-full resize-none py-2 aria-[invalid="false"]:border-b aria-[invalid="true"]:border-b-2 aria-[invalid="false"]:border-b-[#535353] aria-[invalid="true"]:border-b-red-500'
                           placeholder='Add an optional description'
                           {...field}
@@ -158,7 +148,7 @@ const EditPlaylistModal = () => {
               </div>
               <div className='flex justify-end'>
                 <button className='w-fit rounded-full bg-white px-8 py-2 font-bold text-black hover:scale-105'>
-									Save
+                  Save
                 </button>
               </div>
             </form>
@@ -166,9 +156,9 @@ const EditPlaylistModal = () => {
         </div>
         <DialogFooter>
           <p className='text-xxs font-bold'>
-						By proceeding, you agree to give Spotify access to the
-						image you choose to upload. Please make sure you have
-						the right to upload the image.
+            By proceeding, you agree to give Spotify access to the image you
+            choose to upload. Please make sure you have the right to upload the
+            image.
           </p>
         </DialogFooter>
       </DialogContent>

@@ -5,12 +5,12 @@ import Link from 'next/link';
 import React from 'react';
 
 interface ListComponentProps {
-	link: string;
-	iconDefault: keyof typeof Icons;
-	iconActive: keyof typeof Icons;
-	pathname: string;
-	routerPathname: string;
-	text: string;
+  link: string;
+  iconDefault: keyof typeof Icons;
+  iconActive: keyof typeof Icons;
+  pathname: string;
+  routerPathname: string;
+  text: string;
 }
 
 const ListComponent = ({
@@ -34,9 +34,7 @@ const ListComponent = ({
               ? 'fill-white'
               : 'fill-gray-text transition-colors duration-200 hover:fill-white'
           )}
-          name={
-            routerPathname === pathname ? iconActive : iconDefault
-          }
+          name={routerPathname === pathname ? iconActive : iconDefault}
         />
         <span
           className={cn(

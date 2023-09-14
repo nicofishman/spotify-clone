@@ -8,16 +8,12 @@ import { z } from 'zod';
 
 export const meFollowingRouter = createTRPCRouter({
   getArtists: protectedProcedureWithAccount.query(async ({ ctx }) => {
-    const res = await fetch(
-      `${API_URL}/me/following?type=artist&limit=50`,
-      {
-        headers: {
-          Authorization: `Bearer ${ctx.session.account.access_token}`,
-        },
-      }
-    );
-    const json =
-			(await res.json()) as SpotifyApi.UsersFollowedArtistsResponse;
+    const res = await fetch(`${API_URL}/me/following?type=artist&limit=50`, {
+      headers: {
+        Authorization: `Bearer ${ctx.session.account.access_token}`,
+      },
+    });
+    const json = (await res.json()) as SpotifyApi.UsersFollowedArtistsResponse;
 
     return json.artists.items.map((artist) => artist.id);
   }),

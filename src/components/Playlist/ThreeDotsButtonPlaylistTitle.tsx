@@ -6,8 +6,8 @@ import { api } from '@/utils/api';
 import { openSpotify } from '@/utils/spotifyClient';
 
 interface ThreeDotsButtonProps {
-	playlistId: string;
-	iconClassName?: string;
+  playlistId: string;
+  iconClassName?: string;
 }
 
 const ThreeDotsButtonPlaylistTitle = ({
@@ -58,10 +58,7 @@ const ThreeDotsButtonPlaylistTitle = ({
       sub: true,
       name: 'Share',
       content: (
-        <PlaylistShareSubContent
-          type={'playlist'}
-          trackId={playlistId}
-        />
+        <PlaylistShareSubContent type={'playlist'} trackId={playlistId} />
       ),
     },
     {
@@ -79,9 +76,7 @@ const ThreeDotsButtonPlaylistTitle = ({
     },
   ];
 
-  return (
-    <ThreeDotsButtonLayout iconClassName={iconClassName} items={items} />
-  );
+  return <ThreeDotsButtonLayout iconClassName={iconClassName} items={items} />;
 };
 
 export default ThreeDotsButtonPlaylistTitle;

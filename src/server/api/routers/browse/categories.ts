@@ -20,12 +20,12 @@ export const categoriesRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const res = await fetch(
         `${API_URL}/browse/categories/${input.id}?` +
-					new URLSearchParams({
-					  country: input?.country ?? 'AR',
-					  locale: input?.locale ?? 'es_AR',
-					  limit: input?.limit?.toString() ?? '20',
-					  offset: input?.offset?.toString() ?? '0',
-					}).toString(),
+          new URLSearchParams({
+            country: input?.country ?? 'AR',
+            locale: input?.locale ?? 'es_AR',
+            limit: input?.limit?.toString() ?? '20',
+            offset: input?.offset?.toString() ?? '0',
+          }).toString(),
         {
           headers: {
             Authorization: `Bearer ${ctx.session.account.access_token}`,
@@ -51,12 +51,12 @@ export const categoriesRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const res = await fetch(
         `${API_URL}/browse/categories?` +
-					new URLSearchParams({
-					  country: input?.country ?? 'US',
-					  locale: input?.locale ?? 'en_US',
-					  limit: input?.limit?.toString() ?? '20',
-					  offset: input?.offset?.toString() ?? '0',
-					}).toString(),
+          new URLSearchParams({
+            country: input?.country ?? 'US',
+            locale: input?.locale ?? 'en_US',
+            limit: input?.limit?.toString() ?? '20',
+            offset: input?.offset?.toString() ?? '0',
+          }).toString(),
         {
           headers: {
             Authorization: `Bearer ${ctx.session.account.access_token}`,

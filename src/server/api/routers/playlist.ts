@@ -39,8 +39,7 @@ export const playlistRouter = createTRPCRouter({
         method: 'GET',
       });
 
-      const resJson =
-				(await res.json()) as SpotifyApi.PlaylistTrackResponse;
+      const resJson = (await res.json()) as SpotifyApi.PlaylistTrackResponse;
 
       return resJson;
     }),
@@ -55,8 +54,7 @@ export const playlistRouter = createTRPCRouter({
           },
           method: 'GET',
         });
-        const resJson =
-					(await res.json()) as SpotifyApi.PlaylistObjectFull;
+        const resJson = (await res.json()) as SpotifyApi.PlaylistObjectFull;
         return resJson;
       });
       const playlistsJson = await Promise.all(playlists);
@@ -79,9 +77,7 @@ export const playlistRouter = createTRPCRouter({
           },
           method: 'POST',
           body: JSON.stringify({
-            uris: input.tracksId.map(
-              (trackId) => `spotify:track:${trackId}`
-            ),
+            uris: input.tracksId.map((trackId) => `spotify:track:${trackId}`),
           }),
         }
       );
@@ -126,16 +122,13 @@ export const playlistRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const res = await fetch(
-        `${API_URL}/playlists/${input.playlistId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'PUT',
-          body: JSON.stringify(input.body),
-        }
-      );
+      const res = await fetch(`${API_URL}/playlists/${input.playlistId}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'PUT',
+        body: JSON.stringify(input.body),
+      });
 
       await checkRes(res, 200);
       return true;

@@ -5,13 +5,12 @@ import { useState } from 'react';
 
 const Last6Playlists = () => {
   const [last6Playlists, setLast6Playlists] = useState<
-		Set<SpotifyApi.PlaylistObjectFull>
-	>(new Set());
+    Set<SpotifyApi.PlaylistObjectFull>
+  >(new Set());
 
   const { data: recentlyPlayed, isLoading } =
-		api.me.player.recentlyPlayed.useQuery();
-  const { data: currentlyPlaying } =
-		api.me.player.currentlyPlaying.useQuery();
+    api.me.player.recentlyPlayed.useQuery();
+  const { data: currentlyPlaying } = api.me.player.currentlyPlaying.useQuery();
 
   const uris = (recentlyPlayed?.items ?? [])
     .map((item) => item.context?.uri ?? '')
@@ -28,8 +27,7 @@ const Last6Playlists = () => {
           const last6PlaylistsIds = [...last6Playlists].map(
             (playlist) => playlist.id
           );
-          if (last6PlaylistsIds.includes(playlist.id))
-            return last6Playlists;
+          if (last6PlaylistsIds.includes(playlist.id)) return last6Playlists;
           newLast6Playlists.add(playlist);
           return newLast6Playlists;
         });
@@ -52,8 +50,7 @@ const Last6Playlists = () => {
                 key={playlist.id}
                 isCurrentlyPlaying={
                   currentlyPlaying?.is_playing &&
-									currentlyPlaying?.context?.uri ===
-										playlist.uri
+                  currentlyPlaying?.context?.uri === playlist.uri
                 }
                 playlist={playlist}
                 currentlyPlaying={currentlyPlaying}

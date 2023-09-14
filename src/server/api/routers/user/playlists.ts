@@ -48,11 +48,11 @@ export const playlistsRouter = createTRPCRouter({
       }
 
       const url =
-				`${API_URL}/users/${idToUse}/playlists?` +
-				new URLSearchParams({
-				  offset: '0',
-				  limit: '50',
-				}).toString();
+        `${API_URL}/users/${idToUse}/playlists?` +
+        new URLSearchParams({
+          offset: '0',
+          limit: '50',
+        }).toString();
 
       const res = await fetch(url, {
         // auth header
@@ -69,7 +69,7 @@ export const playlistsRouter = createTRPCRouter({
       }
 
       const data =
-				(await res.json()) as SpotifyApi.ListOfUsersPlaylistsResponse;
+        (await res.json()) as SpotifyApi.ListOfUsersPlaylistsResponse;
 
       return data;
     }),
@@ -83,7 +83,7 @@ export const playlistsRouter = createTRPCRouter({
     };
     const res = await fetch(
       `${API_URL}/browse/featured-playlists?` +
-				new URLSearchParams(settings).toString(),
+        new URLSearchParams(settings).toString(),
       {
         headers: {
           Authorization: `Bearer ${ctx.session.account.access_token}`,
@@ -93,7 +93,7 @@ export const playlistsRouter = createTRPCRouter({
 
     await checkRes(res, 200);
     const data =
-			(await res.json()) as SpotifyApi.ListOfFeaturedPlaylistsResponse;
+      (await res.json()) as SpotifyApi.ListOfFeaturedPlaylistsResponse;
     return data;
   }),
   unfollow: protectedProcedureWithAccount

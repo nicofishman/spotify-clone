@@ -8,19 +8,19 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 type TopBarProps = {
-	changeOpacity?: boolean;
-	content?: React.ReactNode;
+  changeOpacity?: boolean;
+  content?: React.ReactNode;
 } & (
-	| {
-			includeSearchInput: false;
-			searchInput?: never;
-			setSearchInput?: never;
-	  }
-	| {
-			includeSearchInput: true;
-			searchInput: string;
-			setSearchInput: (value: string) => void;
-	  }
+  | {
+      includeSearchInput: false;
+      searchInput?: never;
+      setSearchInput?: never;
+    }
+  | {
+      includeSearchInput: true;
+      searchInput: string;
+      setSearchInput: (value: string) => void;
+    }
 );
 
 export const TopBar = ({

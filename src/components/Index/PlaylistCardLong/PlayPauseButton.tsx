@@ -3,7 +3,7 @@ import { cn } from '@/utils/cn';
 import React from 'react';
 
 interface PlayPauseButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-	isPlaying: boolean;
+  isPlaying: boolean;
 }
 
 const PlayPauseButton = ({

@@ -7,24 +7,24 @@ import { cn } from '@/utils/cn';
 import React, { useEffect } from 'react';
 
 type LayoutProps = {
-	children: React.ReactElement | React.ReactElement[];
-	className?: string;
-	mainClassName?: string;
-	divClassName?: string;
-	style?: React.CSSProperties;
-	topBarContent?: React.ReactNode;
-	topBarOpacity?: boolean;
+  children: React.ReactElement | React.ReactElement[];
+  className?: string;
+  mainClassName?: string;
+  divClassName?: string;
+  style?: React.CSSProperties;
+  topBarContent?: React.ReactNode;
+  topBarOpacity?: boolean;
 } & (
-	| {
-			includeSearchInput: true;
-			searchInput: string;
-			onSearchInputChange: (value: string) => void;
-	  }
-	| {
-			includeSearchInput?: false;
-			searchInput?: never;
-			onSearchInputChange?: never;
-	  }
+  | {
+      includeSearchInput: true;
+      searchInput: string;
+      onSearchInputChange: (value: string) => void;
+    }
+  | {
+      includeSearchInput?: false;
+      searchInput?: never;
+      onSearchInputChange?: never;
+    }
 );
 
 const Layout = ({
@@ -43,10 +43,7 @@ const Layout = ({
 
   useEffect(() => {
     if (!topBarOpacity) {
-      document.body.style.setProperty(
-        '--top-bar-color',
-        'rgb(24, 24, 24)'
-      );
+      document.body.style.setProperty('--top-bar-color', 'rgb(24, 24, 24)');
       document.body.style.setProperty('--top-bar-opacity', '1');
       document.body.style.setProperty('--top-bar-content-opacity', '1');
     } else {
@@ -84,22 +81,22 @@ const Layout = ({
             )}
           >
             {includeSearchInput &&
-						searchInput !== undefined &&
-						onSearchInputChange ? (
-                <TopBar
-                  changeOpacity={topBarOpacity}
-                  includeSearchInput={true}
-                  searchInput={searchInput}
-                  setSearchInput={onSearchInputChange}
-                  content={topBarContent}
-                />
-              ) : (
-                <TopBar
-                  changeOpacity={topBarOpacity}
-                  includeSearchInput={false}
-                  content={topBarContent}
-                />
-              )}
+            searchInput !== undefined &&
+            onSearchInputChange ? (
+              <TopBar
+                changeOpacity={topBarOpacity}
+                includeSearchInput={true}
+                searchInput={searchInput}
+                setSearchInput={onSearchInputChange}
+                content={topBarContent}
+              />
+            ) : (
+              <TopBar
+                changeOpacity={topBarOpacity}
+                includeSearchInput={false}
+                content={topBarContent}
+              />
+            )}
             <div
               className={cn(
                 '-mb-16 -mt-[88px] flex h-full flex-col gap-y-4 py-16',

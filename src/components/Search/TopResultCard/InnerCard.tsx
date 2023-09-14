@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface InnerCardProps {
-	image: SpotifyApi.ImageObject | undefined;
-	name: string;
-	artists: SpotifyApi.ArtistObjectSimplified[];
-	type: 'album' | 'track' | 'playlist' | 'artist' | 'show' | 'episode';
+  image: SpotifyApi.ImageObject | undefined;
+  name: string;
+  artists: SpotifyApi.ArtistObjectSimplified[];
+  type: 'album' | 'track' | 'playlist' | 'artist' | 'show' | 'episode';
 }
 
 export const InnerCard = ({ image, name, artists, type }: InnerCardProps) => {
@@ -30,19 +30,17 @@ export const InnerCard = ({ image, name, artists, type }: InnerCardProps) => {
         <div className='truncate text-sm text-gray-text'>
           {type !== 'playlist' && type !== 'artist'
             ? artists.map((artist, index) => {
-              return (
-                <Link
-                  className=''
-                  href={`/artist/${artist.id}`}
-                  key={artist.id}
-                >
-                  <span className=' hover:underline'>
-                    {artist.name}
-                  </span>
-                  {index < artists.length - 1 ? ', ' : ''}
-                </Link>
-              );
-						  })
+                return (
+                  <Link
+                    className=''
+                    href={`/artist/${artist.id}`}
+                    key={artist.id}
+                  >
+                    <span className=' hover:underline'>{artist.name}</span>
+                    {index < artists.length - 1 ? ', ' : ''}
+                  </Link>
+                );
+              })
             : undefined}
           {type === 'playlist' && (
             <span>By {artists[0]?.name ?? 'Unknown'}</span>

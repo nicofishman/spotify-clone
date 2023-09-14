@@ -17,19 +17,19 @@ import { type JWT } from 'next-auth/jwt';
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module 'next-auth' {
-	interface Session extends DefaultSession {
-		user: {
-			id: string;
-			token: JWT;
-			// ...other properties
-			// role: UserRole;
-		} & DefaultSession['user'];
-	}
+  interface Session extends DefaultSession {
+    user: {
+      id: string;
+      token: JWT;
+      // ...other properties
+      // role: UserRole;
+    } & DefaultSession['user'];
+  }
 
-	// interface User {
-	//   // ...other properties
-	//   // role: UserRole;
-	// }
+  // interface User {
+  //   // ...other properties
+  //   // role: UserRole;
+  // }
 }
 
 /**
@@ -56,17 +56,17 @@ export const authOptions: NextAuthOptions = {
       clientId: env.SPOTIFY_CLIENT_ID,
       clientSecret: env.SPOTIFY_CLIENT_SECRET,
       authorization:
-				'https://accounts.spotify.com/authorize?scope=user-read-email,user-top-read,playlist-read-private,playlist-read-collaborative,playlist-modify-private,playlist-modify-public,user-follow-modify,user-follow-read,user-read-playback-position,user-top-read,user-read-recently-played,user-library-modify,user-library-read,user-read-email,user-read-private,user-read-playback-state,user-modify-playback-state,user-read-currently-playing',
+        'https://accounts.spotify.com/authorize?scope=user-read-email,user-top-read,playlist-read-private,playlist-read-collaborative,playlist-modify-private,playlist-modify-public,user-follow-modify,user-follow-read,user-read-playback-position,user-top-read,user-read-recently-played,user-library-modify,user-library-read,user-read-email,user-read-private,user-read-playback-state,user-modify-playback-state,user-read-currently-playing',
     }),
     /**
-		 * ...add more providers here.
-		 *
-		 * Most other providers require a bit more work than the Discord provider. For example, the
-		 * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-		 * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-		 *
-		 * @see https://next-auth.js.org/providers/github
-		 */
+     * ...add more providers here.
+     *
+     * Most other providers require a bit more work than the Discord provider. For example, the
+     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
+     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
+     *
+     * @see https://next-auth.js.org/providers/github
+     */
   ],
 };
 
@@ -76,8 +76,8 @@ export const authOptions: NextAuthOptions = {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = (ctx: {
-	req: GetServerSidePropsContext['req'];
-	res: GetServerSidePropsContext['res'];
+  req: GetServerSidePropsContext['req'];
+  res: GetServerSidePropsContext['res'];
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
 };

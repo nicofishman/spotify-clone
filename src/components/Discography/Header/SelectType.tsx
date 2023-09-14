@@ -11,13 +11,13 @@ import { type discographyTypes } from '@/utils/discographyTypes';
 import { useRouter } from 'next/router';
 
 interface SelectTypeProps {
-	selected: string;
-	availableTypes: Array<{
-		value: (typeof discographyTypes)[number]['value'];
-		name: (typeof discographyTypes)[number]['name'];
-		visible: boolean;
-		selectName?: string;
-	}>;
+  selected: string;
+  availableTypes: Array<{
+    value: (typeof discographyTypes)[number]['value'];
+    name: (typeof discographyTypes)[number]['name'];
+    visible: boolean;
+    selectName?: string;
+  }>;
 }
 
 const SelectType = ({ selected, availableTypes }: SelectTypeProps) => {
@@ -49,10 +49,7 @@ const SelectType = ({ selected, availableTypes }: SelectTypeProps) => {
       >
         <SelectValue placeholder={_selected} />
       </SelectTrigger>
-      <SelectContent
-        className='min-w-[160px] max-w-[350px]'
-        align='start'
-      >
+      <SelectContent className='min-w-[160px] max-w-[350px]' align='start'>
         {availableTypes.map(
           (type) =>
             type.visible && (
@@ -60,15 +57,9 @@ const SelectType = ({ selected, availableTypes }: SelectTypeProps) => {
                 key={type.value}
                 className='capitalize'
                 value={type.value}
-                data-state={
-                  type.value === _selected
-                    ? 'checked'
-                    : 'unchecked'
-                }
+                data-state={type.value === _selected ? 'checked' : 'unchecked'}
               >
-                {'selectName' in type
-                  ? type.selectName
-                  : type.name}
+                {'selectName' in type ? type.selectName : type.name}
               </SelectItem>
             )
         )}

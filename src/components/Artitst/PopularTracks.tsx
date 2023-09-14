@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 interface PopularTracksProps {
-	artistId: string;
+  artistId: string;
 }
 
 const PopularTracks = ({ artistId }: PopularTracksProps) => {
@@ -31,38 +31,30 @@ const PopularTracks = ({ artistId }: PopularTracksProps) => {
       {!isLoading && tracks ? (
         <Table>
           <TableBody>
-            {tracks.tracks
-              .slice(0, showMore ? 10 : 5)
-              .map((track, i) => (
-                <TableRowLayout
-                  showArtists={false}
-                  key={track.id}
-                  image={track.album.images[0]?.url}
-                  track={track}
-                  index={i}
-                  isLiked={
-                    likedTracks?.includes(track.id) ?? false
-                  }
-                  styles={{
-                    firstColumn: 'w-10',
-                    secondColumn: 'max-w-fit',
-                    lastColumn: 'w-[128px]',
-                  }}
-                  artistId={artistId}
-                  threeDotsButton={
-                    <ThreeDotsSongRow
-                      isLiked={
-                        likedTracks?.includes(
-                          track.id
-                        ) ?? false
-                      }
-                      track={track}
-                      isOwner={false}
-                      router={router}
-                    />
-                  }
-                />
-              ))}
+            {tracks.tracks.slice(0, showMore ? 10 : 5).map((track, i) => (
+              <TableRowLayout
+                showArtists={false}
+                key={track.id}
+                image={track.album.images[0]?.url}
+                track={track}
+                index={i}
+                isLiked={likedTracks?.includes(track.id) ?? false}
+                styles={{
+                  firstColumn: 'w-10',
+                  secondColumn: 'max-w-fit',
+                  lastColumn: 'w-[128px]',
+                }}
+                artistId={artistId}
+                threeDotsButton={
+                  <ThreeDotsSongRow
+                    isLiked={likedTracks?.includes(track.id) ?? false}
+                    track={track}
+                    isOwner={false}
+                    router={router}
+                  />
+                }
+              />
+            ))}
           </TableBody>
         </Table>
       ) : (

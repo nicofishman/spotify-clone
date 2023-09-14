@@ -15,7 +15,7 @@ export function formatDate(
     datePrecision === 'day'
       ? 'MMMM d, yyyy'
       : datePrecision === 'month'
-        ? 'MMMM yyyy'
-        : 'yyyy'
+      ? 'MMMM yyyy'
+      : 'yyyy'
   );
 }

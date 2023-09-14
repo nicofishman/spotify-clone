@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 interface GoToArtistSubMenuProps {
-	artists: SpotifyApi.ArtistObjectSimplified[];
+  artists: SpotifyApi.ArtistObjectSimplified[];
 }
 
 const GoToArtistSubMenu = ({ artists }: GoToArtistSubMenuProps) => {
@@ -11,9 +11,7 @@ const GoToArtistSubMenu = ({ artists }: GoToArtistSubMenuProps) => {
     <ul className='max-h-[50vw] overflow-y-scroll bg-gray-border py-2'>
       {artists.map((artist) => (
         <Link href={`/artist/${artist.id}`} key={artist.id}>
-          <DropdownMenuItem key={artist.id}>
-            {artist.name}
-          </DropdownMenuItem>
+          <DropdownMenuItem key={artist.id}>{artist.name}</DropdownMenuItem>
         </Link>
       ))}
     </ul>

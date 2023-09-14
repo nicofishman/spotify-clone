@@ -14,10 +14,7 @@ function editDistance(s1: string, s2: string) {
           let newValue = costs[j - 1] as number;
           if (s1.charAt(i - 1) != s2.charAt(j - 1))
             newValue =
-							Math.min(
-							  Math.min(newValue, lastValue),
-								costs[j] as number
-							) + 1;
+              Math.min(Math.min(newValue, lastValue), costs[j] as number) + 1;
           costs[j - 1] = lastValue;
           lastValue = newValue;
         }
@@ -41,6 +38,6 @@ export function similarity(s1: string, s2: string) {
   }
   return (
     (longerLength - (editDistance(longer, shorter) ?? 0)) /
-		parseFloat(longerLength.toString())
+    parseFloat(longerLength.toString())
   );
 }

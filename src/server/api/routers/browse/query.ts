@@ -42,12 +42,12 @@ export const queryRouter = createTRPCRouter({
       };
 
       const url =
-				`${API_URL}/search?` +
-				new URLSearchParams({
-				  q: input.query,
-				  type: filterToArray(input.filter).join(','),
-				  limit: '50',
-				}).toString();
+        `${API_URL}/search?` +
+        new URLSearchParams({
+          q: input.query,
+          type: filterToArray(input.filter).join(','),
+          limit: '50',
+        }).toString();
 
       const res = await fetch(url, {
         headers: {

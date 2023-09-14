@@ -5,8 +5,8 @@ import { type DropdownItem } from '@/types/UI';
 import { api, type RouterOutputs } from '@/utils/api';
 
 interface ThreeDotsButtonAlbumTitleProps {
-	iconClassName?: string;
-	album: RouterOutputs['album']['get'];
+  iconClassName?: string;
+  album: RouterOutputs['album']['get'];
 }
 
 const ThreeDotsButtonAlbumTitle = ({
@@ -29,9 +29,7 @@ const ThreeDotsButtonAlbumTitle = ({
     onSuccess: () => {
       likedAlbumsStore.set(
         'albumsLiked',
-        likedAlbumsStore
-          .get('albumsLiked')
-          .filter((id) => id !== album.id)
+        likedAlbumsStore.get('albumsLiked').filter((id) => id !== album.id)
       );
     },
   });
@@ -67,9 +65,7 @@ const ThreeDotsButtonAlbumTitle = ({
     },
   ];
 
-  return (
-    <ThreeDotsButtonLayout iconClassName={iconClassName} items={items} />
-  );
+  return <ThreeDotsButtonLayout iconClassName={iconClassName} items={items} />;
 };
 
 export default ThreeDotsButtonAlbumTitle;

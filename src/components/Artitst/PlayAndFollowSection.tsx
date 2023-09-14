@@ -5,7 +5,7 @@ import FollowButton from '@/components/Artitst/FollowButton';
 import tracksStore from '@/stores/tracksStore';
 
 interface PlayAndFollowSectionProps {
-	artistId: string;
+  artistId: string;
 }
 
 const PlayAndFollowSection = ({ artistId }: PlayAndFollowSectionProps) => {
@@ -20,11 +20,11 @@ const PlayAndFollowSection = ({ artistId }: PlayAndFollowSectionProps) => {
         className='scale-[1.20]'
         isPlaying={
           isPlaying &&
-					type === 'track' &&
-					(currentPlaying?.item?.artists
-					  .map((art) => art.id)
-					  .includes(artistId) ??
-						false)
+          type === 'track' &&
+          (currentPlaying?.item?.artists
+            .map((art) => art.id)
+            .includes(artistId) ??
+            false)
         }
       />
       <FollowButton artistId={artistId} />

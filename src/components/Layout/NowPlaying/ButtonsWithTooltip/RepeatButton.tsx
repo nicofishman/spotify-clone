@@ -10,7 +10,7 @@ import { cn } from '@/utils/cn';
 import { useState } from 'react';
 
 interface RepeatButtonProps {
-	isRepeating: boolean;
+  isRepeating: boolean;
 }
 
 export const RepeatButton = ({ isRepeating }: RepeatButtonProps) => {
@@ -27,9 +27,7 @@ export const RepeatButton = ({ isRepeating }: RepeatButtonProps) => {
         <TooltipTrigger className='flex h-8 w-8 items-center justify-center'>
           <Icon
             onClick={() => {
-              repeatMutation.mutate(
-                localRepeat ? 'off' : 'track'
-              );
+              repeatMutation.mutate(localRepeat ? 'off' : 'track');
             }}
             name='repeat'
             className={cn(

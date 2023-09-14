@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@/utils/cn';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-	label?: string;
+  label?: string;
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(

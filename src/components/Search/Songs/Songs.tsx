@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { type useRouter } from 'next/router';
 
 interface SongsProps {
-	songs: SpotifyApi.TrackObjectFull[];
-	router: ReturnType<typeof useRouter>;
+  songs: SpotifyApi.TrackObjectFull[];
+  router: ReturnType<typeof useRouter>;
 }
 
 const Songs = ({ songs, router }: SongsProps) => {
@@ -21,10 +21,7 @@ const Songs = ({ songs, router }: SongsProps) => {
           <div className='flex items-center'>
             <Image
               className='mr-4 aspect-square w-10'
-              src={
-                song.album.images[0]?.url ??
-								DEFAULT_PLAYLISTORALBUM_IMAGE
-              }
+              src={song.album.images[0]?.url ?? DEFAULT_PLAYLISTORALBUM_IMAGE}
               width={song.album.images[0]?.width}
               height={song.album.images[0]?.height}
               alt={song.album.name}
@@ -39,12 +36,8 @@ const Songs = ({ songs, router }: SongsProps) => {
                       href={`/artist/${artist.id}`}
                       key={artist.id}
                     >
-                      <span className='hover:underline'>
-                        {artist.name}
-                      </span>
-                      {index !== song.artists.length - 1
-                        ? ', '
-                        : ''}
+                      <span className='hover:underline'>{artist.name}</span>
+                      {index !== song.artists.length - 1 ? ', ' : ''}
                     </Link>
                   );
                 })}
@@ -56,10 +49,7 @@ const Songs = ({ songs, router }: SongsProps) => {
               {millisToMinutesAndSeconds(song.duration_ms)}
             </p>
             <div className='opacity-0 group-hover:opacity-100'>
-              <ThreeDotsButtonsSearchSong
-                router={router}
-                track={song}
-              />
+              <ThreeDotsButtonsSearchSong router={router} track={song} />
             </div>
           </div>
         </div>

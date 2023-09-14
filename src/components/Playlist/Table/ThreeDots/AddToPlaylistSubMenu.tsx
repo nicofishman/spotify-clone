@@ -7,7 +7,7 @@ import { api } from '@/utils/api';
 import React, { useState } from 'react';
 
 interface PlaylistSearchProps {
-	tracksId: string | string[];
+  tracksId: string | string[];
 }
 
 const AddToPlaylistSubMenu = ({ tracksId }: PlaylistSearchProps) => {
@@ -59,16 +59,12 @@ const AddToPlaylistSubMenu = ({ tracksId }: PlaylistSearchProps) => {
             </button>
           )}
         </div>
-        <DropdownMenuItem className='mt-2'>
-					Create playlist
-        </DropdownMenuItem>
+        <DropdownMenuItem className='mt-2'>Create playlist</DropdownMenuItem>
         <DropdownMenuSeparator />
       </div>
       {playlistsToAdd?.items
         ?.filter((pl) =>
-          pl.name
-            .toLocaleLowerCase()
-            .includes(searchInput.toLocaleLowerCase())
+          pl.name.toLocaleLowerCase().includes(searchInput.toLocaleLowerCase())
         )
         .map((playlist) => (
           <DropdownMenuItem

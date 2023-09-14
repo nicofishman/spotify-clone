@@ -14,14 +14,14 @@ export const mePlaylistsRouter = createTRPCRouter({
     });
 
     const resJson =
-			(await res.json()) as SpotifyApi.ListOfCurrentUsersPlaylistsResponse;
+      (await res.json()) as SpotifyApi.ListOfCurrentUsersPlaylistsResponse;
 
     return {
       ...resJson,
       items: resJson.items.filter(
         (item) =>
           item.collaborative ||
-					item.owner.id === ctx.session.account.providerAccountId
+          item.owner.id === ctx.session.account.providerAccountId
       ),
     };
   }),

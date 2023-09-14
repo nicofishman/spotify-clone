@@ -10,10 +10,10 @@ import { type useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 interface ThreeDotsSongRowProps {
-	router: ReturnType<typeof useRouter>;
-	track: SpotifyApi.PlaylistTrackObject['track'];
-	isLiked: boolean;
-	isOwner: boolean;
+  router: ReturnType<typeof useRouter>;
+  track: SpotifyApi.PlaylistTrackObject['track'];
+  isLiked: boolean;
+  isOwner: boolean;
 }
 
 const ThreeDotsSongRow = ({
@@ -40,10 +40,7 @@ const ThreeDotsSongRow = ({
       await utils.me.tracks.saved.get.invalidate();
     },
     onMutate: () => {
-      tracksStore.set('likedTracks', (prev) => [
-        ...prev,
-        track?.id ?? '',
-      ]);
+      tracksStore.set('likedTracks', (prev) => [...prev, track?.id ?? '']);
     },
   });
   const dislikeSong = api.me.tracks.saved.remove.useMutation({
@@ -84,9 +81,9 @@ const ThreeDotsSongRow = ({
     },
     isOwner
       ? {
-        name: 'Remove from this playlist',
-        onClick: () => handleRemove(),
-			  }
+          name: 'Remove from this playlist',
+          onClick: () => handleRemove(),
+        }
       : undefined,
     itemLiked,
     {
@@ -147,9 +144,7 @@ function getItemArtists(
       sub: true,
       content: (
         <GoToArtistSubMenu
-          artists={
-            artists ?? ([] as SpotifyApi.ArtistObjectSimplified[])
-          }
+          artists={artists ?? ([] as SpotifyApi.ArtistObjectSimplified[])}
         />
       ),
     });

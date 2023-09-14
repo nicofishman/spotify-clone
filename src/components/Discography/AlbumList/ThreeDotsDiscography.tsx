@@ -8,8 +8,8 @@ import { openSpotify } from '@/utils/spotifyClient';
 import React from 'react';
 
 interface ThreeDotsDiscographyProps {
-	album: SpotifyApi.AlbumObjectSimplified;
-	tracks: SpotifyApi.AlbumTracksResponse;
+  album: SpotifyApi.AlbumObjectSimplified;
+  tracks: SpotifyApi.AlbumTracksResponse;
 }
 
 const ThreeDotsDiscography = ({ album, tracks }: ThreeDotsDiscographyProps) => {
@@ -28,9 +28,7 @@ const ThreeDotsDiscography = ({ album, tracks }: ThreeDotsDiscographyProps) => {
     onSuccess: () => {
       likedAlbumsStore.set(
         'albumsLiked',
-        likedAlbumsStore
-          .get('albumsLiked')
-          .filter((id) => id !== album.id)
+        likedAlbumsStore.get('albumsLiked').filter((id) => id !== album.id)
       );
     },
   });
@@ -73,9 +71,7 @@ const ThreeDotsDiscography = ({ album, tracks }: ThreeDotsDiscographyProps) => {
     {
       name: 'Share',
       sub: true,
-      content: (
-        <PlaylistShareSubContent type={album.type} trackId={album.id} />
-      ),
+      content: <PlaylistShareSubContent type={album.type} trackId={album.id} />,
     },
     {
       separator: true,

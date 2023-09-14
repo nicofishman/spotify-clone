@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 
 interface PlaylistCardLongProps {
-	playlist: SpotifyApi.PlaylistObjectFull;
-	isCurrentlyPlaying?: boolean;
-	currentlyPlaying?: SpotifyApi.CurrentPlaybackResponse;
-	shuffle?: boolean;
+  playlist: SpotifyApi.PlaylistObjectFull;
+  isCurrentlyPlaying?: boolean;
+  currentlyPlaying?: SpotifyApi.CurrentPlaybackResponse;
+  shuffle?: boolean;
 }
 
 const PlaylistCardLong = ({
@@ -60,40 +60,34 @@ const PlaylistCardLong = ({
           {playlist.name}
         </p>
         {currentlyPlaying &&
-					(isCurrentlyPlaying ? (
-					  <div className='ml-2'>
-					    <PlayPauseButton
-					      onClick={(e) => {
-					        e.stopPropagation();
-					        e.preventDefault();
-					        pauseMutation.mutate();
-					      }}
-					      isPlaying={true}
-					    />
-					  </div>
-					) : (
-					  <div className='ml-2 opacity-0 transition-all group-hover:opacity-100'>
-					    <PlayPauseButton
-					      onClick={(e) => {
-					        e.stopPropagation();
-					        e.preventDefault();
-					        if (
-					          currentlyPlaying?.context?.uri ===
-										playlist.uri
-					        ) {
-					          playMutation.mutate();
-					        } else {
-					          // TODO: clear queue and then play the playlist with the given uri (keep in mind shuffling can be enabled)
-					          addPlaylistToQueue(
-					            playlist.tracks.items,
-					            shuffle
-					          );
-					        }
-					      }}
-					      isPlaying={false}
-					    />
-					  </div>
-					))}
+          (isCurrentlyPlaying ? (
+            <div className='ml-2'>
+              <PlayPauseButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  pauseMutation.mutate();
+                }}
+                isPlaying={true}
+              />
+            </div>
+          ) : (
+            <div className='ml-2 opacity-0 transition-all group-hover:opacity-100'>
+              <PlayPauseButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  if (currentlyPlaying?.context?.uri === playlist.uri) {
+                    playMutation.mutate();
+                  } else {
+                    // TODO: clear queue and then play the playlist with the given uri (keep in mind shuffling can be enabled)
+                    addPlaylistToQueue(playlist.tracks.items, shuffle);
+                  }
+                }}
+                isPlaying={false}
+              />
+            </div>
+          ))}
       </div>
     </Link>
   );

@@ -3,7 +3,7 @@ import { api } from '@/utils/api';
 import React from 'react';
 
 interface PlaylistTitleProps {
-	playlist: SpotifyApi.PlaylistObjectFull;
+  playlist: SpotifyApi.PlaylistObjectFull;
 }
 
 const PlaylistTitle = ({ playlist }: PlaylistTitleProps) => {

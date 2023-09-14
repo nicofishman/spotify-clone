@@ -14,17 +14,17 @@ import { cn } from '@/utils/cn';
 import { useRouter } from 'next/router';
 
 type AlbumTableProps = {
-	albumId: string;
-	className?: string;
+  albumId: string;
+  className?: string;
 } & (
-	| {
-			showImage?: true;
-			albumImage: string | undefined;
-	  }
-	| {
-			showImage: false;
-			albumImage?: never;
-	  }
+  | {
+      showImage?: true;
+      albumImage: string | undefined;
+    }
+  | {
+      showImage: false;
+      albumImage?: never;
+    }
 );
 
 const AlbumTable = ({
@@ -57,10 +57,7 @@ const AlbumTable = ({
             <TableHead className='w-10 text-center'>#</TableHead>
             <TableHead className='flex-1'>Title</TableHead>
             <TableHead className='mr-4 w-32'>
-              <Icon
-                name='clock'
-                className='mx-auto -translate-x-1/2'
-              />
+              <Icon name='clock' className='mx-auto -translate-x-1/2' />
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -83,9 +80,9 @@ const AlbumTable = ({
           <TableBody>
             {Array.from({
               length:
-								albumTracks?.total && albumTracks?.total >= 5
-								  ? 5
-								  : albumTracks?.total ?? 1,
+                albumTracks?.total && albumTracks?.total >= 5
+                  ? 5
+                  : albumTracks?.total ?? 1,
             }).map((_, index) => (
               <LoadingRow cellCount={3} key={index} />
             ))}

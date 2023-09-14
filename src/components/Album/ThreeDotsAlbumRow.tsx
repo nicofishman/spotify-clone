@@ -9,10 +9,10 @@ import { type useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 interface ThreeDotsAlbumRowProps {
-	router: ReturnType<typeof useRouter>;
-	track: SpotifyApi.TrackObjectSimplified;
-	isLiked: boolean;
-	albumId: string | undefined;
+  router: ReturnType<typeof useRouter>;
+  track: SpotifyApi.TrackObjectSimplified;
+  isLiked: boolean;
+  albumId: string | undefined;
 }
 
 const ThreeDotsAlbumRow = ({
@@ -28,10 +28,7 @@ const ThreeDotsAlbumRow = ({
       await utils.me.tracks.saved.get.invalidate();
     },
     onMutate: () => {
-      tracksStore.set('likedTracks', (prev) => [
-        ...prev,
-        track?.id ?? '',
-      ]);
+      tracksStore.set('likedTracks', (prev) => [...prev, track?.id ?? '']);
     },
   });
   const dislikeSong = api.me.tracks.saved.remove.useMutation({
@@ -78,9 +75,7 @@ const ThreeDotsAlbumRow = ({
       name: 'Go to artist',
       onClick: () =>
         router.push(
-          track.artists[0]?.id
-            ? `/artist/${track.artists[0]?.id}`
-            : `/`
+          track.artists[0]?.id ? `/artist/${track.artists[0]?.id}` : `/`
         ),
     },
     {
@@ -97,10 +92,7 @@ const ThreeDotsAlbumRow = ({
       name: 'Share',
       sub: true,
       content: (
-        <PlaylistShareSubContent
-          type={'track'}
-          trackId={track.id ?? ''}
-        />
+        <PlaylistShareSubContent type={'track'} trackId={track.id ?? ''} />
       ),
     },
     {

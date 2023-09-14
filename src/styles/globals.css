@@ -1,27 +1,27 @@
 @font-face {
-	font-family: Spotify;
-	src: url('/fonts/Circular/CircularStd-Light.otf') format('otf');
-	font-weight: 300;
+  font-family: Spotify;
+  src: url('/fonts/Circular/CircularStd-Light.otf') format('otf');
+  font-weight: 300;
 }
 @font-face {
-	font-family: Spotify;
-	src: url('/fonts/Circular/CircularStd-Book.otf') format('otf');
-	font-weight: 400;
+  font-family: Spotify;
+  src: url('/fonts/Circular/CircularStd-Book.otf') format('otf');
+  font-weight: 400;
 }
 @font-face {
-	font-family: Spotify;
-	src: url('/fonts/Circular/CircularStd-Medium.otf') format('otf');
-	font-weight: 500;
+  font-family: Spotify;
+  src: url('/fonts/Circular/CircularStd-Medium.otf') format('otf');
+  font-weight: 500;
 }
 @font-face {
-	font-family: Spotify;
-	src: url('/fonts/Circular/CircularStd-Bold.otf') format('otf');
-	font-weight: 700;
+  font-family: Spotify;
+  src: url('/fonts/Circular/CircularStd-Bold.otf') format('otf');
+  font-weight: 700;
 }
 @font-face {
-	font-family: Spotify;
-	src: url('/fonts/Circular/CircularStd-Black.otf') format('otf');
-	font-weight: 900;
+  font-family: Spotify;
+  src: url('/fonts/Circular/CircularStd-Black.otf') format('otf');
+  font-weight: 900;
 }
 
 @tailwind base;
@@ -29,37 +29,37 @@
 @tailwind utilities;
 
 @layer base {
-	* {
-		--contentSpacing: clamp(16px, 16px + (1293 - 600)/424 * 8px, 24px);
-	}
+  * {
+    --contentSpacing: clamp(16px, 16px + (1293 - 600)/424 * 8px, 24px);
+  }
 
-	body {
-		--top-bar-color: 18, 18, 18;
-	}
+  body {
+    --top-bar-color: 18, 18, 18;
+  }
 
-	.playlistsGrid {
-		grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
-	}
+  .playlistsGrid {
+    grid-template: auto/repeat(auto-fill, minmax(max(270px, 25%), 1fr));
+  }
 
-	.featuredPlaylists {
-		grid-template: auto/repeat(auto-fill, minmax(max(186px, 20%), 1fr));
-	}
+  .featuredPlaylists {
+    grid-template: auto/repeat(auto-fill, minmax(max(186px, 20%), 1fr));
+  }
 
-	.genresGrid {
-		grid-template: auto/repeat(auto-fill, minmax(max(157px, 20%), 1fr));
-	}
+  .genresGrid {
+    grid-template: auto/repeat(auto-fill, minmax(max(157px, 20%), 1fr));
+  }
 
-	body::-webkit-scrollbar {
-		display: none;
-	}
+  body::-webkit-scrollbar {
+    display: none;
+  }
 
-	::-webkit-scrollbar {
-		width: 8px;
-		background-color: transparent;
-	}
+  ::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+  }
 
-	::-webkit-scrollbar-thumb {
-		background-color: rgba(255, 255, 255, 0.3);
-		border-radius: 8px;
-	}
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+  }
 }

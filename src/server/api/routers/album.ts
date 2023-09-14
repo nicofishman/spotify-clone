@@ -17,8 +17,7 @@ export const albumRouter = createTRPCRouter({
         method: 'GET',
       });
 
-      const resJson =
-				(await res.json()) as SpotifyApi.SingleAlbumResponse;
+      const resJson = (await res.json()) as SpotifyApi.SingleAlbumResponse;
 
       if (!resJson.artists[0]?.id) {
         throw new TRPCError({
@@ -38,7 +37,7 @@ export const albumRouter = createTRPCRouter({
       );
 
       const artistJson =
-				(await artist.json()) as SpotifyApi.SingleArtistResponse;
+        (await artist.json()) as SpotifyApi.SingleArtistResponse;
 
       const resAlbumLiked = await fetch(
         `${API_URL}/me/albums/contains?ids=${input}`,
@@ -51,7 +50,7 @@ export const albumRouter = createTRPCRouter({
       );
 
       const resAlbumLikedJson =
-				(await resAlbumLiked.json()) as SpotifyApi.CheckUserSavedAlbumsResponse;
+        (await resAlbumLiked.json()) as SpotifyApi.CheckUserSavedAlbumsResponse;
 
       if (resAlbumLikedJson[0] === undefined) {
         throw new TRPCError({
@@ -75,18 +74,14 @@ export const albumRouter = createTRPCRouter({
   getTracks: protectedProcedureWithAccount
     .input(z.string())
     .query(async ({ ctx, input }) => {
-      const res = await fetch(
-        `${API_URL}/albums/${input}/tracks?limit=50`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session.account.access_token}`,
-          },
-          method: 'GET',
-        }
-      );
+      const res = await fetch(`${API_URL}/albums/${input}/tracks?limit=50`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session.account.access_token}`,
+        },
+        method: 'GET',
+      });
 
-      const resJson =
-				(await res.json()) as SpotifyApi.AlbumTracksResponse;
+      const resJson = (await res.json()) as SpotifyApi.AlbumTracksResponse;
 
       return resJson;
     }),
